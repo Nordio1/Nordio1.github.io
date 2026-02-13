@@ -1,0 +1,389 @@
+{
+  "pt": {
+    "meta": {
+      "title": "Johnny Nordio | Engenheiro de IA",
+      "description": "Engenheiro de Inteligência Artificial focado em IA Generativa, LLMs, RAG, agentes e LLMOps.",
+      "ogDescription": "IA Generativa • LLMs • RAG • Agentes • LLMOps"
+    },
+    "profile": {
+      "email": "mrnordio@icloud.com",
+      "whatsapp": "https://wa.me/5541995879232",
+      "github": "https://github.com/Nordio1",
+      "linkedin": "https://www.linkedin.com/in/your-handle"
+    },
+    "nav": {
+      "about": "Resumo",
+      "skills": "Competências",
+      "projects": "Projetos",
+      "experience": "Experiência",
+      "education": "Formação",
+      "contact": "Contato"
+    },
+    "hero": {
+      "eyebrow": "AI ENGINEER",
+      "name": "Johnny Nordio",
+      "tagline": "AI ENGINEER | GENERATIVE AI SPECIALIST | LLM SYSTEMS ARCHITECT",
+      "location": "Curitiba - PR | Disponível para remoto internacional",
+      "ctaPrimary": "Falar por e-mail",
+      "ctaSecondary": "Ver projetos",
+      "ctaLinkedin": "LinkedIn (editar link)",
+      "note": "Parte do trabalho está anonimizada (NDA). Detalhes sob demanda.",
+      "panelTitle": "Foco",
+      "panelTitle2": "O que eu construo",
+      "focus": ["LLMs", "RAG", "Agentes", "LLMOps", "Fine-tuning (LoRA/PEFT)", "APIs & Integrações"],
+      "build": [
+        "Pipelines de RAG end-to-end (ingestão → embeddings → vetores → geração)",
+        "Avaliação, monitoramento e guardrails para LLMs",
+        "Integração de IA em ERPs e APIs REST",
+        "Otimização de desempenho, estabilidade e observabilidade"
+      ]
+    },
+    "sections": {
+      "aboutTitle": "Resumo",
+      "aboutSub": "Pragmatismo, produção e qualidade.",
+      "skillsTitle": "Competências",
+      "skillsSub": "Arquitetura, implementação e entrega.",
+      "projectsTitle": "Projetos (seleção)",
+      "projectsSub": "Estudos de caso (NDA-friendly) para entender rápido.",
+      "experienceTitle": "Experiência & Contribuições",
+      "experienceSub": "O que foi entregue, melhorado e estabilizado.",
+      "educationTitle": "Formação",
+      "educationSub": "IA e engenharia de software com foco em aplicação prática.",
+      "contactTitle": "Contato",
+      "contactSub": "Melhor: e-mail. Rápido: WhatsApp."
+    },
+    "about": [
+      "Engenheiro de Inteligência Artificial com foco em IA Generativa, Large Language Models (LLMs) e arquiteturas de Retrieval-Augmented Generation (RAG). Experiência em construir pipelines end-to-end e integrar IA em sistemas corporativos (ERP, APIs REST e plataformas Lakehouse).",
+      "Atuação prática com fine-tuning (LoRA/PEFT), embeddings, vector databases, agentes multi-step e LLMOps. Trabalho com rigor de engenharia: observabilidade, testes, tratamento de erros e foco em estabilidade e latência.",
+      "Parte do portfólio está descrita como estudos de caso anonimizados (NDA-friendly). Posso compartilhar detalhes técnicos adicionais sob demanda."
+    ],
+    "skills": [
+      {
+        "group": "GenAI & LLMs",
+        "items": ["RAG", "Agentes multi-step", "Prompting estruturado", "Guardrails", "Avaliação & métricas"]
+      },
+      {
+        "group": "Fine-tuning & NLP",
+        "items": ["LoRA/PEFT", "Hugging Face", "Tokenização", "Benchmarks", "Inference pipelines"]
+      },
+      { "group": "Stacks & Tooling", "items": ["LangChain", "LlamaIndex", "FAISS", "Chroma", "Vector search"] },
+      { "group": "Lakehouse & MLOps", "items": ["Databricks", "Delta Lake", "MLflow", "Model Serving", "Experiment tracking"] },
+      { "group": "Engenharia", "items": ["Python avançado", "APIs REST", "Testes", "Profiling", "Linux"] },
+      {
+        "group": "Entrega em Produção",
+        "items": ["Observabilidade", "Hardening", "Rollbacks", "Versionamento", "Documentação"]
+      }
+    ],
+    "projects": [
+      {
+        "title": "ERP/CRM Varejo (NDA) | Estabilidade + Integrações",
+        "subtitle": "Hardening de APIs, observabilidade e integração de módulos críticos.",
+        "highlights": [
+          "Arquitetura resiliente com fallback de serviços e reconexão segura",
+          "Validação de rotas e contratos, tratamento de erros e auditoria",
+          "Otimizações de latência e estabilização de inicialização"
+        ],
+        "stack": ["Python", "APIs REST", "SQLite/Postgres", "Observability", "LLMs"],
+        "links": { "repo": "", "demo": "", "writeup": "" },
+        "disclaimer": "Detalhes sensíveis omitidos. Posso compartilhar arquitetura e decisões sob demanda.",
+        "image": "assets/projects/project-erpcrm.svg"
+      },
+      {
+        "title": "Enterprise RAG System",
+        "subtitle": "Pipeline completo: ingestão → embeddings → armazenamento vetorial → geração.",
+        "highlights": [
+          "Indexação e chunking com foco em qualidade de recuperação",
+          "Avaliação de respostas (consistência, cobertura, groundedness)",
+          "Guardrails e observabilidade para reduzir alucinações"
+        ],
+        "stack": ["RAG", "Embeddings", "FAISS/Chroma", "LLMOps", "Python"],
+        "links": { "repo": "", "demo": "", "writeup": "" },
+        "disclaimer": "KPI/impacto: adicionar números reais quando disponível.",
+        "image": "assets/projects/project-rag.svg"
+      },
+      {
+        "title": "AI Agent Workflows",
+        "subtitle": "Agentes autônomos integrados a ferramentas e APIs externas com segurança.",
+        "highlights": [
+          "Tool-calling com validação de entrada/saída e limites de execução",
+          "Memória e contexto com foco em previsibilidade",
+          "Avaliação offline e testes para regressão"
+        ],
+        "stack": ["Agents", "Tooling", "Guardrails", "APIs", "Python"],
+        "links": { "repo": "", "demo": "", "writeup": "" },
+        "disclaimer": "Foco em robustez: menos magia, mais controle.",
+        "image": "assets/projects/project-agents.svg"
+      },
+      {
+        "title": "Lakehouse LLMOps (Databricks)",
+        "subtitle": "Integração de dados + rastreabilidade de modelos em ambiente corporativo.",
+        "highlights": [
+          "Pipelines com Delta Lake e experiment tracking com MLflow",
+          "Model serving e monitoramento com métricas de qualidade",
+          "Integração com sistemas legados via APIs"
+        ],
+        "stack": ["Databricks", "Delta Lake", "MLflow", "Serving", "Python"],
+        "links": { "repo": "", "demo": "", "writeup": "" },
+        "disclaimer": "Descrever detalhamento técnico conforme escopo permitido.",
+        "image": "assets/projects/project-lakehouse.svg"
+      }
+    ],
+    "labels": { "repo": "Repo", "demo": "Demo", "writeup": "Writeup" },
+    "experience": [
+      {
+        "when": "Open Source AI",
+        "title": "Contribuições em OpenShift AI / InstructLab",
+        "org": "Ecossistema Red Hat (conforme CV)",
+        "bullets": [
+          "Otimização e integração de modelos generativos em ambiente corporativo",
+          "Práticas de engenharia: observabilidade, hardening e qualidade de entrega"
+        ]
+      },
+      {
+        "when": "NLP / Fine-tuning",
+        "title": "Fine-tuning e pipelines (ecossistema Hugging Face)",
+        "org": "Projetos e benchmarks de avaliação (conforme CV)",
+        "bullets": [
+          "Experimentos com LoRA/PEFT e avaliação de qualidade",
+          "Pipelines de inferência com foco em desempenho e confiabilidade"
+        ]
+      },
+      {
+        "when": "Dados / Automação",
+        "title": "Automação de fluxos corporativos + Lakehouse",
+        "org": "Volk do Brasil (conforme CV)",
+        "bullets": [
+          "Automação com Python e integração de dados",
+          "Aplicação de IA em plataforma Databricks (Delta/MLflow)"
+        ]
+      },
+      {
+        "when": "Embedded / Linux",
+        "title": "Linux OEM e sistemas críticos",
+        "org": "Perkons & Policorp (conforme CV)",
+        "bullets": [
+          "Customização de distribuições Linux OEM",
+          "Engenharia embarcada e software mission-critical"
+        ]
+      }
+    ],
+    "education": [
+      { "title": "Pós-graduação em Inteligência Artificial", "org": "UTFPR", "year": "2025" },
+      { "title": "Pós-graduação em Engenharia de Software", "org": "Universidade Positivo", "year": "" },
+      { "title": "Tecnólogo em Análise e Desenvolvimento de Sistemas", "org": "Universidade Positivo", "year": "" },
+      {
+        "title": "Pós-graduação em IA Generativa Aplicada",
+        "org": "UTFPR",
+        "year": "Início Abr/2026",
+        "note": "Linha de estudo aplicada em GenAI e LLM systems."
+      }
+    ],
+    "quickLinks": [
+      { "label": "LinkedIn (editar link)", "href": "https://www.linkedin.com/in/your-handle", "external": true },
+      { "label": "CV (PDF) (adicionar)", "href": "#", "external": false },
+      { "label": "GitHub", "href": "https://github.com/Nordio1", "external": true },
+      { "label": "Email", "href": "mailto:mrnordio@icloud.com", "external": false }
+    ],
+    "contact": {
+      "cardTitle": "Fale comigo",
+      "cardSub": "Posso compartilhar writeups técnicos e detalhes dos estudos de caso.",
+      "phoneCta": "WhatsApp",
+      "linkedinCta": "Editar LinkedIn",
+      "quickTitle": "Links rápidos",
+      "quickNote": "Substitua placeholders pelos links reais (LinkedIn, CV PDF, demos).",
+      "privacy": "Página pública. Sem scripts de tracking."
+    },
+    "footer": { "backTop": "Voltar ao topo" }
+  },
+  "en": {
+    "meta": {
+      "title": "Johnny Nordio | AI Engineer",
+      "description": "Artificial Intelligence Engineer focused on Generative AI, LLMs, RAG, agents, and LLMOps.",
+      "ogDescription": "Generative AI • LLMs • RAG • Agents • LLMOps"
+    },
+    "profile": {
+      "email": "mrnordio@icloud.com",
+      "whatsapp": "https://wa.me/5541995879232",
+      "github": "https://github.com/Nordio1",
+      "linkedin": "https://www.linkedin.com/in/your-handle"
+    },
+    "nav": {
+      "about": "Summary",
+      "skills": "Skills",
+      "projects": "Projects",
+      "experience": "Experience",
+      "education": "Education",
+      "contact": "Contact"
+    },
+    "hero": {
+      "eyebrow": "AI ENGINEER",
+      "name": "Johnny Nordio",
+      "tagline": "AI ENGINEER | GENERATIVE AI SPECIALIST | LLM SYSTEMS ARCHITECT",
+      "location": "Curitiba, Brazil | Open to Global Remote Roles",
+      "ctaPrimary": "Email me",
+      "ctaSecondary": "View projects",
+      "ctaLinkedin": "LinkedIn (edit link)",
+      "note": "Some work is anonymized (NDA-friendly). Details available on request.",
+      "panelTitle": "Focus",
+      "panelTitle2": "What I build",
+      "focus": ["LLMs", "RAG", "Agents", "LLMOps", "Fine-tuning (LoRA/PEFT)", "APIs & Integrations"],
+      "build": [
+        "End-to-end RAG pipelines (ingestion → embeddings → vector store → generation)",
+        "LLM evaluation, monitoring, and guardrails",
+        "AI integration into enterprise ERPs and REST APIs",
+        "Performance, stability, and observability improvements"
+      ]
+    },
+    "sections": {
+      "aboutTitle": "Executive Summary",
+      "aboutSub": "Pragmatic, production-focused, quality-driven.",
+      "skillsTitle": "Strategic Expertise",
+      "skillsSub": "Architecture, implementation, and delivery.",
+      "projectsTitle": "Selected Projects",
+      "projectsSub": "NDA-friendly case studies you can scan in 60 seconds.",
+      "experienceTitle": "Experience & Contributions",
+      "experienceSub": "What shipped, what improved, and what stabilized.",
+      "educationTitle": "Education",
+      "educationSub": "AI and software engineering with a hands-on bias.",
+      "contactTitle": "Contact",
+      "contactSub": "Best: email. Fast: WhatsApp."
+    },
+    "about": [
+      "Artificial Intelligence Engineer focused on Generative AI, Large Language Models (LLMs), and Retrieval-Augmented Generation (RAG) architectures. Experienced in building end-to-end pipelines and integrating AI into enterprise systems (ERP, REST APIs, and Lakehouse platforms).",
+      "Hands-on with fine-tuning (LoRA/PEFT), embeddings, vector databases, multi-step agents, and LLMOps. Strong engineering rigor: observability, testing, error handling, and a relentless focus on stability and latency.",
+      "Some portfolio items are described as anonymized case studies (NDA-friendly). I can share deeper technical details on request."
+    ],
+    "skills": [
+      {
+        "group": "GenAI & LLMs",
+        "items": ["RAG", "Multi-step agents", "Structured prompting", "Guardrails", "Evaluation & metrics"]
+      },
+      {
+        "group": "Fine-tuning & NLP",
+        "items": ["LoRA/PEFT", "Hugging Face", "Tokenization", "Benchmarks", "Inference pipelines"]
+      },
+      { "group": "Stacks & Tooling", "items": ["LangChain", "LlamaIndex", "FAISS", "Chroma", "Vector search"] },
+      { "group": "Lakehouse & MLOps", "items": ["Databricks", "Delta Lake", "MLflow", "Model Serving", "Experiment tracking"] },
+      { "group": "Engineering", "items": ["Advanced Python", "REST APIs", "Testing", "Profiling", "Linux"] },
+      { "group": "Production Delivery", "items": ["Observability", "Hardening", "Rollbacks", "Versioning", "Docs"] }
+    ],
+    "projects": [
+      {
+        "title": "Retail ERP/CRM (NDA) | Stability + Integrations",
+        "subtitle": "API hardening, observability, and critical module integration.",
+        "highlights": [
+          "Resilient architecture with service fallback and safe reconnection",
+          "Route validation and contracts, error handling, and auditing",
+          "Latency optimizations and startup stabilization"
+        ],
+        "stack": ["Python", "REST APIs", "SQLite/Postgres", "Observability", "LLMs"],
+        "links": { "repo": "", "demo": "", "writeup": "" },
+        "disclaimer": "Sensitive details omitted. I can share architecture and tradeoffs on request.",
+        "image": "assets/projects/project-erpcrm.svg"
+      },
+      {
+        "title": "Enterprise RAG System",
+        "subtitle": "Full pipeline: ingestion → embeddings → vector store → generation.",
+        "highlights": [
+          "Indexing and chunking focused on retrieval quality",
+          "Answer evaluation (consistency, coverage, groundedness)",
+          "Guardrails + observability to reduce hallucinations"
+        ],
+        "stack": ["RAG", "Embeddings", "FAISS/Chroma", "LLMOps", "Python"],
+        "links": { "repo": "", "demo": "", "writeup": "" },
+        "disclaimer": "Impact/KPIs: add real numbers when available.",
+        "image": "assets/projects/project-rag.svg"
+      },
+      {
+        "title": "AI Agent Workflows",
+        "subtitle": "Autonomous agents integrated with tools and external APIs, safely.",
+        "highlights": [
+          "Tool-calling with I/O validation and execution limits",
+          "Memory/context designed for predictability",
+          "Offline evaluation and regression testing"
+        ],
+        "stack": ["Agents", "Tooling", "Guardrails", "APIs", "Python"],
+        "links": { "repo": "", "demo": "", "writeup": "" },
+        "disclaimer": "Robustness first: less magic, more control.",
+        "image": "assets/projects/project-agents.svg"
+      },
+      {
+        "title": "Lakehouse LLMOps (Databricks)",
+        "subtitle": "Data integration + model traceability in enterprise environments.",
+        "highlights": [
+          "Delta Lake pipelines + MLflow experiment tracking",
+          "Model serving and monitoring with quality metrics",
+          "Integration with legacy systems via APIs"
+        ],
+        "stack": ["Databricks", "Delta Lake", "MLflow", "Serving", "Python"],
+        "links": { "repo": "", "demo": "", "writeup": "" },
+        "disclaimer": "Technical depth shared within allowed scope.",
+        "image": "assets/projects/project-lakehouse.svg"
+      }
+    ],
+    "labels": { "repo": "Repo", "demo": "Demo", "writeup": "Writeup" },
+    "experience": [
+      {
+        "when": "Open Source AI",
+        "title": "OpenShift AI / InstructLab contributions",
+        "org": "Red Hat ecosystem (per CV)",
+        "bullets": [
+          "Optimized and integrated generative model workflows for enterprise settings",
+          "Engineering practices: observability, hardening, and delivery quality"
+        ]
+      },
+      {
+        "when": "NLP / Fine-tuning",
+        "title": "Fine-tuning and inference pipelines (Hugging Face ecosystem)",
+        "org": "Projects and evaluation benchmarks (per CV)",
+        "bullets": [
+          "LoRA/PEFT experiments and quality evaluation",
+          "Inference pipelines with performance and reliability focus"
+        ]
+      },
+      {
+        "when": "Data / Automation",
+        "title": "Enterprise workflow automation + Lakehouse",
+        "org": "Volk do Brasil (per CV)",
+        "bullets": [
+          "Python automation and data integration",
+          "Applied AI capabilities on Databricks (Delta/MLflow)"
+        ]
+      },
+      {
+        "when": "Embedded / Linux",
+        "title": "Linux OEM and mission-critical systems",
+        "org": "Perkons & Policorp (per CV)",
+        "bullets": ["Linux OEM distro customization", "Embedded engineering and mission-critical software"]
+      }
+    ],
+    "education": [
+      { "title": "Postgraduate Degree in Artificial Intelligence", "org": "UTFPR", "year": "2025" },
+      { "title": "Postgraduate Degree in Software Engineering", "org": "Universidade Positivo", "year": "" },
+      { "title": "Technologist Degree in Systems Analysis and Development", "org": "Universidade Positivo", "year": "" },
+      {
+        "title": "Postgraduate Degree in Applied Generative AI",
+        "org": "UTFPR",
+        "year": "Starting Apr/2026",
+        "note": "Applied track for GenAI and LLM systems."
+      }
+    ],
+    "quickLinks": [
+      { "label": "LinkedIn (edit link)", "href": "https://www.linkedin.com/in/your-handle", "external": true },
+      { "label": "CV (PDF) (add)", "href": "#", "external": false },
+      { "label": "GitHub", "href": "https://github.com/Nordio1", "external": true },
+      { "label": "Email", "href": "mailto:mrnordio@icloud.com", "external": false }
+    ],
+    "contact": {
+      "cardTitle": "Get in touch",
+      "cardSub": "Happy to share deeper technical writeups and case study details.",
+      "phoneCta": "WhatsApp",
+      "linkedinCta": "Edit LinkedIn",
+      "quickTitle": "Quick links",
+      "quickNote": "Replace placeholders with your real links (LinkedIn, CV PDF, demos).",
+      "privacy": "Public page. No tracking scripts."
+    },
+    "footer": { "backTop": "Back to top" }
+  }
+}
+

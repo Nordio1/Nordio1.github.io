@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Johnny Nordio | AI Engineer</title>
+    <meta
+      name="description"
+      content="Artificial Intelligence Engineer focused on Generative AI, LLMs, RAG, Agents, and LLMOps."
+    />
+
+    <meta property="og:title" content="Johnny Nordio | AI Engineer" />
+    <meta
+      property="og:description"
+      content="Generative AI • LLMs • RAG • Agents • LLMOps"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://nordio1.github.io/" />
+    <meta property="og:image" content="https://nordio1.github.io/assets/og.png" />
+    <meta property="og:image:alt" content="Johnny Nordio - AI Engineer" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://nordio1.github.io/assets/og.png" />
+
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="favicon.ico" sizes="any" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..900&family=Sora:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="topbar">
+      <div class="wrap topbar-inner">
+        <a class="brand" href="#top" aria-label="Home">
+          <img src="assets/avatar-placeholder.svg" alt="" class="brand-mark" />
+          <span class="brand-name">Johnny Nordio</span>
+        </a>
+
+        <nav class="nav" aria-label="Primary">
+          <a href="#about" data-i18n="nav.about">Sobre</a>
+          <a href="#skills" data-i18n="nav.skills">Competências</a>
+          <a href="#projects" data-i18n="nav.projects">Projetos</a>
+          <a href="#experience" data-i18n="nav.experience">Experiência</a>
+          <a href="#education" data-i18n="nav.education">Formação</a>
+          <a href="#contact" data-i18n="nav.contact">Contato</a>
+        </nav>
+
+        <div class="actions">
+          <div class="lang" role="group" aria-label="Language">
+            <button type="button" class="lang-btn" data-lang="pt">PT</button>
+            <button type="button" class="lang-btn" data-lang="en">EN</button>
+          </div>
+          <a
+            class="pill"
+            id="cta-email"
+            href="mailto:mrnordio@icloud.com"
+            data-i18n="hero.ctaPrimary"
+            >Falar por e-mail</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="wrap hero-inner" data-reveal>
+          <div class="hero-copy">
+            <p class="eyebrow" data-i18n="hero.eyebrow">AI ENGINEER</p>
+            <h1 class="hero-title" data-i18n="hero.name">Johnny Nordio</h1>
+            <p class="hero-tagline" data-i18n="hero.tagline">
+              AI ENGINEER | GENERATIVE AI SPECIALIST | LLM SYSTEMS ARCHITECT
+            </p>
+            <p class="hero-meta" data-i18n="hero.location">
+              Curitiba, Brazil | Open to Global Remote Roles
+            </p>
+
+            <div class="hero-ctas">
+              <a class="btn primary" href="#projects" data-i18n="hero.ctaSecondary"
+                >Ver projetos</a
+              >
+              <a
+                class="btn ghost"
+                id="cta-linkedin"
+                href="https://www.linkedin.com/in/your-handle"
+                target="_blank"
+                rel="noreferrer"
+                data-i18n="hero.ctaLinkedin"
+                >LinkedIn (editar link)</a
+              >
+            </div>
+
+            <p class="note" data-i18n="hero.note">
+              Parte do trabalho está anonimizada (NDA). Detalhes sob demanda.
+            </p>
+          </div>
+
+          <div class="hero-panel">
+            <div class="panel-card" data-reveal>
+              <h2 class="panel-title" data-i18n="hero.panelTitle">Foco</h2>
+              <ul class="chiplist" id="focus-chips" aria-label="Focus areas"></ul>
+            </div>
+
+            <div class="panel-card subtle" data-reveal>
+              <h2 class="panel-title" data-i18n="hero.panelTitle2">O que eu construo</h2>
+              <ul class="bullets" id="build-bullets"></ul>
+            </div>
+          </div>
+        </div>
+        <div class="hero-bg" aria-hidden="true"></div>
+      </section>
+
+      <section class="section" id="about">
+        <div class="wrap" data-reveal>
+          <div class="section-head">
+            <h2 data-i18n="sections.aboutTitle">Resumo</h2>
+            <p class="section-sub" data-i18n="sections.aboutSub">
+              Pragmatismo, produção e qualidade.
+            </p>
+          </div>
+          <div class="prose" id="about-content"></div>
+        </div>
+      </section>
+
+      <section class="section" id="skills">
+        <div class="wrap" data-reveal>
+          <div class="section-head">
+            <h2 data-i18n="sections.skillsTitle">Competências</h2>
+            <p class="section-sub" data-i18n="sections.skillsSub">
+              Arquitetura, implementação e entrega.
+            </p>
+          </div>
+          <div class="grid skills" id="skills-grid"></div>
+        </div>
+      </section>
+
+      <section class="section" id="projects">
+        <div class="wrap" data-reveal>
+          <div class="section-head">
+            <h2 data-i18n="sections.projectsTitle">Projetos</h2>
+            <p class="section-sub" data-i18n="sections.projectsSub">
+              Estudos de caso (NDA-friendly) para entender rápido.
+            </p>
+          </div>
+          <div class="grid projects" id="projects-grid"></div>
+        </div>
+      </section>
+
+      <section class="section" id="experience">
+        <div class="wrap" data-reveal>
+          <div class="section-head">
+            <h2 data-i18n="sections.experienceTitle">Experiência & Contribuições</h2>
+            <p class="section-sub" data-i18n="sections.experienceSub">
+              O que foi entregue, melhorado e estabilizado.
+            </p>
+          </div>
+          <div class="timeline" id="experience-list"></div>
+        </div>
+      </section>
+
+      <section class="section" id="education">
+        <div class="wrap" data-reveal>
+          <div class="section-head">
+            <h2 data-i18n="sections.educationTitle">Formação</h2>
+            <p class="section-sub" data-i18n="sections.educationSub">
+              IA e engenharia de software com foco em aplicação prática.
+            </p>
+          </div>
+          <div class="cards" id="education-list"></div>
+        </div>
+      </section>
+
+      <section class="section contact" id="contact">
+        <div class="wrap" data-reveal>
+          <div class="section-head">
+            <h2 data-i18n="sections.contactTitle">Contato</h2>
+            <p class="section-sub" data-i18n="sections.contactSub">
+              Melhor: e-mail. Rápido: WhatsApp.
+            </p>
+          </div>
+
+          <div class="contact-grid">
+            <div class="contact-card">
+              <h3 data-i18n="contact.cardTitle">Fale comigo</h3>
+              <p class="muted" data-i18n="contact.cardSub">
+                Posso compartilhar writeups técnicos e detalhes dos estudos de caso.
+              </p>
+              <div class="contact-links">
+                <a id="contact-email" class="btn primary" href="mailto:mrnordio@icloud.com"
+                  >mrnordio@icloud.com</a
+                >
+                <a
+                  id="contact-phone"
+                  class="btn ghost"
+                  href="https://wa.me/5541995879232"
+                  target="_blank"
+                  rel="noreferrer"
+                  data-i18n="contact.phoneCta"
+                  >WhatsApp</a
+                >
+                <a
+                  id="contact-github"
+                  class="btn ghost"
+                  href="https://github.com/Nordio1"
+                  target="_blank"
+                  rel="noreferrer"
+                  >GitHub</a
+                >
+                <a
+                  id="contact-linkedin"
+                  class="btn ghost"
+                  href="https://www.linkedin.com/in/your-handle"
+                  target="_blank"
+                  rel="noreferrer"
+                  data-i18n="contact.linkedinCta"
+                  >Editar LinkedIn</a
+                >
+              </div>
+              <p class="tiny muted" data-i18n="contact.privacy">
+                Página pública. Sem scripts de tracking.
+              </p>
+            </div>
+
+            <div class="contact-card subtle">
+              <h3 data-i18n="contact.quickTitle">Links rápidos</h3>
+              <ul class="linklist" id="quick-links"></ul>
+              <p class="tiny muted" data-i18n="contact.quickNote">
+                Substitua placeholders pelos links reais (LinkedIn, CV PDF, demos).
+              </p>
+            </div>
+          </div>
+
+          <footer class="footer">
+            <span class="muted">© <span id="year"></span> Johnny Nordio</span>
+            <span class="muted">·</span>
+            <a class="muted" href="#top" data-i18n="footer.backTop">Voltar ao topo</a>
+          </footer>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
+
