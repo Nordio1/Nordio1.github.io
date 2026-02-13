@@ -1,12 +1,69 @@
 :root {
   --paper: #f6f3ee;
+  --paper-rgb: 246, 243, 238;
   --ink: #0b0d12;
-  --muted: rgba(11, 13, 18, 0.68);
+  --ink-rgb: 11, 13, 18;
+  --shadow-rgb: 11, 13, 18;
+  --white-rgb: 255, 255, 255;
+
+  --muted: rgba(var(--ink-rgb), 0.68);
   --accent: #1e6f5c;
   --accent2: #b08968;
-  --stroke: rgba(11, 13, 18, 0.12);
-  --shadow: 0 18px 50px rgba(11, 13, 18, 0.12);
+  --stroke: rgba(var(--ink-rgb), 0.12);
+  --shadow: 0 18px 50px rgba(var(--shadow-rgb), 0.12);
+  --shadow-soft: 0 18px 44px rgba(var(--shadow-rgb), 0.1);
   --radius: 18px;
+
+  --bg-acc1: rgba(30, 111, 92, 0.16);
+  --bg-acc2: rgba(176, 137, 104, 0.14);
+  --bg-wash: rgba(var(--ink-rgb), 0.03);
+
+  --topbar-bg: rgba(var(--paper-rgb), 0.72);
+  --topbar-border: rgba(var(--ink-rgb), 0.09);
+
+  --surface-50: rgba(var(--white-rgb), 0.5);
+  --surface-65: rgba(var(--white-rgb), 0.65);
+  --surface-55: rgba(var(--white-rgb), 0.55);
+  --surface-45: rgba(var(--white-rgb), 0.45);
+  --surface-54: rgba(var(--white-rgb), 0.54);
+  --surface-46: rgba(var(--white-rgb), 0.46);
+  --surface-52: rgba(var(--white-rgb), 0.52);
+  --surface-58: rgba(var(--white-rgb), 0.58);
+  --surface-60: rgba(var(--white-rgb), 0.6);
+  --chip-bg: rgba(var(--paper-rgb), 0.6);
+  --pilltag-bg: rgba(var(--paper-rgb), 0.62);
+}
+
+:root[data-theme="dark"] {
+  --paper: #0b0d12;
+  --paper-rgb: 11, 13, 18;
+  --ink: #f6f3ee;
+  --ink-rgb: 246, 243, 238;
+  --shadow-rgb: 0, 0, 0;
+
+  --muted: rgba(var(--ink-rgb), 0.72);
+  --stroke: rgba(var(--ink-rgb), 0.14);
+  --shadow: 0 18px 50px rgba(var(--shadow-rgb), 0.6);
+  --shadow-soft: 0 18px 44px rgba(var(--shadow-rgb), 0.45);
+
+  --bg-acc1: rgba(30, 111, 92, 0.22);
+  --bg-acc2: rgba(176, 137, 104, 0.18);
+  --bg-wash: rgba(var(--ink-rgb), 0.04);
+
+  --topbar-bg: rgba(11, 13, 18, 0.72);
+  --topbar-border: rgba(var(--ink-rgb), 0.1);
+
+  --surface-50: rgba(var(--white-rgb), 0.06);
+  --surface-65: rgba(var(--white-rgb), 0.08);
+  --surface-55: rgba(var(--white-rgb), 0.07);
+  --surface-45: rgba(var(--white-rgb), 0.05);
+  --surface-54: rgba(var(--white-rgb), 0.07);
+  --surface-46: rgba(var(--white-rgb), 0.05);
+  --surface-52: rgba(var(--white-rgb), 0.06);
+  --surface-58: rgba(var(--white-rgb), 0.08);
+  --surface-60: rgba(var(--white-rgb), 0.1);
+  --chip-bg: rgba(var(--white-rgb), 0.06);
+  --pilltag-bg: rgba(var(--white-rgb), 0.06);
 }
 
 *,
@@ -28,9 +85,9 @@ html {
 body {
   margin: 0;
   color: var(--ink);
-  background: radial-gradient(1200px 680px at 12% -10%, rgba(30, 111, 92, 0.16), transparent 62%),
-    radial-gradient(980px 620px at 94% 8%, rgba(176, 137, 104, 0.14), transparent 60%),
-    linear-gradient(180deg, rgba(11, 13, 18, 0.03), transparent 30%),
+  background: radial-gradient(1200px 680px at 12% -10%, var(--bg-acc1), transparent 62%),
+    radial-gradient(980px 620px at 94% 8%, var(--bg-acc2), transparent 60%),
+    linear-gradient(180deg, var(--bg-wash), transparent 30%),
     var(--paper);
   font-family: "Sora", ui-sans-serif, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
   line-height: 1.55;
@@ -53,7 +110,7 @@ a {
   position: absolute;
   left: -9999px;
   top: 12px;
-  background: #fff;
+  background: var(--surface-65);
   border: 1px solid var(--stroke);
   padding: 10px 12px;
   border-radius: 10px;
@@ -73,8 +130,8 @@ a {
   position: sticky;
   top: 0;
   z-index: 20;
-  border-bottom: 1px solid rgba(11, 13, 18, 0.09);
-  background: rgba(246, 243, 238, 0.72);
+  border-bottom: 1px solid var(--topbar-border);
+  background: var(--topbar-bg);
   backdrop-filter: blur(10px);
 }
 
@@ -97,7 +154,7 @@ a {
   width: 34px;
   height: 34px;
   border-radius: 999px;
-  box-shadow: 0 10px 26px rgba(11, 13, 18, 0.14);
+  box-shadow: 0 10px 26px rgba(var(--shadow-rgb), 0.14);
 }
 
 .brand-name {
@@ -116,7 +173,7 @@ a {
 }
 
 .nav a {
-  color: rgba(11, 13, 18, 0.82);
+  color: rgba(var(--ink-rgb), 0.82);
   border: 1px solid transparent;
   padding: 8px 10px;
   border-radius: 999px;
@@ -125,8 +182,8 @@ a {
 }
 
 .nav a:hover {
-  background: rgba(11, 13, 18, 0.04);
-  border-color: rgba(11, 13, 18, 0.08);
+  background: rgba(var(--ink-rgb), 0.04);
+  border-color: rgba(var(--ink-rgb), 0.08);
   transform: translateY(-1px);
 }
 
@@ -138,10 +195,10 @@ a {
 
 .lang {
   display: inline-flex;
-  border: 1px solid rgba(11, 13, 18, 0.12);
+  border: 1px solid var(--stroke);
   border-radius: 999px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.5);
+  background: var(--surface-50);
 }
 
 .lang-btn {
@@ -151,12 +208,31 @@ a {
   font-weight: 650;
   font-size: 12px;
   cursor: pointer;
-  color: rgba(11, 13, 18, 0.75);
+  color: rgba(var(--ink-rgb), 0.75);
 }
 
 .lang-btn.is-active {
   background: rgba(30, 111, 92, 0.12);
-  color: rgba(11, 13, 18, 0.92);
+  color: rgba(var(--ink-rgb), 0.92);
+}
+
+.theme-toggle {
+  border: 1px solid var(--stroke);
+  background: var(--surface-50);
+  padding: 9px 12px;
+  border-radius: 999px;
+  font-weight: 650;
+  font-size: 12px;
+  cursor: pointer;
+  color: rgba(var(--ink-rgb), 0.82);
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+  white-space: nowrap;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 30px rgba(var(--shadow-rgb), 0.14);
+  background: var(--surface-60);
 }
 
 .pill {
@@ -167,15 +243,15 @@ a {
   border-radius: 999px;
   font-weight: 650;
   font-size: 12px;
-  border: 1px solid rgba(11, 13, 18, 0.12);
-  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid var(--stroke);
+  background: var(--surface-65);
   transition: transform 180ms ease, box-shadow 180ms ease;
   white-space: nowrap;
 }
 
 .pill:hover {
   transform: translateY(-1px);
-  box-shadow: 0 12px 30px rgba(11, 13, 18, 0.14);
+  box-shadow: 0 12px 30px rgba(var(--shadow-rgb), 0.14);
 }
 
 .hero {
@@ -201,7 +277,7 @@ a {
   font-size: 12px;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: rgba(11, 13, 18, 0.7);
+  color: rgba(var(--ink-rgb), 0.7);
   margin: 0 0 14px;
 }
 
@@ -217,7 +293,7 @@ a {
   margin: 14px 0 0;
   font-weight: 520;
   font-size: 16px;
-  color: rgba(11, 13, 18, 0.84);
+  color: rgba(var(--ink-rgb), 0.84);
 }
 
 .hero-meta {
@@ -242,15 +318,15 @@ a {
   padding: 11px 14px;
   font-weight: 650;
   font-size: 13px;
-  border: 1px solid rgba(11, 13, 18, 0.14);
-  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(var(--ink-rgb), 0.14);
+  background: var(--surface-55);
   transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
   white-space: nowrap;
 }
 
 .btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 16px 40px rgba(11, 13, 18, 0.16);
+  box-shadow: 0 16px 40px rgba(var(--shadow-rgb), 0.16);
 }
 
 .btn.primary {
@@ -259,13 +335,13 @@ a {
 }
 
 .btn.ghost {
-  background: rgba(255, 255, 255, 0.45);
+  background: var(--surface-45);
 }
 
 .note {
   margin: 16px 0 0;
   font-size: 12px;
-  color: rgba(11, 13, 18, 0.66);
+  color: rgba(var(--ink-rgb), 0.66);
   max-width: 62ch;
 }
 
@@ -275,21 +351,21 @@ a {
 }
 
 .panel-card {
-  border: 1px solid rgba(11, 13, 18, 0.12);
+  border: 1px solid var(--stroke);
   border-radius: var(--radius);
-  background: rgba(255, 255, 255, 0.54);
-  box-shadow: 0 18px 44px rgba(11, 13, 18, 0.12);
+  background: var(--surface-54);
+  box-shadow: var(--shadow-soft);
   padding: 16px 16px 14px;
 }
 
 .panel-card.subtle {
-  background: rgba(255, 255, 255, 0.46);
+  background: var(--surface-46);
 }
 
 .panel-title {
   margin: 0 0 10px;
   font-size: 13px;
-  color: rgba(11, 13, 18, 0.82);
+  color: rgba(var(--ink-rgb), 0.82);
   letter-spacing: -0.01em;
 }
 
@@ -308,10 +384,10 @@ a {
   gap: 8px;
   padding: 8px 10px;
   border-radius: 999px;
-  border: 1px solid rgba(11, 13, 18, 0.12);
-  background: rgba(246, 243, 238, 0.6);
+  border: 1px solid var(--stroke);
+  background: var(--chip-bg);
   font-size: 12px;
-  color: rgba(11, 13, 18, 0.82);
+  color: rgba(var(--ink-rgb), 0.82);
   white-space: nowrap;
 }
 
@@ -327,7 +403,7 @@ a {
 .bullets {
   margin: 0;
   padding-left: 18px;
-  color: rgba(11, 13, 18, 0.78);
+  color: rgba(var(--ink-rgb), 0.78);
   font-size: 13px;
 }
 
@@ -341,15 +417,15 @@ a {
   height: 560px;
   background: repeating-linear-gradient(
       90deg,
-      rgba(11, 13, 18, 0.045),
-      rgba(11, 13, 18, 0.045) 1px,
+      rgba(var(--ink-rgb), 0.045),
+      rgba(var(--ink-rgb), 0.045) 1px,
       transparent 1px,
       transparent 18px
     ),
     repeating-linear-gradient(
       0deg,
-      rgba(11, 13, 18, 0.03),
-      rgba(11, 13, 18, 0.03) 1px,
+      rgba(var(--ink-rgb), 0.03),
+      rgba(var(--ink-rgb), 0.03) 1px,
       transparent 1px,
       transparent 18px
     );
@@ -392,7 +468,7 @@ a {
 .prose p {
   margin: 0 0 12px;
   max-width: 78ch;
-  color: rgba(11, 13, 18, 0.82);
+  color: rgba(var(--ink-rgb), 0.82);
 }
 
 .grid {
@@ -410,10 +486,10 @@ a {
 }
 
 .card {
-  border: 1px solid rgba(11, 13, 18, 0.12);
+  border: 1px solid var(--stroke);
   border-radius: var(--radius);
-  background: rgba(255, 255, 255, 0.52);
-  box-shadow: 0 18px 44px rgba(11, 13, 18, 0.1);
+  background: var(--surface-52);
+  box-shadow: var(--shadow-soft);
   padding: 16px;
   transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
   overflow: hidden;
@@ -422,7 +498,7 @@ a {
 .card:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow);
-  background: rgba(255, 255, 255, 0.58);
+  background: var(--surface-58);
 }
 
 .card h3 {
@@ -433,7 +509,7 @@ a {
 
 .card p {
   margin: 8px 0 0;
-  color: rgba(11, 13, 18, 0.78);
+  color: rgba(var(--ink-rgb), 0.78);
 }
 
 .skill-items {
@@ -447,10 +523,10 @@ a {
 
 .pilltag {
   font-size: 12px;
-  border: 1px solid rgba(11, 13, 18, 0.12);
+  border: 1px solid var(--stroke);
   border-radius: 999px;
   padding: 7px 10px;
-  background: rgba(246, 243, 238, 0.62);
+  background: var(--pilltag-bg);
 }
 
 .project-top {
@@ -464,21 +540,21 @@ a {
   width: 138px;
   height: 78px;
   border-radius: 14px;
-  border: 1px solid rgba(11, 13, 18, 0.12);
-  background: rgba(246, 243, 238, 0.65);
+  border: 1px solid var(--stroke);
+  background: var(--surface-65);
   flex: 0 0 auto;
 }
 
 .project-subtitle {
   margin: 8px 0 0;
-  color: rgba(11, 13, 18, 0.72);
+  color: rgba(var(--ink-rgb), 0.72);
   font-size: 13px;
 }
 
 .highlights {
   margin: 12px 0 0;
   padding-left: 18px;
-  color: rgba(11, 13, 18, 0.78);
+  color: rgba(var(--ink-rgb), 0.78);
 }
 
 .stack {
@@ -512,17 +588,17 @@ a {
   font-weight: 650;
   padding: 8px 10px;
   border-radius: 999px;
-  border: 1px solid rgba(11, 13, 18, 0.12);
-  background: rgba(255, 255, 255, 0.46);
+  border: 1px solid var(--stroke);
+  background: var(--surface-46);
 }
 
 .links a:hover {
-  background: rgba(255, 255, 255, 0.6);
+  background: var(--surface-60);
 }
 
 .disclaimer {
   font-size: 12px;
-  color: rgba(11, 13, 18, 0.62);
+  color: rgba(var(--ink-rgb), 0.62);
   max-width: 44ch;
 }
 
@@ -538,13 +614,13 @@ a {
   align-items: start;
   padding: 16px;
   border-radius: var(--radius);
-  border: 1px solid rgba(11, 13, 18, 0.12);
-  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid var(--stroke);
+  background: var(--surface-50);
 }
 
 .twhen {
   font-size: 12px;
-  color: rgba(11, 13, 18, 0.65);
+  color: rgba(var(--ink-rgb), 0.65);
   text-transform: uppercase;
   letter-spacing: 0.14em;
   padding-top: 3px;
@@ -557,14 +633,14 @@ a {
 
 .torg {
   margin: 6px 0 0;
-  color: rgba(11, 13, 18, 0.7);
+  color: rgba(var(--ink-rgb), 0.7);
   font-size: 13px;
 }
 
 .tbullets {
   margin: 10px 0 0;
   padding-left: 18px;
-  color: rgba(11, 13, 18, 0.78);
+  color: rgba(var(--ink-rgb), 0.78);
 }
 
 .cards {
@@ -575,9 +651,9 @@ a {
 
 .edu {
   padding: 16px;
-  border: 1px solid rgba(11, 13, 18, 0.12);
+  border: 1px solid var(--stroke);
   border-radius: var(--radius);
-  background: rgba(255, 255, 255, 0.5);
+  background: var(--surface-50);
 }
 
 .edu h3 {
@@ -587,7 +663,7 @@ a {
 
 .edu p {
   margin: 8px 0 0;
-  color: rgba(11, 13, 18, 0.74);
+  color: rgba(var(--ink-rgb), 0.74);
   font-size: 13px;
 }
 
@@ -599,14 +675,14 @@ a {
 
 .contact-card {
   padding: 16px;
-  border: 1px solid rgba(11, 13, 18, 0.12);
+  border: 1px solid var(--stroke);
   border-radius: var(--radius);
-  background: rgba(255, 255, 255, 0.52);
-  box-shadow: 0 18px 44px rgba(11, 13, 18, 0.1);
+  background: var(--surface-52);
+  box-shadow: var(--shadow-soft);
 }
 
 .contact-card.subtle {
-  background: rgba(255, 255, 255, 0.46);
+  background: var(--surface-46);
 }
 
 .contact-card h3 {
@@ -635,14 +711,14 @@ a {
   justify-content: space-between;
   padding: 10px 12px;
   border-radius: 14px;
-  border: 1px solid rgba(11, 13, 18, 0.12);
-  background: rgba(246, 243, 238, 0.62);
+  border: 1px solid var(--stroke);
+  background: var(--pilltag-bg);
   font-weight: 650;
   font-size: 13px;
 }
 
 .linklist a:hover {
-  background: rgba(246, 243, 238, 0.78);
+  background: var(--surface-60);
 }
 
 .footer {

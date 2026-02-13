@@ -3,5 +3,4 @@
 Public GitHub Pages site.
 
 - Live: `https://nordio1.github.io/`
-- Edit content in `content.json`
-
+- Update content in `content.json`

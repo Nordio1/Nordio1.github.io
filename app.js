@@ -10,6 +10,7 @@
   const state = {
     content: null,
     lang: localStorage.getItem("lang") || DEFAULT_LANG,
+    theme: "light",
   };
 
   function $(sel, root = document) {
@@ -283,6 +284,32 @@
     });
   }
 
+  function getPreferredTheme() {
+    const raw = (localStorage.getItem("theme") || "").toLowerCase();
+    if (raw === "light" || raw === "dark") return raw;
+    if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) return "dark";
+    return "light";
+  }
+
+  function applyTheme(theme) {
+    state.theme = theme === "dark" ? "dark" : "light";
+    document.documentElement.dataset.theme = state.theme;
+    localStorage.setItem("theme", state.theme);
+  }
+
+  function updateThemeToggle(langData) {
+    const btn = $("#theme-toggle");
+    if (!btn) return;
+
+    const toDark = langData?.theme?.toDark || "Dark";
+    const toLight = langData?.theme?.toLight || "Light";
+    const aria = langData?.theme?.aria || "Toggle theme";
+
+    btn.textContent = state.theme === "dark" ? toLight : toDark;
+    btn.setAttribute("aria-label", aria);
+    btn.setAttribute("aria-pressed", state.theme === "dark" ? "true" : "false");
+  }
+
   function applyProfileLinks(langData) {
     const p = langData.profile || {};
     const email = typeof p.email === "string" ? p.email.trim() : "";
@@ -326,6 +353,7 @@
     setMeta(langData);
     applyI18n(langData);
     applyProfileLinks(langData);
+    updateThemeToggle(langData);
     renderAbout(langData);
     renderFocus(langData);
     renderSkills(langData);
@@ -359,6 +387,17 @@
     $all(".lang-btn").forEach((b) => {
       b.addEventListener("click", () => setLang(b.dataset.lang || "en"));
     });
+
+    applyTheme(getPreferredTheme());
+    const themeBtn = $("#theme-toggle");
+    if (themeBtn) {
+      themeBtn.addEventListener("click", () => {
+        applyTheme(state.theme === "dark" ? "light" : "dark");
+        const langData = state.content ? state.content[state.lang] : null;
+        updateThemeToggle(langData);
+      });
+    }
+    updateThemeToggle(null);
 
     setupReveal();
 

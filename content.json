@@ -9,7 +9,7 @@
       "email": "mrnordio@icloud.com",
       "whatsapp": "https://wa.me/5541995879232",
       "github": "https://github.com/Nordio1",
-      "linkedin": "https://www.linkedin.com/in/your-handle"
+      "linkedin": "https://br.linkedin.com/in/johnny-nordio-533769251"
     },
     "nav": {
       "about": "Resumo",
@@ -19,6 +19,11 @@
       "education": "Formação",
       "contact": "Contato"
     },
+    "theme": {
+      "toDark": "Modo escuro",
+      "toLight": "Modo claro",
+      "aria": "Alternar tema"
+    },
     "hero": {
       "eyebrow": "AI ENGINEER",
       "name": "Johnny Nordio",
@@ -26,7 +31,7 @@
       "location": "Curitiba - PR | Disponível para remoto internacional",
       "ctaPrimary": "Falar por e-mail",
       "ctaSecondary": "Ver projetos",
-      "ctaLinkedin": "LinkedIn (editar link)",
+      "ctaLinkedin": "LinkedIn",
       "note": "Parte do trabalho está anonimizada (NDA). Detalhes sob demanda.",
       "panelTitle": "Foco",
       "panelTitle2": "O que eu construo",
@@ -77,41 +82,41 @@
     "projects": [
       {
         "title": "ERP/CRM Varejo (NDA) | Estabilidade + Integrações",
-        "subtitle": "Hardening de APIs, observabilidade e integração de módulos críticos.",
+        "subtitle": "Integração de módulos críticos, hardening de APIs e qualidade de entrega em produção.",
         "highlights": [
-          "Arquitetura resiliente com fallback de serviços e reconexão segura",
-          "Validação de rotas e contratos, tratamento de erros e auditoria",
-          "Otimizações de latência e estabilização de inicialização"
+          "Resiliência: reconexão segura, fallback de serviços e redução de falhas intermitentes",
+          "Contrato e consistência: validação de rotas, tratamento de erros e auditoria ponta a ponta",
+          "Performance: redução de latência perceptível e melhoria de tempo de carga em fluxos críticos"
         ],
-        "stack": ["Python", "APIs REST", "SQLite/Postgres", "Observability", "LLMs"],
+        "stack": ["Python", "REST APIs", "Desktop app", "Databases", "Observability"],
         "links": { "repo": "", "demo": "", "writeup": "" },
-        "disclaimer": "Detalhes sensíveis omitidos. Posso compartilhar arquitetura e decisões sob demanda.",
+        "disclaimer": "Estudo de caso anonimizado (NDA-friendly). Detalhes técnicos sob demanda.",
         "image": "assets/projects/project-erpcrm.svg"
       },
       {
         "title": "Enterprise RAG System",
         "subtitle": "Pipeline completo: ingestão → embeddings → armazenamento vetorial → geração.",
         "highlights": [
-          "Indexação e chunking com foco em qualidade de recuperação",
-          "Avaliação de respostas (consistência, cobertura, groundedness)",
-          "Guardrails e observabilidade para reduzir alucinações"
+          "Ingestão, normalização e chunking com foco em recuperação consistente",
+          "Busca semântica com vetores e ajustes de relevância (recall/precision)",
+          "Avaliação, guardrails e observabilidade para reduzir respostas não fundamentadas"
         ],
         "stack": ["RAG", "Embeddings", "FAISS/Chroma", "LLMOps", "Python"],
         "links": { "repo": "", "demo": "", "writeup": "" },
-        "disclaimer": "KPI/impacto: adicionar números reais quando disponível.",
+        "disclaimer": "Detalhes de dados e documentos são variáveis por domínio (ajuste rápido por caso).",
         "image": "assets/projects/project-rag.svg"
       },
       {
         "title": "AI Agent Workflows",
         "subtitle": "Agentes autônomos integrados a ferramentas e APIs externas com segurança.",
         "highlights": [
-          "Tool-calling com validação de entrada/saída e limites de execução",
-          "Memória e contexto com foco em previsibilidade",
-          "Avaliação offline e testes para regressão"
+          "Tool-calling com validação de entrada/saída, limites de execução e segurança",
+          "Orquestração multi-step com foco em previsibilidade e rastreabilidade",
+          "Testes e avaliação offline para evitar regressões em cenários reais"
         ],
-        "stack": ["Agents", "Tooling", "Guardrails", "APIs", "Python"],
+        "stack": ["Agents", "Tool calling", "Guardrails", "APIs", "Python"],
         "links": { "repo": "", "demo": "", "writeup": "" },
-        "disclaimer": "Foco em robustez: menos magia, mais controle.",
+        "disclaimer": "Foco em robustez: execução controlada, logs úteis e falhas previsíveis.",
         "image": "assets/projects/project-agents.svg"
       },
       {
@@ -119,12 +124,12 @@
         "subtitle": "Integração de dados + rastreabilidade de modelos em ambiente corporativo.",
         "highlights": [
           "Pipelines com Delta Lake e experiment tracking com MLflow",
-          "Model serving e monitoramento com métricas de qualidade",
-          "Integração com sistemas legados via APIs"
+          "Serving e monitoramento com métricas de qualidade e rastreabilidade",
+          "Integração com sistemas legados e APIs corporativas"
         ],
         "stack": ["Databricks", "Delta Lake", "MLflow", "Serving", "Python"],
         "links": { "repo": "", "demo": "", "writeup": "" },
-        "disclaimer": "Descrever detalhamento técnico conforme escopo permitido.",
+        "disclaimer": "Padrões prontos para monitoramento, versionamento e entrega contínua.",
         "image": "assets/projects/project-lakehouse.svg"
       }
     ],
@@ -179,18 +184,18 @@
       }
     ],
     "quickLinks": [
-      { "label": "LinkedIn (editar link)", "href": "https://www.linkedin.com/in/your-handle", "external": true },
-      { "label": "CV (PDF) (adicionar)", "href": "#", "external": false },
+      { "label": "LinkedIn", "href": "https://br.linkedin.com/in/johnny-nordio-533769251", "external": true },
       { "label": "GitHub", "href": "https://github.com/Nordio1", "external": true },
+      { "label": "WhatsApp", "href": "https://wa.me/5541995879232", "external": true },
       { "label": "Email", "href": "mailto:mrnordio@icloud.com", "external": false }
     ],
     "contact": {
       "cardTitle": "Fale comigo",
       "cardSub": "Posso compartilhar writeups técnicos e detalhes dos estudos de caso.",
       "phoneCta": "WhatsApp",
-      "linkedinCta": "Editar LinkedIn",
+      "linkedinCta": "LinkedIn",
       "quickTitle": "Links rápidos",
-      "quickNote": "Substitua placeholders pelos links reais (LinkedIn, CV PDF, demos).",
+      "quickNote": "Links úteis para contato e portfólio.",
       "privacy": "Página pública. Sem scripts de tracking."
     },
     "footer": { "backTop": "Voltar ao topo" }
@@ -205,7 +210,7 @@
       "email": "mrnordio@icloud.com",
       "whatsapp": "https://wa.me/5541995879232",
       "github": "https://github.com/Nordio1",
-      "linkedin": "https://www.linkedin.com/in/your-handle"
+      "linkedin": "https://br.linkedin.com/in/johnny-nordio-533769251"
     },
     "nav": {
       "about": "Summary",
@@ -215,6 +220,11 @@
       "education": "Education",
       "contact": "Contact"
     },
+    "theme": {
+      "toDark": "Dark mode",
+      "toLight": "Light mode",
+      "aria": "Toggle theme"
+    },
     "hero": {
       "eyebrow": "AI ENGINEER",
       "name": "Johnny Nordio",
@@ -222,7 +232,7 @@
       "location": "Curitiba, Brazil | Open to Global Remote Roles",
       "ctaPrimary": "Email me",
       "ctaSecondary": "View projects",
-      "ctaLinkedin": "LinkedIn (edit link)",
+      "ctaLinkedin": "LinkedIn",
       "note": "Some work is anonymized (NDA-friendly). Details available on request.",
       "panelTitle": "Focus",
       "panelTitle2": "What I build",
@@ -270,41 +280,41 @@
     "projects": [
       {
         "title": "Retail ERP/CRM (NDA) | Stability + Integrations",
-        "subtitle": "API hardening, observability, and critical module integration.",
+        "subtitle": "Critical module integration, API hardening, and production-grade delivery.",
         "highlights": [
-          "Resilient architecture with service fallback and safe reconnection",
-          "Route validation and contracts, error handling, and auditing",
-          "Latency optimizations and startup stabilization"
+          "Resilience: safe reconnection, service fallback, and fewer intermittent failures",
+          "Consistency: route validation, error handling, and end-to-end auditing",
+          "Performance: lower perceived latency and faster critical flows"
         ],
-        "stack": ["Python", "REST APIs", "SQLite/Postgres", "Observability", "LLMs"],
+        "stack": ["Python", "REST APIs", "Desktop app", "Databases", "Observability"],
         "links": { "repo": "", "demo": "", "writeup": "" },
-        "disclaimer": "Sensitive details omitted. I can share architecture and tradeoffs on request.",
+        "disclaimer": "Anonymized case study (NDA-friendly). Deeper technical details on request.",
         "image": "assets/projects/project-erpcrm.svg"
       },
       {
         "title": "Enterprise RAG System",
         "subtitle": "Full pipeline: ingestion → embeddings → vector store → generation.",
         "highlights": [
-          "Indexing and chunking focused on retrieval quality",
-          "Answer evaluation (consistency, coverage, groundedness)",
-          "Guardrails + observability to reduce hallucinations"
+          "Ingestion, normalization, and chunking designed for consistent retrieval",
+          "Semantic search with vector stores and relevance tuning (recall/precision)",
+          "Evaluation, guardrails, and observability to reduce ungrounded answers"
         ],
         "stack": ["RAG", "Embeddings", "FAISS/Chroma", "LLMOps", "Python"],
         "links": { "repo": "", "demo": "", "writeup": "" },
-        "disclaimer": "Impact/KPIs: add real numbers when available.",
+        "disclaimer": "Data sources and documents vary by domain (fast adaptation per use case).",
         "image": "assets/projects/project-rag.svg"
       },
       {
         "title": "AI Agent Workflows",
         "subtitle": "Autonomous agents integrated with tools and external APIs, safely.",
         "highlights": [
-          "Tool-calling with I/O validation and execution limits",
-          "Memory/context designed for predictability",
-          "Offline evaluation and regression testing"
+          "Tool-calling with strict I/O validation, execution limits, and safety",
+          "Multi-step orchestration designed for predictability and traceability",
+          "Offline evaluation and regression tests for real-world scenarios"
         ],
         "stack": ["Agents", "Tooling", "Guardrails", "APIs", "Python"],
         "links": { "repo": "", "demo": "", "writeup": "" },
-        "disclaimer": "Robustness first: less magic, more control.",
+        "disclaimer": "Robustness first: controlled execution, useful logs, predictable failures.",
         "image": "assets/projects/project-agents.svg"
       },
       {
@@ -312,12 +322,12 @@
         "subtitle": "Data integration + model traceability in enterprise environments.",
         "highlights": [
           "Delta Lake pipelines + MLflow experiment tracking",
-          "Model serving and monitoring with quality metrics",
-          "Integration with legacy systems via APIs"
+          "Serving and monitoring with quality metrics and traceability",
+          "Integration with legacy systems and enterprise APIs"
         ],
         "stack": ["Databricks", "Delta Lake", "MLflow", "Serving", "Python"],
         "links": { "repo": "", "demo": "", "writeup": "" },
-        "disclaimer": "Technical depth shared within allowed scope.",
+        "disclaimer": "Patterns ready for monitoring, versioning, and continuous delivery.",
         "image": "assets/projects/project-lakehouse.svg"
       }
     ],
@@ -369,21 +379,20 @@
       }
     ],
     "quickLinks": [
-      { "label": "LinkedIn (edit link)", "href": "https://www.linkedin.com/in/your-handle", "external": true },
-      { "label": "CV (PDF) (add)", "href": "#", "external": false },
+      { "label": "LinkedIn", "href": "https://br.linkedin.com/in/johnny-nordio-533769251", "external": true },
       { "label": "GitHub", "href": "https://github.com/Nordio1", "external": true },
+      { "label": "WhatsApp", "href": "https://wa.me/5541995879232", "external": true },
       { "label": "Email", "href": "mailto:mrnordio@icloud.com", "external": false }
     ],
     "contact": {
       "cardTitle": "Get in touch",
       "cardSub": "Happy to share deeper technical writeups and case study details.",
       "phoneCta": "WhatsApp",
-      "linkedinCta": "Edit LinkedIn",
+      "linkedinCta": "LinkedIn",
       "quickTitle": "Quick links",
-      "quickNote": "Replace placeholders with your real links (LinkedIn, CV PDF, demos).",
+      "quickNote": "Useful links for contact and work.",
       "privacy": "Public page. No tracking scripts."
     },
     "footer": { "backTop": "Back to top" }
   }
 }
-
