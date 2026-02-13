@@ -697,7 +697,16 @@ a {
   }
 
   .nav {
+    width: 100%;
+    order: 3;
+    padding: 6px 0 0;
+  }
+
+  .topbar-inner {
+    flex-wrap: wrap;
+  }
+
+  .brand-name {
     display: none;
   }
 }
-
