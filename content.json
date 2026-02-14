@@ -17,7 +17,8 @@
       "projects": "Projetos",
       "experience": "Experiência",
       "education": "Formação",
-      "contact": "Contato"
+      "contact": "Contato",
+      "lab": "Arquiteturas"
     },
     "theme": {
       "toDark": "Modo escuro",
@@ -35,12 +36,73 @@
       "note": "Parte do trabalho está anonimizada (NDA). Detalhes sob demanda.",
       "panelTitle": "Foco",
       "panelTitle2": "O que eu construo",
-      "focus": ["LLMs", "RAG", "Agentes", "LLMOps", "Fine-tuning (LoRA/PEFT)", "APIs & Integrações"],
+      "focus": [
+        "LLMs",
+        "RAG",
+        "Agentes",
+        "LLMOps",
+        "Fine-tuning (LoRA/PEFT)",
+        "APIs & Integrações"
+      ],
       "build": [
         "Pipelines de RAG end-to-end (ingestão → embeddings → vetores → geração)",
         "Avaliação, monitoramento e guardrails para LLMs",
         "Integração de IA em ERPs e APIs REST",
         "Otimização de desempenho, estabilidade e observabilidade"
+      ],
+      "panelTitle3": "Pipelines",
+      "pipelineHint": "Clique para explorar",
+      "pipeline": [
+        {
+          "id": "ingest",
+          "title": "Ingest?o",
+          "desc": "Documentos, dados e logs",
+          "bullets": [
+            "Ingest?o com normaliza??o + deduplica??o",
+            "Chunking com estrat?gia por tipo de dado",
+            "Versionamento de fontes e trilha de auditoria"
+          ]
+        },
+        {
+          "id": "embed",
+          "title": "Embeddings",
+          "desc": "Representa??o sem?ntica",
+          "bullets": [
+            "Sele??o de modelo por dom?nio/custo/lat?ncia",
+            "Batching e cache para reduzir custo",
+            "Avalia??o cont?nua de recall/precision"
+          ]
+        },
+        {
+          "id": "vector",
+          "title": "Busca vetorial",
+          "desc": "Recupera??o com relev?ncia",
+          "bullets": [
+            "Vector DB (FAISS/Chroma) + filtros",
+            "Reranking quando necess?rio",
+            "Observabilidade de consultas e hits"
+          ]
+        },
+        {
+          "id": "gen",
+          "title": "Gera??o",
+          "desc": "LLM com guardrails",
+          "bullets": [
+            "Prompts estruturados + context windows",
+            "Guardrails e valida??o de sa?da",
+            "M?tricas de qualidade (offline + online)"
+          ]
+        },
+        {
+          "id": "ops",
+          "title": "LLMOps",
+          "desc": "Deploy, monitoramento, avalia??o",
+          "bullets": [
+            "Experiment tracking (MLflow)",
+            "Canary/rollback e seguran?a",
+            "Monitoramento de drift e regress?es"
+          ]
+        }
       ]
     },
     "sections": {
@@ -55,7 +117,9 @@
       "educationTitle": "Formação",
       "educationSub": "IA e engenharia de software com foco em aplicação prática.",
       "contactTitle": "Contato",
-      "contactSub": "Melhor: e-mail. Rápido: WhatsApp."
+      "contactSub": "Melhor: e-mail. Rápido: WhatsApp.",
+      "labTitle": "Arquiteturas em a??o",
+      "labSub": "Um mapa interativo dos blocos que mais uso em produ??o (RAG, agentes, avalia??o e LLMOps)."
     },
     "about": [
       "Engenheiro de Inteligência Artificial com foco em IA Generativa, Large Language Models (LLMs) e arquiteturas de Retrieval-Augmented Generation (RAG). Experiência em construir pipelines end-to-end e integrar IA em sistemas corporativos (ERP, APIs REST e plataformas Lakehouse).",
@@ -65,18 +129,63 @@
     "skills": [
       {
         "group": "GenAI & LLMs",
-        "items": ["RAG", "Agentes multi-step", "Prompting estruturado", "Guardrails", "Avaliação & métricas"]
+        "items": [
+          "RAG",
+          "Agentes multi-step",
+          "Prompting estruturado",
+          "Guardrails",
+          "Avaliação & métricas"
+        ]
       },
       {
         "group": "Fine-tuning & NLP",
-        "items": ["LoRA/PEFT", "Hugging Face", "Tokenização", "Benchmarks", "Inference pipelines"]
+        "items": [
+          "LoRA/PEFT",
+          "Hugging Face",
+          "Tokenização",
+          "Benchmarks",
+          "Inference pipelines"
+        ]
       },
-      { "group": "Stacks & Tooling", "items": ["LangChain", "LlamaIndex", "FAISS", "Chroma", "Vector search"] },
-      { "group": "Lakehouse & MLOps", "items": ["Databricks", "Delta Lake", "MLflow", "Model Serving", "Experiment tracking"] },
-      { "group": "Engenharia", "items": ["Python avançado", "APIs REST", "Testes", "Profiling", "Linux"] },
+      {
+        "group": "Stacks & Tooling",
+        "items": [
+          "LangChain",
+          "LlamaIndex",
+          "FAISS",
+          "Chroma",
+          "Vector search"
+        ]
+      },
+      {
+        "group": "Lakehouse & MLOps",
+        "items": [
+          "Databricks",
+          "Delta Lake",
+          "MLflow",
+          "Model Serving",
+          "Experiment tracking"
+        ]
+      },
+      {
+        "group": "Engenharia",
+        "items": [
+          "Python avançado",
+          "APIs REST",
+          "Testes",
+          "Profiling",
+          "Linux"
+        ]
+      },
       {
         "group": "Entrega em Produção",
-        "items": ["Observabilidade", "Hardening", "Rollbacks", "Versionamento", "Documentação"]
+        "items": [
+          "Observabilidade",
+          "Hardening",
+          "Rollbacks",
+          "Versionamento",
+          "Documentação"
+        ]
       }
     ],
     "projects": [
@@ -88,8 +197,18 @@
           "Contrato e consistência: validação de rotas, tratamento de erros e auditoria ponta a ponta",
           "Performance: redução de latência perceptível e melhoria de tempo de carga em fluxos críticos"
         ],
-        "stack": ["Python", "REST APIs", "Desktop app", "Databases", "Observability"],
-        "links": { "repo": "", "demo": "", "writeup": "" },
+        "stack": [
+          "Python",
+          "REST APIs",
+          "Desktop app",
+          "Databases",
+          "Observability"
+        ],
+        "links": {
+          "repo": "",
+          "demo": "",
+          "writeup": ""
+        },
         "disclaimer": "Estudo de caso anonimizado (NDA-friendly). Detalhes técnicos sob demanda.",
         "image": "assets/projects/project-erpcrm.svg"
       },
@@ -101,10 +220,32 @@
           "Busca semântica com vetores e ajustes de relevância (recall/precision)",
           "Avaliação, guardrails e observabilidade para reduzir respostas não fundamentadas"
         ],
-        "stack": ["RAG", "Embeddings", "FAISS/Chroma", "LLMOps", "Python"],
-        "links": { "repo": "", "demo": "", "writeup": "" },
+        "stack": [
+          "RAG",
+          "Embeddings",
+          "FAISS/Chroma",
+          "LLMOps",
+          "Python"
+        ],
+        "links": {
+          "repo": "",
+          "demo": "",
+          "writeup": ""
+        },
         "disclaimer": "Detalhes de dados e documentos são variáveis por domínio (ajuste rápido por caso).",
-        "image": "assets/projects/project-rag.svg"
+        "image": "assets/projects/project-rag.svg",
+        "id": "rag",
+        "problem": "Busca e resposta em bases documentais grandes tendem a perder precis?o sem arquitetura e avalia??o.",
+        "approach": [
+          "Ingest?o + chunking estruturado + vetores + reranking (quando necess?rio)",
+          "M?tricas e testes de qualidade (offline + online)",
+          "Guardrails e observabilidade para reduzir alucina??o"
+        ],
+        "impact": [
+          "Respostas mais consistentes e audit?veis",
+          "Menos tempo perdido em buscas manuais",
+          "Base pronta para opera??o e evolu??o cont?nua"
+        ]
       },
       {
         "title": "AI Agent Workflows",
@@ -114,10 +255,32 @@
           "Orquestração multi-step com foco em previsibilidade e rastreabilidade",
           "Testes e avaliação offline para evitar regressões em cenários reais"
         ],
-        "stack": ["Agents", "Tool calling", "Guardrails", "APIs", "Python"],
-        "links": { "repo": "", "demo": "", "writeup": "" },
+        "stack": [
+          "Agents",
+          "Tool calling",
+          "Guardrails",
+          "APIs",
+          "Python"
+        ],
+        "links": {
+          "repo": "",
+          "demo": "",
+          "writeup": ""
+        },
         "disclaimer": "Foco em robustez: execução controlada, logs úteis e falhas previsíveis.",
-        "image": "assets/projects/project-agents.svg"
+        "image": "assets/projects/project-agents.svg",
+        "id": "agents",
+        "problem": "Agentes podem ser poderosos, mas s?o perigosos sem limites, valida??o e rastreabilidade.",
+        "approach": [
+          "Tool-calling com valida??o de I/O e limites de execu??o",
+          "Orquestra??o multi-step com logs ?teis",
+          "Avalia??o offline e testes para evitar regress?es"
+        ],
+        "impact": [
+          "Execu??o mais previs?vel",
+          "Falhas trat?veis e rastre?veis",
+          "Maior seguran?a em produ??o"
+        ]
       },
       {
         "title": "Lakehouse LLMOps (Databricks)",
@@ -127,13 +290,115 @@
           "Serving e monitoramento com métricas de qualidade e rastreabilidade",
           "Integração com sistemas legados e APIs corporativas"
         ],
-        "stack": ["Databricks", "Delta Lake", "MLflow", "Serving", "Python"],
-        "links": { "repo": "", "demo": "", "writeup": "" },
+        "stack": [
+          "Databricks",
+          "Delta Lake",
+          "MLflow",
+          "Serving",
+          "Python"
+        ],
+        "links": {
+          "repo": "",
+          "demo": "",
+          "writeup": ""
+        },
         "disclaimer": "Padrões prontos para monitoramento, versionamento e entrega contínua.",
+        "image": "assets/projects/project-lakehouse.svg",
+        "id": "lakehouse",
+        "problem": "Sem governan?a, o ciclo de modelos vira ?caixa preta?: dif?cil rastrear, reproduzir e operar.",
+        "approach": [
+          "Pipelines Lakehouse (Delta) com rastreabilidade",
+          "MLflow para experimentos, versionamento e auditoria",
+          "Serving e monitoramento com m?tricas operacionais"
+        ],
+        "impact": [
+          "Entrega mais controlada e reproduz?vel",
+          "Menos retrabalho em incidentes",
+          "Base s?lida para evolu??o de modelos"
+        ]
+      },
+      {
+        "id": "finetune",
+        "title": "Fine-tuning de Transformers (LoRA/PEFT)",
+        "subtitle": "Ajuste fino com foco em qualidade, custo e governan?a de experimentos.",
+        "problem": "Modelos base raramente atendem um dom?nio espec?fico sem ajuste e avalia??o.",
+        "approach": [
+          "LoRA/PEFT com datasets controlados e rastre?veis",
+          "Benchmarks e avalia??o (qualitativa + quantitativa)",
+          "Pipelines de infer?ncia com aten??o a lat?ncia e custo"
+        ],
+        "impact": [
+          "Melhor ader?ncia a estilo e dom?nio",
+          "Ciclo de itera??o mais r?pido e seguro",
+          "Base pronta para produ??o e monitoramento"
+        ],
+        "highlights": [
+          "Experimentos reproduz?veis com tracking",
+          "M?tricas de qualidade e regress?o",
+          "Deploy de infer?ncia com foco em confiabilidade"
+        ],
+        "stack": [
+          "Transformers",
+          "LoRA/PEFT",
+          "Hugging Face",
+          "Eval",
+          "Python"
+        ],
+        "links": {
+          "repo": "",
+          "demo": "",
+          "writeup": ""
+        },
+        "disclaimer": "Detalhes de datasets/modelos dependem do caso de uso.",
+        "image": "assets/projects/project-generic.svg"
+      },
+      {
+        "id": "eval",
+        "title": "Avalia??o & Observabilidade de LLMs",
+        "subtitle": "M?tricas, suites de teste e monitoramento para evitar regress?es.",
+        "problem": "Sem avalia??o, sistemas com LLM degradam silenciosamente e ficam imprevis?veis.",
+        "approach": [
+          "Suites offline (golden set) + checks automatizados",
+          "M?tricas online (lat?ncia, taxa de erro, satisfa??o)",
+          "Dashboards e alertas para falhas e regress?es"
+        ],
+        "impact": [
+          "Detec??o precoce de regress?es",
+          "Melhor previsibilidade em produ??o",
+          "Diagn?stico mais r?pido em incidentes"
+        ],
+        "highlights": [
+          "Guardrails e valida??es por rota/caso",
+          "Telemetria ?til (sem vazamento de dados)",
+          "Processo de release mais seguro"
+        ],
+        "stack": [
+          "LLMOps",
+          "Observability",
+          "Testing",
+          "Python",
+          "APIs"
+        ],
+        "links": {
+          "repo": "",
+          "demo": "",
+          "writeup": ""
+        },
+        "disclaimer": "Sem n?meros inventados: m?tricas espec?ficas variam por cliente e contexto.",
         "image": "assets/projects/project-lakehouse.svg"
       }
     ],
-    "labels": { "repo": "Repo", "demo": "Demo", "writeup": "Writeup" },
+    "labels": {
+      "repo": "Repo",
+      "demo": "Demo",
+      "writeup": "Writeup",
+      "caseStudy": "Estudo de caso",
+      "problem": "Problema",
+      "approach": "Abordagem",
+      "impact": "Impacto",
+      "highlights": "Destaques",
+      "stack": "Stack"
+    },
     "experience": [
       {
         "when": "Open Source AI",
@@ -173,9 +438,21 @@
       }
     ],
     "education": [
-      { "title": "Pós-graduação em Inteligência Artificial", "org": "UTFPR", "year": "2025" },
-      { "title": "Pós-graduação em Engenharia de Software", "org": "Universidade Positivo", "year": "" },
-      { "title": "Tecnólogo em Análise e Desenvolvimento de Sistemas", "org": "Universidade Positivo", "year": "" },
+      {
+        "title": "Pós-graduação em Inteligência Artificial",
+        "org": "UTFPR",
+        "year": "2025"
+      },
+      {
+        "title": "Pós-graduação em Engenharia de Software",
+        "org": "Universidade Positivo",
+        "year": ""
+      },
+      {
+        "title": "Tecnólogo em Análise e Desenvolvimento de Sistemas",
+        "org": "Universidade Positivo",
+        "year": ""
+      },
       {
         "title": "Pós-graduação em IA Generativa Aplicada",
         "org": "UTFPR",
@@ -184,10 +461,26 @@
       }
     ],
     "quickLinks": [
-      { "label": "LinkedIn", "href": "https://br.linkedin.com/in/johnny-nordio-533769251", "external": true },
-      { "label": "GitHub", "href": "https://github.com/Nordio1", "external": true },
-      { "label": "WhatsApp", "href": "https://wa.me/5541995879232", "external": true },
-      { "label": "Email", "href": "mailto:mrnordio@icloud.com", "external": false }
+      {
+        "label": "LinkedIn",
+        "href": "https://br.linkedin.com/in/johnny-nordio-533769251",
+        "external": true
+      },
+      {
+        "label": "GitHub",
+        "href": "https://github.com/Nordio1",
+        "external": true
+      },
+      {
+        "label": "WhatsApp",
+        "href": "https://wa.me/5541995879232",
+        "external": true
+      },
+      {
+        "label": "Email",
+        "href": "mailto:mrnordio@icloud.com",
+        "external": false
+      }
     ],
     "contact": {
       "cardTitle": "Fale comigo",
@@ -198,7 +491,160 @@
       "quickNote": "Links úteis para contato e portfólio.",
       "privacy": "Página pública. Sem scripts de tracking."
     },
-    "footer": { "backTop": "Voltar ao topo" }
+    "footer": {
+      "backTop": "Voltar ao topo"
+    },
+    "lab": {
+      "legend": [
+        {
+          "label": "RAG",
+          "hint": "Recupera??o + gera??o"
+        },
+        {
+          "label": "Agentes",
+          "hint": "Tool-calling multi-step"
+        },
+        {
+          "label": "Avalia??o",
+          "hint": "Qualidade e regress?o"
+        },
+        {
+          "label": "LLMOps",
+          "hint": "Deploy e monitoramento"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "sources",
+          "label": "Fontes",
+          "x": 16,
+          "y": 20,
+          "title": "Fontes e ingest?o",
+          "body": "Ponto de partida: documentos, tabelas, eventos e dados operacionais. A chave ? consist?ncia e rastreabilidade.",
+          "bullets": [
+            "Normaliza??o e deduplica??o",
+            "Controle de vers?es de dados",
+            "Trilha de auditoria (o que entrou e quando)"
+          ],
+          "links": [
+            "chunking"
+          ]
+        },
+        {
+          "id": "chunking",
+          "label": "Chunking",
+          "x": 38,
+          "y": 30,
+          "title": "Chunking e indexa??o",
+          "body": "Separar conte?do em partes recuper?veis aumenta a qualidade do RAG. Estrat?gias mudam por dom?nio.",
+          "bullets": [
+            "Chunking por estrutura (t?tulo/se??o/tabela)",
+            "Metadados para filtros",
+            "Testes de recall/precision"
+          ],
+          "links": [
+            "vectors",
+            "eval"
+          ]
+        },
+        {
+          "id": "vectors",
+          "label": "Vetores",
+          "x": 60,
+          "y": 18,
+          "title": "Embeddings + vector store",
+          "body": "Embeddings traduzem texto em vetores. O index precisa ser r?pido, consistente e observ?vel.",
+          "bullets": [
+            "FAISS/Chroma e filtros",
+            "Cache e batching",
+            "Reranking quando necess?rio"
+          ],
+          "links": [
+            "rag"
+          ]
+        },
+        {
+          "id": "rag",
+          "label": "RAG",
+          "x": 72,
+          "y": 42,
+          "title": "RAG (retrieval + gera??o)",
+          "body": "Resposta com base em evid?ncias recuperadas. O objetivo ? reduzir alucina??o e aumentar precis?o.",
+          "bullets": [
+            "Contexto citado/ancorado",
+            "Prompts estruturados",
+            "Fallbacks e limites"
+          ],
+          "links": [
+            "guardrails",
+            "eval"
+          ]
+        },
+        {
+          "id": "agents",
+          "label": "Agentes",
+          "x": 22,
+          "y": 58,
+          "title": "Agentes com ferramentas",
+          "body": "Agentes chamam ferramentas/APIs. O segredo ? previsibilidade: limites, valida??o e logs ?teis.",
+          "bullets": [
+            "Tool-calling com valida??o",
+            "Execu??o multi-step controlada",
+            "Erros previs?veis e rastre?veis"
+          ],
+          "links": [
+            "guardrails",
+            "ops"
+          ]
+        },
+        {
+          "id": "guardrails",
+          "label": "Guardrails",
+          "x": 52,
+          "y": 60,
+          "title": "Guardrails e seguran?a",
+          "body": "Regras para evitar sa?das perigosas e reduzir comportamento inesperado em produ??o.",
+          "bullets": [
+            "Valida??o de entrada/sa?da",
+            "Pol?ticas de dados e PII",
+            "Rate limits e timeouts"
+          ],
+          "links": [
+            "eval"
+          ]
+        },
+        {
+          "id": "eval",
+          "label": "Avalia??o",
+          "x": 78,
+          "y": 70,
+          "title": "Avalia??o cont?nua",
+          "body": "Sem avalia??o, sistema degrada. O foco ? criar testes e m?tricas que detectem regress?o cedo.",
+          "bullets": [
+            "Suites offline (golden set)",
+            "M?tricas online (qualidade/lat?ncia)",
+            "Observabilidade e alertas"
+          ],
+          "links": [
+            "ops"
+          ]
+        },
+        {
+          "id": "ops",
+          "label": "LLMOps",
+          "x": 90,
+          "y": 56,
+          "title": "LLMOps (deploy e monitoramento)",
+          "body": "Entrega com controle: versionamento, canary, rollback e monitoramento por custo/lat?ncia/qualidade.",
+          "bullets": [
+            "MLflow / tracking",
+            "Deploy seguro (canary/rollback)",
+            "Monitoramento + auditoria"
+          ],
+          "links": []
+        }
+      ]
+    }
   },
   "en": {
     "meta": {
@@ -218,7 +664,8 @@
       "projects": "Projects",
       "experience": "Experience",
       "education": "Education",
-      "contact": "Contact"
+      "contact": "Contact",
+      "lab": "Systems"
     },
     "theme": {
       "toDark": "Dark mode",
@@ -236,12 +683,73 @@
       "note": "Some work is anonymized (NDA-friendly). Details available on request.",
       "panelTitle": "Focus",
       "panelTitle2": "What I build",
-      "focus": ["LLMs", "RAG", "Agents", "LLMOps", "Fine-tuning (LoRA/PEFT)", "APIs & Integrations"],
+      "focus": [
+        "LLMs",
+        "RAG",
+        "Agents",
+        "LLMOps",
+        "Fine-tuning (LoRA/PEFT)",
+        "APIs & Integrations"
+      ],
       "build": [
         "End-to-end RAG pipelines (ingestion → embeddings → vector store → generation)",
         "LLM evaluation, monitoring, and guardrails",
         "AI integration into enterprise ERPs and REST APIs",
         "Performance, stability, and observability improvements"
+      ],
+      "panelTitle3": "Pipelines",
+      "pipelineHint": "Click to explore",
+      "pipeline": [
+        {
+          "id": "ingest",
+          "title": "Ingestion",
+          "desc": "Docs, data, logs",
+          "bullets": [
+            "Ingestion with normalization + deduplication",
+            "Chunking strategies per data type",
+            "Source versioning and audit trail"
+          ]
+        },
+        {
+          "id": "embed",
+          "title": "Embeddings",
+          "desc": "Semantic representations",
+          "bullets": [
+            "Model selection by domain/cost/latency",
+            "Batching and caching to reduce cost",
+            "Continuous recall/precision evaluation"
+          ]
+        },
+        {
+          "id": "vector",
+          "title": "Vector search",
+          "desc": "Retrieval with relevance",
+          "bullets": [
+            "Vector DB (FAISS/Chroma) + filters",
+            "Reranking when needed",
+            "Query/hit observability"
+          ]
+        },
+        {
+          "id": "gen",
+          "title": "Generation",
+          "desc": "LLM with guardrails",
+          "bullets": [
+            "Structured prompting + context windows",
+            "Output validation and guardrails",
+            "Quality metrics (offline + online)"
+          ]
+        },
+        {
+          "id": "ops",
+          "title": "LLMOps",
+          "desc": "Deploy, monitoring, evaluation",
+          "bullets": [
+            "Experiment tracking (MLflow)",
+            "Canary/rollback and security",
+            "Drift monitoring and regressions"
+          ]
+        }
       ]
     },
     "sections": {
@@ -256,7 +764,9 @@
       "educationTitle": "Education",
       "educationSub": "AI and software engineering with a hands-on bias.",
       "contactTitle": "Contact",
-      "contactSub": "Best: email. Fast: WhatsApp."
+      "contactSub": "Best: email. Fast: WhatsApp.",
+      "labTitle": "Architectures in action",
+      "labSub": "An interactive map of the building blocks I ship in production (RAG, agents, evaluation, LLMOps)."
     },
     "about": [
       "Artificial Intelligence Engineer focused on Generative AI, Large Language Models (LLMs), and Retrieval-Augmented Generation (RAG) architectures. Experienced in building end-to-end pipelines and integrating AI into enterprise systems (ERP, REST APIs, and Lakehouse platforms).",
@@ -266,16 +776,64 @@
     "skills": [
       {
         "group": "GenAI & LLMs",
-        "items": ["RAG", "Multi-step agents", "Structured prompting", "Guardrails", "Evaluation & metrics"]
+        "items": [
+          "RAG",
+          "Multi-step agents",
+          "Structured prompting",
+          "Guardrails",
+          "Evaluation & metrics"
+        ]
       },
       {
         "group": "Fine-tuning & NLP",
-        "items": ["LoRA/PEFT", "Hugging Face", "Tokenization", "Benchmarks", "Inference pipelines"]
+        "items": [
+          "LoRA/PEFT",
+          "Hugging Face",
+          "Tokenization",
+          "Benchmarks",
+          "Inference pipelines"
+        ]
       },
-      { "group": "Stacks & Tooling", "items": ["LangChain", "LlamaIndex", "FAISS", "Chroma", "Vector search"] },
-      { "group": "Lakehouse & MLOps", "items": ["Databricks", "Delta Lake", "MLflow", "Model Serving", "Experiment tracking"] },
-      { "group": "Engineering", "items": ["Advanced Python", "REST APIs", "Testing", "Profiling", "Linux"] },
-      { "group": "Production Delivery", "items": ["Observability", "Hardening", "Rollbacks", "Versioning", "Docs"] }
+      {
+        "group": "Stacks & Tooling",
+        "items": [
+          "LangChain",
+          "LlamaIndex",
+          "FAISS",
+          "Chroma",
+          "Vector search"
+        ]
+      },
+      {
+        "group": "Lakehouse & MLOps",
+        "items": [
+          "Databricks",
+          "Delta Lake",
+          "MLflow",
+          "Model Serving",
+          "Experiment tracking"
+        ]
+      },
+      {
+        "group": "Engineering",
+        "items": [
+          "Advanced Python",
+          "REST APIs",
+          "Testing",
+          "Profiling",
+          "Linux"
+        ]
+      },
+      {
+        "group": "Production Delivery",
+        "items": [
+          "Observability",
+          "Hardening",
+          "Rollbacks",
+          "Versioning",
+          "Docs"
+        ]
+      }
     ],
     "projects": [
       {
@@ -286,10 +844,32 @@
           "Consistency: route validation, error handling, and end-to-end auditing",
           "Performance: lower perceived latency and faster critical flows"
         ],
-        "stack": ["Python", "REST APIs", "Desktop app", "Databases", "Observability"],
-        "links": { "repo": "", "demo": "", "writeup": "" },
+        "stack": [
+          "Python",
+          "REST APIs",
+          "Desktop app",
+          "Databases",
+          "Observability"
+        ],
+        "links": {
+          "repo": "",
+          "demo": "",
+          "writeup": ""
+        },
         "disclaimer": "Anonymized case study (NDA-friendly). Deeper technical details on request.",
-        "image": "assets/projects/project-erpcrm.svg"
+        "image": "assets/projects/project-erpcrm.svg",
+        "id": "erp-crm",
+        "problem": "Retail operations require stability, traceability, and integrations without production surprises.",
+        "approach": [
+          "API hardening, error handling, and observability",
+          "Fiscal snapshot + end-to-end audit trail",
+          "Guided critical flows and human-friendly UX"
+        ],
+        "impact": [
+          "Fewer intermittent failures and more predictable behavior",
+          "Consistent data (ERP ? API ? CRM) with reliable persistence",
+          "Operational delivery designed for support and maintenance"
+        ]
       },
       {
         "title": "Enterprise RAG System",
@@ -299,10 +879,32 @@
           "Semantic search with vector stores and relevance tuning (recall/precision)",
           "Evaluation, guardrails, and observability to reduce ungrounded answers"
         ],
-        "stack": ["RAG", "Embeddings", "FAISS/Chroma", "LLMOps", "Python"],
-        "links": { "repo": "", "demo": "", "writeup": "" },
+        "stack": [
+          "RAG",
+          "Embeddings",
+          "FAISS/Chroma",
+          "LLMOps",
+          "Python"
+        ],
+        "links": {
+          "repo": "",
+          "demo": "",
+          "writeup": ""
+        },
         "disclaimer": "Data sources and documents vary by domain (fast adaptation per use case).",
-        "image": "assets/projects/project-rag.svg"
+        "image": "assets/projects/project-rag.svg",
+        "id": "rag",
+        "problem": "Answering over large document bases tends to lose accuracy without architecture and evaluation.",
+        "approach": [
+          "Structured ingestion + chunking + vectors + reranking when needed",
+          "Quality metrics and evaluation (offline + online)",
+          "Guardrails and observability to reduce hallucinations"
+        ],
+        "impact": [
+          "More consistent, auditable answers",
+          "Less time spent on manual search",
+          "Production-ready foundation for continuous improvement"
+        ]
       },
       {
         "title": "AI Agent Workflows",
@@ -312,10 +914,32 @@
           "Multi-step orchestration designed for predictability and traceability",
           "Offline evaluation and regression tests for real-world scenarios"
         ],
-        "stack": ["Agents", "Tooling", "Guardrails", "APIs", "Python"],
-        "links": { "repo": "", "demo": "", "writeup": "" },
+        "stack": [
+          "Agents",
+          "Tooling",
+          "Guardrails",
+          "APIs",
+          "Python"
+        ],
+        "links": {
+          "repo": "",
+          "demo": "",
+          "writeup": ""
+        },
         "disclaimer": "Robustness first: controlled execution, useful logs, predictable failures.",
-        "image": "assets/projects/project-agents.svg"
+        "image": "assets/projects/project-agents.svg",
+        "id": "agents",
+        "problem": "Agents are powerful but risky without limits, validation, and traceability.",
+        "approach": [
+          "Tool calling with strict I/O validation and execution limits",
+          "Multi-step orchestration with useful logs",
+          "Offline evaluation and regression tests"
+        ],
+        "impact": [
+          "More predictable execution",
+          "Traceable failures",
+          "Better production safety"
+        ]
       },
       {
         "title": "Lakehouse LLMOps (Databricks)",
@@ -325,21 +949,125 @@
           "Serving and monitoring with quality metrics and traceability",
           "Integration with legacy systems and enterprise APIs"
         ],
-        "stack": ["Databricks", "Delta Lake", "MLflow", "Serving", "Python"],
-        "links": { "repo": "", "demo": "", "writeup": "" },
+        "stack": [
+          "Databricks",
+          "Delta Lake",
+          "MLflow",
+          "Serving",
+          "Python"
+        ],
+        "links": {
+          "repo": "",
+          "demo": "",
+          "writeup": ""
+        },
         "disclaimer": "Patterns ready for monitoring, versioning, and continuous delivery.",
+        "image": "assets/projects/project-lakehouse.svg",
+        "id": "lakehouse",
+        "problem": "Without governance, the model lifecycle becomes a black box: hard to trace, reproduce, and operate.",
+        "approach": [
+          "Lakehouse pipelines (Delta) with traceability",
+          "MLflow for experiments, versioning, and auditability",
+          "Serving + monitoring with operational metrics"
+        ],
+        "impact": [
+          "More controlled, reproducible delivery",
+          "Less rework during incidents",
+          "Solid base for model iteration"
+        ]
+      },
+      {
+        "id": "finetune",
+        "title": "Transformer Fine-Tuning (LoRA/PEFT)",
+        "subtitle": "Fine-tuning focused on quality, cost, and experiment governance.",
+        "problem": "Base models rarely meet a specific domain without adaptation and evaluation.",
+        "approach": [
+          "LoRA/PEFT with controlled, traceable datasets",
+          "Benchmarks and evaluation (qualitative + quantitative)",
+          "Inference pipelines with latency/cost awareness"
+        ],
+        "impact": [
+          "Better domain fit and style alignment",
+          "Faster, safer iteration cycles",
+          "Production-ready foundation with monitoring"
+        ],
+        "highlights": [
+          "Reproducible experiments with tracking",
+          "Quality and regression metrics",
+          "Reliable inference delivery"
+        ],
+        "stack": [
+          "Transformers",
+          "LoRA/PEFT",
+          "Hugging Face",
+          "Eval",
+          "Python"
+        ],
+        "links": {
+          "repo": "",
+          "demo": "",
+          "writeup": ""
+        },
+        "disclaimer": "Model/dataset details vary by use case.",
+        "image": "assets/projects/project-generic.svg"
+      },
+      {
+        "id": "eval",
+        "title": "LLM Evaluation & Observability",
+        "subtitle": "Metrics, test suites, and monitoring to prevent regressions.",
+        "problem": "Without evaluation, LLM systems degrade silently and become unpredictable.",
+        "approach": [
+          "Offline suites (golden set) + automated checks",
+          "Online metrics (latency, error rate, satisfaction)",
+          "Dashboards and alerts for failures/regressions"
+        ],
+        "impact": [
+          "Earlier regression detection",
+          "Better production predictability",
+          "Faster incident diagnosis"
+        ],
+        "highlights": [
+          "Guardrails and validations per route/case",
+          "Useful telemetry (without leaking data)",
+          "Safer release process"
+        ],
+        "stack": [
+          "LLMOps",
+          "Observability",
+          "Testing",
+          "Python",
+          "APIs"
+        ],
+        "links": {
+          "repo": "",
+          "demo": "",
+          "writeup": ""
+        },
+        "disclaimer": "No fabricated numbers: metrics are context-dependent.",
         "image": "assets/projects/project-lakehouse.svg"
       }
     ],
-    "labels": { "repo": "Repo", "demo": "Demo", "writeup": "Writeup" },
+    "labels": {
+      "repo": "Repo",
+      "demo": "Demo",
+      "writeup": "Writeup",
+      "caseStudy": "Case study",
+      "problem": "Problem",
+      "approach": "Approach",
+      "impact": "Impact",
+      "highlights": "Highlights",
+      "stack": "Stack"
+    },
     "experience": [
       {
         "when": "Open Source AI",
         "title": "OpenShift AI / InstructLab contributions",
         "org": "Red Hat ecosystem (per CV)",
         "bullets": [
-          "Optimized and integrated generative model workflows for enterprise settings",
-          "Engineering practices: observability, hardening, and delivery quality"
+          "Contributions and improvements focused on GenAI workflows for enterprise use",
+          "Hardening: error handling, useful logs, validations, predictable behavior",
+          "Performance/latency improvements and fewer intermittent pipeline failures",
+          "Engineering discipline: tests, release notes, sustainable maintenance"
         ]
       },
       {
@@ -356,21 +1084,40 @@
         "title": "Enterprise workflow automation + Lakehouse",
         "org": "Volk do Brasil (per CV)",
         "bullets": [
-          "Python automation and data integration",
-          "Applied AI capabilities on Databricks (Delta/MLflow)"
+          "Python automation and data integration across systems",
+          "Lakehouse pipelines (Delta) with traceability and data quality",
+          "MLflow for experiment tracking/versioning and governance",
+          "Integration with enterprise APIs and legacy systems"
         ]
       },
       {
         "when": "Embedded / Linux",
         "title": "Linux OEM and mission-critical systems",
         "org": "Perkons & Policorp (per CV)",
-        "bullets": ["Linux OEM distro customization", "Embedded engineering and mission-critical software"]
+        "bullets": [
+          "Linux OEM distribution customization and build/deploy processes",
+          "Embedded engineering and hardware integrations when applicable",
+          "Stability focus: diagnosis, logs, safe fixes",
+          "Tooling and processes for critical software maintenance"
+        ]
       }
     ],
     "education": [
-      { "title": "Postgraduate Degree in Artificial Intelligence", "org": "UTFPR", "year": "2025" },
-      { "title": "Postgraduate Degree in Software Engineering", "org": "Universidade Positivo", "year": "" },
-      { "title": "Technologist Degree in Systems Analysis and Development", "org": "Universidade Positivo", "year": "" },
+      {
+        "title": "Postgraduate Degree in Artificial Intelligence",
+        "org": "UTFPR",
+        "year": "2025"
+      },
+      {
+        "title": "Postgraduate Degree in Software Engineering",
+        "org": "Universidade Positivo",
+        "year": ""
+      },
+      {
+        "title": "Technologist Degree in Systems Analysis and Development",
+        "org": "Universidade Positivo",
+        "year": ""
+      },
       {
         "title": "Postgraduate Degree in Applied Generative AI",
         "org": "UTFPR",
@@ -379,10 +1126,26 @@
       }
     ],
     "quickLinks": [
-      { "label": "LinkedIn", "href": "https://br.linkedin.com/in/johnny-nordio-533769251", "external": true },
-      { "label": "GitHub", "href": "https://github.com/Nordio1", "external": true },
-      { "label": "WhatsApp", "href": "https://wa.me/5541995879232", "external": true },
-      { "label": "Email", "href": "mailto:mrnordio@icloud.com", "external": false }
+      {
+        "label": "LinkedIn",
+        "href": "https://br.linkedin.com/in/johnny-nordio-533769251",
+        "external": true
+      },
+      {
+        "label": "GitHub",
+        "href": "https://github.com/Nordio1",
+        "external": true
+      },
+      {
+        "label": "WhatsApp",
+        "href": "https://wa.me/5541995879232",
+        "external": true
+      },
+      {
+        "label": "Email",
+        "href": "mailto:mrnordio@icloud.com",
+        "external": false
+      }
     ],
     "contact": {
       "cardTitle": "Get in touch",
@@ -393,6 +1156,159 @@
       "quickNote": "Useful links for contact and work.",
       "privacy": "Public page. No tracking scripts."
     },
-    "footer": { "backTop": "Back to top" }
+    "footer": {
+      "backTop": "Back to top"
+    },
+    "lab": {
+      "legend": [
+        {
+          "label": "RAG",
+          "hint": "Retrieval + generation"
+        },
+        {
+          "label": "Agents",
+          "hint": "Multi-step tool calling"
+        },
+        {
+          "label": "Evaluation",
+          "hint": "Quality and regressions"
+        },
+        {
+          "label": "LLMOps",
+          "hint": "Deploy and monitoring"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "sources",
+          "label": "Sources",
+          "x": 16,
+          "y": 20,
+          "title": "Sources and ingestion",
+          "body": "Starting point: documents, tables, events, operational data. The key is consistency and traceability.",
+          "bullets": [
+            "Normalization and deduplication",
+            "Data versioning",
+            "Audit trail (what/when)"
+          ],
+          "links": [
+            "chunking"
+          ]
+        },
+        {
+          "id": "chunking",
+          "label": "Chunking",
+          "x": 38,
+          "y": 30,
+          "title": "Chunking and indexing",
+          "body": "Splitting content into retrievable units improves RAG quality. Strategies vary by domain.",
+          "bullets": [
+            "Structure-aware chunking",
+            "Metadata for filters",
+            "Recall/precision testing"
+          ],
+          "links": [
+            "vectors",
+            "eval"
+          ]
+        },
+        {
+          "id": "vectors",
+          "label": "Vectors",
+          "x": 60,
+          "y": 18,
+          "title": "Embeddings + vector store",
+          "body": "Embeddings turn text into vectors. Indexes must be fast, consistent, and observable.",
+          "bullets": [
+            "FAISS/Chroma and filters",
+            "Caching and batching",
+            "Reranking when needed"
+          ],
+          "links": [
+            "rag"
+          ]
+        },
+        {
+          "id": "rag",
+          "label": "RAG",
+          "x": 72,
+          "y": 42,
+          "title": "RAG (retrieval + generation)",
+          "body": "Evidence-grounded answers. Goal: reduce hallucination and increase accuracy.",
+          "bullets": [
+            "Anchored context",
+            "Structured prompts",
+            "Fallbacks and limits"
+          ],
+          "links": [
+            "guardrails",
+            "eval"
+          ]
+        },
+        {
+          "id": "agents",
+          "label": "Agents",
+          "x": 22,
+          "y": 58,
+          "title": "Tool-enabled agents",
+          "body": "Agents call tools/APIs. The secret is predictability: limits, validation, and useful logs.",
+          "bullets": [
+            "Tool calling with validation",
+            "Controlled multi-step execution",
+            "Predictable failures"
+          ],
+          "links": [
+            "guardrails",
+            "ops"
+          ]
+        },
+        {
+          "id": "guardrails",
+          "label": "Guardrails",
+          "x": 52,
+          "y": 60,
+          "title": "Guardrails and safety",
+          "body": "Policies to reduce unsafe outputs and unexpected behavior in production.",
+          "bullets": [
+            "I/O validation",
+            "Data/PII policies",
+            "Rate limits and timeouts"
+          ],
+          "links": [
+            "eval"
+          ]
+        },
+        {
+          "id": "eval",
+          "label": "Evaluation",
+          "x": 78,
+          "y": 70,
+          "title": "Continuous evaluation",
+          "body": "Without evaluation, systems degrade. Focus: tests and metrics that catch regressions early.",
+          "bullets": [
+            "Offline suites (golden set)",
+            "Online metrics (quality/latency)",
+            "Observability and alerts"
+          ],
+          "links": [
+            "ops"
+          ]
+        },
+        {
+          "id": "ops",
+          "label": "LLMOps",
+          "x": 90,
+          "y": 56,
+          "title": "LLMOps (deploy and monitoring)",
+          "body": "Delivery with control: versioning, canary, rollback and monitoring for cost/latency/quality.",
+          "bullets": [
+            "MLflow / tracking",
+            "Safe deploy (canary/rollback)",
+            "Monitoring + audit trail"
+          ],
+          "links": []
+        }
+      ]
+    }
   }
 }

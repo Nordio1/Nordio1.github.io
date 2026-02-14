@@ -21,6 +21,9 @@
     <meta property="og:image:alt" content="Johnny Nordio - AI Engineer" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="https://nordio1.github.io/assets/og.png" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#F6F3EE" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0B0D12" media="(prefers-color-scheme: dark)" />
 
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="favicon.ico" sizes="any" />
@@ -33,7 +36,22 @@
     />
 
     <link rel="stylesheet" href="styles.css" />
-    <script defer src="app.js"></script>
+    <script type="module" defer src="app.js"></script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Johnny Nordio",
+        "jobTitle": "AI Engineer",
+        "email": "mrnordio@icloud.com",
+        "url": "https://nordio1.github.io/",
+        "sameAs": [
+          "https://github.com/Nordio1",
+          "https://br.linkedin.com/in/johnny-nordio-533769251"
+        ]
+      }
+    </script>
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
@@ -49,6 +67,7 @@
           <a href="#about" data-i18n="nav.about">Sobre</a>
           <a href="#skills" data-i18n="nav.skills">Competências</a>
           <a href="#projects" data-i18n="nav.projects">Projetos</a>
+          <a href="#lab" data-i18n="nav.lab">Arquiteturas</a>
           <a href="#experience" data-i18n="nav.experience">Experiência</a>
           <a href="#education" data-i18n="nav.education">Formação</a>
           <a href="#contact" data-i18n="nav.contact">Contato</a>
@@ -75,6 +94,7 @@
 
     <main id="main">
       <section class="hero" id="top">
+        <canvas id="fx-canvas" class="fx-canvas" aria-hidden="true"></canvas>
         <div class="wrap hero-inner" data-reveal>
           <div class="hero-copy">
             <p class="eyebrow" data-i18n="hero.eyebrow">AI ENGINEER</p>
@@ -116,6 +136,14 @@
               <h2 class="panel-title" data-i18n="hero.panelTitle2">O que eu construo</h2>
               <ul class="bullets" id="build-bullets"></ul>
             </div>
+
+            <div class="panel-card pipeline" data-reveal>
+              <div class="pipeline-head">
+                <h2 class="panel-title" data-i18n="hero.panelTitle3">Pipelines</h2>
+                <span class="tiny muted" data-i18n="hero.pipelineHint">Clique para explorar</span>
+              </div>
+              <div class="pipeline-grid" id="pipeline-grid" aria-label="Pipeline map"></div>
+            </div>
           </div>
         </div>
         <div class="hero-bg" aria-hidden="true"></div>
@@ -154,6 +182,23 @@
             </p>
           </div>
           <div class="grid projects" id="projects-grid"></div>
+        </div>
+      </section>
+
+      <section class="section lab" id="lab">
+        <div class="wrap" data-reveal>
+          <div class="section-head">
+            <h2 data-i18n="sections.labTitle">Arquiteturas em ação</h2>
+            <p class="section-sub" data-i18n="sections.labSub">
+              Um mapa interativo dos blocos que mais uso em produção (RAG, agentes, avaliação e LLMOps).
+            </p>
+          </div>
+
+          <div class="lab-stage" role="group" aria-label="Interactive system map">
+            <div class="lab-legend" id="lab-legend"></div>
+            <div class="lab-map" id="lab-map"></div>
+            <div class="lab-detail" id="lab-detail" aria-live="polite"></div>
+          </div>
         </div>
       </section>
 
@@ -235,9 +280,6 @@
             <div class="contact-card subtle">
               <h3 data-i18n="contact.quickTitle">Links rápidos</h3>
               <ul class="linklist" id="quick-links"></ul>
-              <p class="tiny muted" data-i18n="contact.quickNote">
-                Substitua placeholders pelos links reais (LinkedIn, CV PDF, demos).
-              </p>
             </div>
           </div>
 
@@ -249,5 +291,12 @@
         </div>
       </section>
     </main>
+
+    <dialog class="modal" id="project-modal" aria-label="Project details">
+      <form method="dialog" class="modal-inner">
+        <button class="modal-close" value="cancel" aria-label="Close">×</button>
+        <div class="modal-body" id="project-modal-body"></div>
+      </form>
+    </dialog>
   </body>
 </html>
