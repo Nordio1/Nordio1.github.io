@@ -185,6 +185,69 @@ function renderFocus(langData) {
   }
 }
 
+function renderHeroFeature(langData) {
+  const grid = $("#hero-feature-grid");
+  if (!grid) return;
+
+  const projects = Array.isArray(langData.projects) ? langData.projects : [];
+  if (projects.length === 0) {
+    grid.innerHTML = "";
+    return;
+  }
+
+  const ids = Array.isArray(langData.hero?.featuredProjectIds) ? langData.hero.featuredProjectIds : [];
+  let picks = [];
+  if (ids.length) {
+    ids.forEach((id) => {
+      const hit = projects.find((p) => String(p.id || "") === String(id));
+      if (hit) picks.push(hit);
+    });
+  }
+  if (picks.length === 0) picks = projects.slice(0, 3);
+
+  const seen = new Set();
+  picks = picks
+    .filter((p) => p && (p.id || p.title))
+    .filter((p) => {
+      const key = String(p.id || p.title || "");
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .slice(0, 3);
+
+  grid.innerHTML = "";
+  const frag = document.createDocumentFragment();
+  picks.forEach((p) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "feature-item";
+    btn.addEventListener("click", () => openProjectModal(p, langData));
+
+    const strong = document.createElement("strong");
+    strong.textContent = p.title || "";
+
+    const span = document.createElement("span");
+    span.textContent = p.subtitle || p.problem || "";
+
+    const stack = document.createElement("div");
+    stack.className = "feature-stack";
+    (Array.isArray(p.stack) ? p.stack : []).slice(0, 4).forEach((t) => {
+      const pill = document.createElement("span");
+      pill.className = "feature-pill";
+      pill.textContent = t;
+      stack.appendChild(pill);
+    });
+
+    btn.appendChild(strong);
+    btn.appendChild(span);
+    if (stack.childNodes.length) btn.appendChild(stack);
+
+    frag.appendChild(btn);
+  });
+  grid.appendChild(frag);
+}
+
 function renderPipeline(langData) {
   const grid = $("#pipeline-grid");
   if (!grid) return;
@@ -695,7 +758,7 @@ function setupCardTilt() {
   const ok = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   if (!ok) return;
 
-  const cards = $all(".card, .panel-card, .titem, .edu");
+  const cards = $all(".card, .panel-card, .titem, .edu, .feature-item");
   cards.forEach((el) => {
     if (el.dataset.tiltBound) return;
     el.dataset.tiltBound = "1";
@@ -1262,6 +1325,7 @@ function setLang(next) {
 
   renderAbout(langData);
   renderFocus(langData);
+  renderHeroFeature(langData);
   renderPipeline(langData);
   renderSkills(langData);
   renderProjects(langData);

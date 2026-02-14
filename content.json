@@ -104,6 +104,14 @@
             "Monitoramento de drift e regressões"
           ]
         }
+      ],
+      "featureTitle": "Case studies em destaque",
+      "featureSub": "Clique para abrir um deep-dive rápido (problema, abordagem, impacto).",
+      "featureHint": "Dica: Ctrl/Cmd+K para buscar seções, projetos e links.",
+      "featuredProjectIds": [
+        "erp-crm",
+        "rag",
+        "agents"
       ]
     },
     "sections": {
@@ -194,11 +202,11 @@
     "projects": [
       {
         "title": "ERP/CRM Varejo (NDA) | Estabilidade + Integrações",
-        "subtitle": "Integração de módulos críticos, hardening de APIs e qualidade de entrega em produção.",
+        "subtitle": "ResiliÃªncia, trilha de auditoria e integraÃ§Ãµes crÃ­ticas em um ERP/CRM desktop (NDA).",
         "highlights": [
-          "Resiliência: reconexão segura, fallback de serviços e redução de falhas intermitentes",
-          "Contrato e consistência: validação de rotas, tratamento de erros e auditoria ponta a ponta",
-          "Performance: redução de latência perceptível e melhoria de tempo de carga em fluxos críticos"
+          "Hardening de APIs: validaÃ§Ã£o, erros tratados, observabilidade e compatibilidade retroativa",
+          "Paridade ERP<->CRM: diagnÃ³stico por rota, contratos e roundtrip de dados consistente",
+          "UX guiada para fluxos crÃ­ticos (venda/pagamento) com auditoria ponta a ponta"
         ],
         "stack": [
           "Python",
@@ -213,15 +221,29 @@
           "writeup": ""
         },
         "disclaimer": "Estudo de caso anonimizado (NDA-friendly). Detalhes técnicos sob demanda.",
-        "image": "assets/projects/project-erpcrm.svg"
+        "image": "assets/projects/project-erpcrm.svg",
+        "id": "erp-crm",
+        "problem": "OperaÃ§Ã£o de varejo nÃ£o tolera instabilidade: uma desconexÃ£o em venda/estoque/fiscal vira retrabalho, inconsistÃªncia e suporte caro.",
+        "approach": [
+          "Contratos canÃ´nicos de rotas + testes automatizados para capturar regressÃµes antes do release",
+          "Camada de rede resiliente (timeout/backoff/fallback) com retries idempotentes para evitar duplicidade de gravaÃ§Ãµes",
+          "PersistÃªncia consistente: configuraÃ§Ãµes e estados crÃ­ticos sempre no banco (sem \"estado em memÃ³ria\") + validaÃ§Ãµes de unicidade",
+          "Auditoria como trilha de verdade: registrar quem fez o quÃª e quando, com mensagens operacionais e sem vazar segredos",
+          "Profiling + otimizaÃ§Ã£o de queries e carregamento lazy para reduzir \"travadas\" em abas pesadas"
+        ],
+        "impact": [
+          "Comportamento previsÃ­vel em produÃ§Ã£o: menos falhas intermitentes e reconexÃ£o segura",
+          "Integridade de dados: ERP -> API -> CRM sem perda de campos e com rastreabilidade",
+          "OperaÃ§Ã£o mais simples: diagnÃ³stico mais rÃ¡pido e releases mais seguros"
+        ]
       },
       {
         "title": "Enterprise RAG System",
         "subtitle": "Pipeline completo: ingestão → embeddings → armazenamento vetorial → geração.",
         "highlights": [
-          "Ingestão, normalização e chunking com foco em recuperação consistente",
-          "Busca semântica com vetores e ajustes de relevância (recall/precision)",
-          "Avaliação, guardrails e observabilidade para reduzir respostas não fundamentadas"
+          "IngestÃ£o versionada: dedup + metadados + chunking por estrutura",
+          "RecuperaÃ§Ã£o hÃ­brida: filtros + vetores + reranking, com cache e observabilidade",
+          "Qualidade em produÃ§Ã£o: suites de avaliaÃ§Ã£o + guardrails + respostas com evidÃªncias"
         ],
         "stack": [
           "RAG",
@@ -238,25 +260,27 @@
         "disclaimer": "Detalhes de dados e documentos são variáveis por domínio (ajuste rápido por caso).",
         "image": "assets/projects/project-rag.svg",
         "id": "rag",
-        "problem": "Busca e resposta em bases documentais grandes tendem a perder precisão sem arquitetura e avaliação.",
+        "problem": "RAG \"naive\" quebra em produÃ§Ã£o: documentos mudam, a recuperaÃ§Ã£o traz ruÃ­do e ninguÃ©m mede qualidade, gerando respostas erradas com confianÃ§a.",
         "approach": [
-          "Ingestão + chunking estruturado + vetores + reranking (quando necessário)",
-          "Métricas e testes de qualidade (offline + online)",
-          "Guardrails e observabilidade para reduzir alucinação"
+          "Pipeline de ingestÃ£o incremental com versionamento de fontes, deduplicaÃ§Ã£o e metadados",
+          "Chunking adaptativo por tipo de documento (tÃ­tulo/seÃ§Ã£o/tabela) + normalizaÃ§Ã£o",
+          "RecuperaÃ§Ã£o com vetores + filtros, reranking e tuning por recall/precision",
+          "AvaliaÃ§Ã£o contÃ­nua (golden set) + gates de regressÃ£o antes de mudanÃ§as de prompt/modelo",
+          "Guardrails: schemas, redaction de PII, citaÃ§Ãµes obrigatÃ³rias e controles de custo/latÃªncia"
         ],
         "impact": [
-          "Respostas mais consistentes e auditáveis",
-          "Menos tempo perdido em buscas manuais",
-          "Base pronta para operação e evolução contínua"
+          "Respostas mais confiÃ¡veis e auditÃ¡veis (com evidÃªncias/citaÃ§Ãµes)",
+          "Menos risco de alucinaÃ§Ã£o e regressÃµes silenciosas",
+          "Loop de melhoria contÃ­nua: medir -> ajustar -> revalidar"
         ]
       },
       {
         "title": "AI Agent Workflows",
         "subtitle": "Agentes autônomos integrados a ferramentas e APIs externas com segurança.",
         "highlights": [
-          "Tool-calling com validação de entrada/saída, limites de execução e segurança",
-          "Orquestração multi-step com foco em previsibilidade e rastreabilidade",
-          "Testes e avaliação offline para evitar regressões em cenários reais"
+          "Tool-calling seguro: schemas, allowlist, budgets/timeouts e validaÃ§Ã£o de I/O",
+          "OrquestraÃ§Ã£o determinÃ­stica: estado explÃ­cito, logs Ãºteis e replay de execuÃ§Ãµes",
+          "AvaliaÃ§Ã£o por cenÃ¡rios + regressÃ£o: agentes tratÃ¡veis como software"
         ],
         "stack": [
           "Agents",
@@ -273,25 +297,27 @@
         "disclaimer": "Foco em robustez: execução controlada, logs úteis e falhas previsíveis.",
         "image": "assets/projects/project-agents.svg",
         "id": "agents",
-        "problem": "Agentes podem ser poderosos, mas são perigosos sem limites, validação e rastreabilidade.",
+        "problem": "Agentes que chamam ferramentas tÃªm efeitos colaterais reais; sem limites, ficam imprevisÃ­veis, inseguros e difÃ­ceis de depurar.",
         "approach": [
-          "Tool-calling com validação de I/O e limites de execução",
-          "Orquestração multi-step com logs úteis",
-          "Avaliação offline e testes para evitar regressões"
+          "Design de ferramentas com contratos (schemas) e validaÃ§Ã£o rigorosa de inputs/outputs",
+          "PolÃ­ticas de seguranÃ§a: allowlists, budgets/timeouts, rate limits e aprovaÃ§Ã£o humana para aÃ§Ãµes sensÃ­veis",
+          "OrquestraÃ§Ã£o multi-step com estado explÃ­cito, idempotÃªncia e logs por etapa",
+          "Test harness com cenÃ¡rios reais + replay para depuraÃ§Ã£o e regressÃ£o",
+          "Observabilidade: tracing por step, custo/latÃªncia e erros acionÃ¡veis"
         ],
         "impact": [
-          "Execução mais previsível",
-          "Falhas tratáveis e rastreáveis",
-          "Maior segurança em produção"
+          "Agentes previsÃ­veis, testÃ¡veis e fÃ¡ceis de operar",
+          "Menos risco operacional em integraÃ§Ãµes com sistemas externos",
+          "Time-to-market mais rÃ¡pido para novos workflows e ferramentas"
         ]
       },
       {
         "title": "Lakehouse LLMOps (Databricks)",
         "subtitle": "Integração de dados + rastreabilidade de modelos em ambiente corporativo.",
         "highlights": [
-          "Pipelines com Delta Lake e experiment tracking com MLflow",
-          "Serving e monitoramento com métricas de qualidade e rastreabilidade",
-          "Integração com sistemas legados e APIs corporativas"
+          "Lineage e reprodutibilidade: Delta Lake + checks de qualidade de dados",
+          "GovernanÃ§a de modelos: MLflow tracking/registry + deploy canary/rollback",
+          "OperaÃ§Ã£o: mÃ©tricas online + alertas (sem nÃºmeros inventados)"
         ],
         "stack": [
           "Databricks",
@@ -308,37 +334,41 @@
         "disclaimer": "Padrões prontos para monitoramento, versionamento e entrega contínua.",
         "image": "assets/projects/project-lakehouse.svg",
         "id": "lakehouse",
-        "problem": "Sem governança, o ciclo de modelos vira \"caixa preta\": difícil rastrear, reproduzir e operar.",
+        "problem": "Sem governanÃ§a, o ciclo de dados/modelos vira caixa-preta: difÃ­cil reproduzir, auditar e operar sob pressÃ£o.",
         "approach": [
-          "Pipelines Lakehouse (Delta) com rastreabilidade",
-          "MLflow para experimentos, versionamento e auditoria",
-          "Serving e monitoramento com métricas operacionais"
+          "Pipelines Lakehouse com versionamento, validaÃ§Ãµes e trilha de lineage",
+          "MLflow para tracking/registro/versionamento, com artefatos reproduzÃ­veis",
+          "Deploy com canary + rollback e monitoramento por custo/latÃªncia/qualidade",
+          "IntegraÃ§Ã£o com APIs/sistemas legados e controles de acesso",
+          "OperaÃ§Ã£o contÃ­nua: alertas, playbooks e rotinas de validaÃ§Ã£o"
         ],
         "impact": [
-          "Entrega mais controlada e reproduzível",
-          "Menos retrabalho em incidentes",
-          "Base sólida para evolução de modelos"
+          "Entrega controlada e auditÃ¡vel do ciclo inteiro",
+          "Resposta mais rÃ¡pida a incidentes e regressÃµes",
+          "Base pronta para escalar para mÃºltiplos domÃ­nios/equipes"
         ]
       },
       {
         "id": "finetune",
         "title": "Fine-tuning de Transformers (LoRA/PEFT)",
         "subtitle": "Ajuste fino com foco em qualidade, custo e governança de experimentos.",
-        "problem": "Modelos base raramente atendem um domínio específico sem ajuste e avaliação.",
+        "problem": "Modelos base nÃ£o refletem linguagem de domÃ­nio; fine-tuning sem avaliaÃ§Ã£o vira overfitting e regressÃµes difÃ­ceis de perceber.",
         "approach": [
-          "LoRA/PEFT com datasets controlados e rastreáveis",
-          "Benchmarks e avaliação (qualitativa + quantitativa)",
-          "Pipelines de inferência com atenção a latência e custo"
+          "Curadoria/limpeza/segmentaÃ§Ã£o de datasets e instruÃ§Ãµes por objetivo",
+          "LoRA/PEFT com experimentos reproduzÃ­veis + versionamento de dados e configs",
+          "Benchmarks e avaliaÃ§Ã£o qualitativa+quantitativa, com baseline e ablaÃ§Ãµes",
+          "Pipelines de inferÃªncia com atenÃ§Ã£o a latÃªncia/custo + monitoraÃ§Ã£o",
+          "Gates de release e rollback quando degrada"
         ],
         "impact": [
-          "Melhor aderência a estilo e domínio",
-          "Ciclo de iteração mais rápido e seguro",
-          "Base pronta para produção e monitoramento"
+          "Modelos alinhados ao domÃ­nio com risco controlado",
+          "Ciclo de iteraÃ§Ã£o mais rÃ¡pido e seguro",
+          "Entrega pronta para produÃ§Ã£o com rastreabilidade"
         ],
         "highlights": [
-          "Experimentos reproduzíveis com tracking",
-          "Métricas de qualidade e regressão",
-          "Deploy de inferência com foco em confiabilidade"
+          "Curadoria de dados + LoRA/PEFT com rastreabilidade e ablaÃ§Ã£o",
+          "AvaliaÃ§Ã£o rigorosa: qualidade, seguranÃ§a e regressÃ£o antes do deploy",
+          "InferÃªncia: otimizaÃ§Ã£o de custo/latÃªncia (batching/cache/quantizaÃ§Ã£o quando aplicÃ¡vel)"
         ],
         "stack": [
           "Transformers",
@@ -359,21 +389,23 @@
         "id": "eval",
         "title": "Avaliação & Observabilidade de LLMs",
         "subtitle": "Métricas, suites de teste e monitoramento para evitar regressões.",
-        "problem": "Sem avaliação, sistemas com LLM degradam silenciosamente e ficam imprevisíveis.",
+        "problem": "LLMs degradam silenciosamente em produÃ§Ã£o; sem observabilidade, vocÃª sÃ³ descobre quando o usuÃ¡rio reclama.",
         "approach": [
-          "Suites offline (golden set) + checks automatizados",
-          "Métricas online (latência, taxa de erro, satisfação)",
-          "Dashboards e alertas para falhas e regressões"
+          "Golden set + testes automÃ¡ticos por rota/caso (CI/CD) para detectar regressÃµes cedo",
+          "MÃ©tricas online: latÃªncia, custo, erro e qualidade percebida, com sampling e traces",
+          "Tracing E2E: request -> retrieval -> prompt -> resposta (sem vazar PII)",
+          "Guardrails: schema, polÃ­ticas de dados e validaÃ§Ãµes por contexto",
+          "Processo de release: checklist + canary + rollback e playbooks de incidente"
         ],
         "impact": [
-          "Detecção precoce de regressões",
-          "Melhor previsibilidade em produção",
-          "Diagnóstico mais rápido em incidentes"
+          "DetecÃ§Ã£o precoce e debug mais rÃ¡pido",
+          "Sistemas mais previsÃ­veis e confiÃ¡veis",
+          "Releases mais seguros (menos surpresas)"
         ],
         "highlights": [
-          "Guardrails e validações por rota/caso",
-          "Telemetria útil (sem vazamento de dados)",
-          "Processo de release mais seguro"
+          "Golden set + testes automÃ¡ticos por rota/caso (CI/CD)",
+          "Tracing E2E com custo/latÃªncia, sem vazamento de PII",
+          "Alertas + playbooks para incidentes e regressÃµes"
         ],
         "stack": [
           "LLMOps",
@@ -656,8 +688,8 @@
     "cmdk": {
       "open": "Comandos",
       "title": "Comandos",
-      "placeholder": "Buscar seções, projetos e links...",
-      "hint": "Use ↑/↓ e Enter. Pressione Ctrl+K para abrir de qualquer lugar.",
+      "placeholder": "Buscar seÃ§Ãµes, projetos e links...",
+      "hint": "Use â/â e Enter. Pressione Ctrl+K para abrir de qualquer lugar.",
       "sectionHint": "Ir para seção",
       "actionHint": "Ação rápida",
       "toggleTheme": "Alternar tema",
@@ -776,6 +808,14 @@
             "Drift monitoring and regressions"
           ]
         }
+      ],
+      "featureTitle": "Featured case studies",
+      "featureSub": "Click to open a quick deep-dive (problem, approach, impact).",
+      "featureHint": "Tip: Ctrl/Cmd+K to search sections, projects and links.",
+      "featuredProjectIds": [
+        "erp-crm",
+        "rag",
+        "agents"
       ]
     },
     "sections": {
@@ -866,11 +906,11 @@
     "projects": [
       {
         "title": "Retail ERP/CRM (NDA) | Stability + Integrations",
-        "subtitle": "Critical module integration, API hardening, and production-grade delivery.",
+        "subtitle": "Resilience, audit trail, and critical integrations in a desktop ERP/CRM (NDA).",
         "highlights": [
-          "Resilience: safe reconnection, service fallback, and fewer intermittent failures",
-          "Consistency: route validation, error handling, and end-to-end auditing",
-          "Performance: lower perceived latency and faster critical flows"
+          "API hardening: validation, explicit errors, observability, and backwards-compatible contracts",
+          "ERP<->CRM parity: route-level diagnostics, contracts, and consistent data roundtrip",
+          "Guided critical flows (sales/payments) with end-to-end auditing"
         ],
         "stack": [
           "Python",
@@ -887,25 +927,27 @@
         "disclaimer": "Anonymized case study (NDA-friendly). Deeper technical details on request.",
         "image": "assets/projects/project-erpcrm.svg",
         "id": "erp-crm",
-        "problem": "Retail operations require stability, traceability, and integrations without production surprises.",
+        "problem": "Retail operations cannot tolerate instability: a disconnect during sales/stock/fiscal flows turns into rework, inconsistency, and expensive support.",
         "approach": [
-          "API hardening, error handling, and observability",
-          "Fiscal snapshot + end-to-end audit trail",
-          "Guided critical flows and human-friendly UX"
+          "Canonical API contracts + automated route checks to catch regressions before release",
+          "Resilient networking (timeouts/backoff/fallback) with idempotent retries to avoid duplicate writes",
+          "Consistent persistence: critical configs/state always in the database (no \"in-memory state\") + uniqueness validation",
+          "Audit trail as source of truth: who did what/when, with operational messages and no secret leakage",
+          "Profiling + query and lazy-load optimization to reduce first-click freezes on heavy screens"
         ],
         "impact": [
-          "Fewer intermittent failures and more predictable behavior",
-          "Consistent data (ERP ? API ? CRM) with reliable persistence",
-          "Operational delivery designed for support and maintenance"
+          "More predictable production behavior: fewer intermittent failures and safer reconnection",
+          "Data integrity: ERP -> API -> CRM roundtrip without losing fields, with traceability",
+          "Simpler operations: faster diagnosis and safer releases"
         ]
       },
       {
         "title": "Enterprise RAG System",
         "subtitle": "Full pipeline: ingestion → embeddings → vector store → generation.",
         "highlights": [
-          "Ingestion, normalization, and chunking designed for consistent retrieval",
-          "Semantic search with vector stores and relevance tuning (recall/precision)",
-          "Evaluation, guardrails, and observability to reduce ungrounded answers"
+          "Versioned ingestion: dedup + metadata + structure-aware chunking",
+          "Hybrid retrieval: filters + vectors + reranking, with cache + observability",
+          "Production quality: evaluation suites + guardrails + evidence-backed answers"
         ],
         "stack": [
           "RAG",
@@ -922,25 +964,27 @@
         "disclaimer": "Data sources and documents vary by domain (fast adaptation per use case).",
         "image": "assets/projects/project-rag.svg",
         "id": "rag",
-        "problem": "Answering over large document bases tends to lose accuracy without architecture and evaluation.",
+        "problem": "Naive RAG breaks in production: documents change, retrieval brings noise, and nobody measures quality, leading to confident-but-wrong answers.",
         "approach": [
-          "Structured ingestion + chunking + vectors + reranking when needed",
-          "Quality metrics and evaluation (offline + online)",
-          "Guardrails and observability to reduce hallucinations"
+          "Incremental ingestion pipeline with source versioning, deduplication, and metadata",
+          "Adaptive chunking per doc type (headings/sections/tables) + normalization",
+          "Retrieval with vectors + filters, reranking, and tuning by recall/precision",
+          "Continuous evaluation (golden set) + regression gates before prompt/model changes",
+          "Guardrails: schemas, PII redaction, required citations, and cost/latency controls"
         ],
         "impact": [
-          "More consistent, auditable answers",
-          "Less time spent on manual search",
-          "Production-ready foundation for continuous improvement"
+          "More trustworthy, auditable answers (evidence-backed)",
+          "Lower hallucination risk and fewer silent regressions",
+          "A measurable improvement loop: measure -> adjust -> re-validate"
         ]
       },
       {
         "title": "AI Agent Workflows",
         "subtitle": "Autonomous agents integrated with tools and external APIs, safely.",
         "highlights": [
-          "Tool-calling with strict I/O validation, execution limits, and safety",
-          "Multi-step orchestration designed for predictability and traceability",
-          "Offline evaluation and regression tests for real-world scenarios"
+          "Safe tool-calling: schemas, allowlists, budgets/timeouts, strict I/O validation",
+          "Deterministic orchestration: explicit state, useful logs, and execution replay",
+          "Scenario evaluation + regression: agents treated as real software"
         ],
         "stack": [
           "Agents",
@@ -957,25 +1001,27 @@
         "disclaimer": "Robustness first: controlled execution, useful logs, predictable failures.",
         "image": "assets/projects/project-agents.svg",
         "id": "agents",
-        "problem": "Agents are powerful but risky without limits, validation, and traceability.",
+        "problem": "Agents that call tools have real side effects; without limits they become unpredictable, unsafe, and hard to debug.",
         "approach": [
-          "Tool calling with strict I/O validation and execution limits",
-          "Multi-step orchestration with useful logs",
-          "Offline evaluation and regression tests"
+          "Tool design with contracts (schemas) and strict input/output validation",
+          "Security policies: allowlists, budgets/timeouts, rate limits, and human approval for sensitive actions",
+          "Multi-step orchestration with explicit state, idempotency, and step-level logs",
+          "Scenario-based test harness + replay for debugging and regression",
+          "Observability: step tracing, cost/latency, and actionable errors"
         ],
         "impact": [
-          "More predictable execution",
-          "Traceable failures",
-          "Better production safety"
+          "Agents that behave like software: predictable, testable, operable",
+          "Lower operational risk when integrating external systems",
+          "Faster time-to-market for new workflows and tools"
         ]
       },
       {
         "title": "Lakehouse LLMOps (Databricks)",
         "subtitle": "Data integration + model traceability in enterprise environments.",
         "highlights": [
-          "Delta Lake pipelines + MLflow experiment tracking",
-          "Serving and monitoring with quality metrics and traceability",
-          "Integration with legacy systems and enterprise APIs"
+          "Lineage + reproducibility: Delta Lake + data quality checks",
+          "Model governance: MLflow tracking/registry + canary/rollback",
+          "Operational metrics + alerts (no invented numbers)"
         ],
         "stack": [
           "Databricks",
@@ -992,37 +1038,41 @@
         "disclaimer": "Patterns ready for monitoring, versioning, and continuous delivery.",
         "image": "assets/projects/project-lakehouse.svg",
         "id": "lakehouse",
-        "problem": "Without governance, the model lifecycle becomes a black box: hard to trace, reproduce, and operate.",
+        "problem": "Without governance, the data/model lifecycle becomes a black box: hard to reproduce, audit, and operate under pressure.",
         "approach": [
-          "Lakehouse pipelines (Delta) with traceability",
-          "MLflow for experiments, versioning, and auditability",
-          "Serving + monitoring with operational metrics"
+          "Lakehouse pipelines with versioning, validation, and lineage",
+          "MLflow tracking/registry/versioning with reproducible artifacts",
+          "Canary + rollback deployment and monitoring by cost/latency/quality",
+          "Integration with legacy systems/APIs and access controls",
+          "Continuous ops: alerts, playbooks, and validation routines"
         ],
         "impact": [
-          "More controlled, reproducible delivery",
-          "Less rework during incidents",
-          "Solid base for model iteration"
+          "End-to-end delivery that is controlled and auditable",
+          "Faster response to incidents and regressions",
+          "A foundation that scales across domains/teams"
         ]
       },
       {
         "id": "finetune",
         "title": "Transformer Fine-Tuning (LoRA/PEFT)",
         "subtitle": "Fine-tuning focused on quality, cost, and experiment governance.",
-        "problem": "Base models rarely meet a specific domain without adaptation and evaluation.",
+        "problem": "Base models rarely match a domain's language; fine-tuning without evaluation leads to overfitting and hard-to-notice regressions.",
         "approach": [
-          "LoRA/PEFT with controlled, traceable datasets",
-          "Benchmarks and evaluation (qualitative + quantitative)",
-          "Inference pipelines with latency/cost awareness"
+          "Dataset curation/cleaning/slicing and instruction design per objective",
+          "LoRA/PEFT with reproducible experiments + versioned data/configs",
+          "Benchmarks and qualitative+quantitative evaluation with baselines and ablations",
+          "Inference pipelines with latency/cost awareness + monitoring",
+          "Release gates and rollback when quality degrades"
         ],
         "impact": [
-          "Better domain fit and style alignment",
+          "Domain-aligned models with controlled risk",
           "Faster, safer iteration cycles",
-          "Production-ready foundation with monitoring"
+          "Production-ready delivery with traceability"
         ],
         "highlights": [
-          "Reproducible experiments with tracking",
-          "Quality and regression metrics",
-          "Reliable inference delivery"
+          "Data curation + LoRA/PEFT with traceability and ablations",
+          "Rigorous evaluation: quality, safety, and regression before deployment",
+          "Inference: cost/latency optimization (batching/cache/quantization when applicable)"
         ],
         "stack": [
           "Transformers",
@@ -1043,21 +1093,23 @@
         "id": "eval",
         "title": "LLM Evaluation & Observability",
         "subtitle": "Metrics, test suites, and monitoring to prevent regressions.",
-        "problem": "Without evaluation, LLM systems degrade silently and become unpredictable.",
+        "problem": "LLMs degrade silently in production; without observability you only learn when users complain.",
         "approach": [
-          "Offline suites (golden set) + automated checks",
-          "Online metrics (latency, error rate, satisfaction)",
-          "Dashboards and alerts for failures/regressions"
+          "Golden set + route/scenario tests in CI/CD to catch regressions early",
+          "Online metrics: latency, cost, errors, and perceived quality with sampling and traces",
+          "E2E tracing: request -> retrieval -> prompt -> output (no PII leakage)",
+          "Guardrails: schemas, data policies, and context-aware validation",
+          "Release process: checklist + canary + rollback and incident playbooks"
         ],
         "impact": [
-          "Earlier regression detection",
-          "Better production predictability",
-          "Faster incident diagnosis"
+          "Earlier detection and faster debugging",
+          "More predictable, reliable systems",
+          "Safer releases with fewer surprises"
         ],
         "highlights": [
-          "Guardrails and validations per route/case",
-          "Useful telemetry (without leaking data)",
-          "Safer release process"
+          "Golden sets + automated tests per route/scenario (CI/CD)",
+          "E2E tracing with cost/latency, without PII leakage",
+          "Alerts + playbooks for incidents and regressions"
         ],
         "stack": [
           "LLMOps",
