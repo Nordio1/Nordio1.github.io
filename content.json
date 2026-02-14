@@ -18,7 +18,8 @@
       "experience": "Experiência",
       "education": "Formação",
       "contact": "Contato",
-      "lab": "Arquiteturas"
+      "lab": "Arquiteturas",
+      "toolbox": "Toolbox"
     },
     "theme": {
       "toDark": "Modo escuro",
@@ -55,52 +56,52 @@
       "pipeline": [
         {
           "id": "ingest",
-          "title": "Ingest?o",
+          "title": "Ingestão",
           "desc": "Documentos, dados e logs",
           "bullets": [
-            "Ingest?o com normaliza??o + deduplica??o",
-            "Chunking com estrat?gia por tipo de dado",
+            "Ingestão com normalização + deduplicação",
+            "Chunking com estratégia por tipo de dado",
             "Versionamento de fontes e trilha de auditoria"
           ]
         },
         {
           "id": "embed",
           "title": "Embeddings",
-          "desc": "Representa??o sem?ntica",
+          "desc": "Representação semântica",
           "bullets": [
-            "Sele??o de modelo por dom?nio/custo/lat?ncia",
+            "Seleção de modelo por domínio/custo/latência",
             "Batching e cache para reduzir custo",
-            "Avalia??o cont?nua de recall/precision"
+            "Avaliação contínua de recall/precision"
           ]
         },
         {
           "id": "vector",
           "title": "Busca vetorial",
-          "desc": "Recupera??o com relev?ncia",
+          "desc": "Recuperação com relevância",
           "bullets": [
             "Vector DB (FAISS/Chroma) + filtros",
-            "Reranking quando necess?rio",
+            "Reranking quando necessário",
             "Observabilidade de consultas e hits"
           ]
         },
         {
           "id": "gen",
-          "title": "Gera??o",
+          "title": "Geração",
           "desc": "LLM com guardrails",
           "bullets": [
             "Prompts estruturados + context windows",
-            "Guardrails e valida??o de sa?da",
-            "M?tricas de qualidade (offline + online)"
+            "Guardrails e validação de saída",
+            "Métricas de qualidade (offline + online)"
           ]
         },
         {
           "id": "ops",
           "title": "LLMOps",
-          "desc": "Deploy, monitoramento, avalia??o",
+          "desc": "Deploy, monitoramento, avaliação",
           "bullets": [
             "Experiment tracking (MLflow)",
-            "Canary/rollback e seguran?a",
-            "Monitoramento de drift e regress?es"
+            "Canary/rollback e segurança",
+            "Monitoramento de drift e regressões"
           ]
         }
       ]
@@ -118,8 +119,10 @@
       "educationSub": "IA e engenharia de software com foco em aplicação prática.",
       "contactTitle": "Contato",
       "contactSub": "Melhor: e-mail. Rápido: WhatsApp.",
-      "labTitle": "Arquiteturas em a??o",
-      "labSub": "Um mapa interativo dos blocos que mais uso em produ??o (RAG, agentes, avalia??o e LLMOps)."
+      "labTitle": "Arquiteturas em ação",
+      "labSub": "Um mapa interativo dos blocos que mais uso em produção (RAG, agentes, avaliação e LLMOps).",
+      "toolboxTitle": "Toolbox",
+      "toolboxSub": "Clique em um item para destacar os projetos que realmente usam aquela peça."
     },
     "about": [
       "Engenheiro de Inteligência Artificial com foco em IA Generativa, Large Language Models (LLMs) e arquiteturas de Retrieval-Augmented Generation (RAG). Experiência em construir pipelines end-to-end e integrar IA em sistemas corporativos (ERP, APIs REST e plataformas Lakehouse).",
@@ -235,16 +238,16 @@
         "disclaimer": "Detalhes de dados e documentos são variáveis por domínio (ajuste rápido por caso).",
         "image": "assets/projects/project-rag.svg",
         "id": "rag",
-        "problem": "Busca e resposta em bases documentais grandes tendem a perder precis?o sem arquitetura e avalia??o.",
+        "problem": "Busca e resposta em bases documentais grandes tendem a perder precisão sem arquitetura e avaliação.",
         "approach": [
-          "Ingest?o + chunking estruturado + vetores + reranking (quando necess?rio)",
-          "M?tricas e testes de qualidade (offline + online)",
-          "Guardrails e observabilidade para reduzir alucina??o"
+          "Ingestão + chunking estruturado + vetores + reranking (quando necessário)",
+          "Métricas e testes de qualidade (offline + online)",
+          "Guardrails e observabilidade para reduzir alucinação"
         ],
         "impact": [
-          "Respostas mais consistentes e audit?veis",
+          "Respostas mais consistentes e auditáveis",
           "Menos tempo perdido em buscas manuais",
-          "Base pronta para opera??o e evolu??o cont?nua"
+          "Base pronta para operação e evolução contínua"
         ]
       },
       {
@@ -270,16 +273,16 @@
         "disclaimer": "Foco em robustez: execução controlada, logs úteis e falhas previsíveis.",
         "image": "assets/projects/project-agents.svg",
         "id": "agents",
-        "problem": "Agentes podem ser poderosos, mas s?o perigosos sem limites, valida??o e rastreabilidade.",
+        "problem": "Agentes podem ser poderosos, mas são perigosos sem limites, validação e rastreabilidade.",
         "approach": [
-          "Tool-calling com valida??o de I/O e limites de execu??o",
-          "Orquestra??o multi-step com logs ?teis",
-          "Avalia??o offline e testes para evitar regress?es"
+          "Tool-calling com validação de I/O e limites de execução",
+          "Orquestração multi-step com logs úteis",
+          "Avaliação offline e testes para evitar regressões"
         ],
         "impact": [
-          "Execu??o mais previs?vel",
-          "Falhas trat?veis e rastre?veis",
-          "Maior seguran?a em produ??o"
+          "Execução mais previsível",
+          "Falhas tratáveis e rastreáveis",
+          "Maior segurança em produção"
         ]
       },
       {
@@ -305,37 +308,37 @@
         "disclaimer": "Padrões prontos para monitoramento, versionamento e entrega contínua.",
         "image": "assets/projects/project-lakehouse.svg",
         "id": "lakehouse",
-        "problem": "Sem governan?a, o ciclo de modelos vira ?caixa preta?: dif?cil rastrear, reproduzir e operar.",
+        "problem": "Sem governança, o ciclo de modelos vira \"caixa preta\": difícil rastrear, reproduzir e operar.",
         "approach": [
           "Pipelines Lakehouse (Delta) com rastreabilidade",
           "MLflow para experimentos, versionamento e auditoria",
-          "Serving e monitoramento com m?tricas operacionais"
+          "Serving e monitoramento com métricas operacionais"
         ],
         "impact": [
-          "Entrega mais controlada e reproduz?vel",
+          "Entrega mais controlada e reproduzível",
           "Menos retrabalho em incidentes",
-          "Base s?lida para evolu??o de modelos"
+          "Base sólida para evolução de modelos"
         ]
       },
       {
         "id": "finetune",
         "title": "Fine-tuning de Transformers (LoRA/PEFT)",
-        "subtitle": "Ajuste fino com foco em qualidade, custo e governan?a de experimentos.",
-        "problem": "Modelos base raramente atendem um dom?nio espec?fico sem ajuste e avalia??o.",
+        "subtitle": "Ajuste fino com foco em qualidade, custo e governança de experimentos.",
+        "problem": "Modelos base raramente atendem um domínio específico sem ajuste e avaliação.",
         "approach": [
-          "LoRA/PEFT com datasets controlados e rastre?veis",
-          "Benchmarks e avalia??o (qualitativa + quantitativa)",
-          "Pipelines de infer?ncia com aten??o a lat?ncia e custo"
+          "LoRA/PEFT com datasets controlados e rastreáveis",
+          "Benchmarks e avaliação (qualitativa + quantitativa)",
+          "Pipelines de inferência com atenção a latência e custo"
         ],
         "impact": [
-          "Melhor ader?ncia a estilo e dom?nio",
-          "Ciclo de itera??o mais r?pido e seguro",
-          "Base pronta para produ??o e monitoramento"
+          "Melhor aderência a estilo e domínio",
+          "Ciclo de iteração mais rápido e seguro",
+          "Base pronta para produção e monitoramento"
         ],
         "highlights": [
-          "Experimentos reproduz?veis com tracking",
-          "M?tricas de qualidade e regress?o",
-          "Deploy de infer?ncia com foco em confiabilidade"
+          "Experimentos reproduzíveis com tracking",
+          "Métricas de qualidade e regressão",
+          "Deploy de inferência com foco em confiabilidade"
         ],
         "stack": [
           "Transformers",
@@ -354,22 +357,22 @@
       },
       {
         "id": "eval",
-        "title": "Avalia??o & Observabilidade de LLMs",
-        "subtitle": "M?tricas, suites de teste e monitoramento para evitar regress?es.",
-        "problem": "Sem avalia??o, sistemas com LLM degradam silenciosamente e ficam imprevis?veis.",
+        "title": "Avaliação & Observabilidade de LLMs",
+        "subtitle": "Métricas, suites de teste e monitoramento para evitar regressões.",
+        "problem": "Sem avaliação, sistemas com LLM degradam silenciosamente e ficam imprevisíveis.",
         "approach": [
           "Suites offline (golden set) + checks automatizados",
-          "M?tricas online (lat?ncia, taxa de erro, satisfa??o)",
-          "Dashboards e alertas para falhas e regress?es"
+          "Métricas online (latência, taxa de erro, satisfação)",
+          "Dashboards e alertas para falhas e regressões"
         ],
         "impact": [
-          "Detec??o precoce de regress?es",
-          "Melhor previsibilidade em produ??o",
-          "Diagn?stico mais r?pido em incidentes"
+          "Detecção precoce de regressões",
+          "Melhor previsibilidade em produção",
+          "Diagnóstico mais rápido em incidentes"
         ],
         "highlights": [
-          "Guardrails e valida??es por rota/caso",
-          "Telemetria ?til (sem vazamento de dados)",
+          "Guardrails e validações por rota/caso",
+          "Telemetria útil (sem vazamento de dados)",
           "Processo de release mais seguro"
         ],
         "stack": [
@@ -384,7 +387,7 @@
           "demo": "",
           "writeup": ""
         },
-        "disclaimer": "Sem n?meros inventados: m?tricas espec?ficas variam por cliente e contexto.",
+        "disclaimer": "Sem números inventados: métricas específicas variam por cliente e contexto.",
         "image": "assets/projects/project-lakehouse.svg"
       }
     ],
@@ -498,15 +501,15 @@
       "legend": [
         {
           "label": "RAG",
-          "hint": "Recupera??o + gera??o"
+          "hint": "Recuperação + geração"
         },
         {
           "label": "Agentes",
           "hint": "Tool-calling multi-step"
         },
         {
-          "label": "Avalia??o",
-          "hint": "Qualidade e regress?o"
+          "label": "Avaliação",
+          "hint": "Qualidade e regressão"
         },
         {
           "label": "LLMOps",
@@ -519,11 +522,11 @@
           "label": "Fontes",
           "x": 16,
           "y": 20,
-          "title": "Fontes e ingest?o",
-          "body": "Ponto de partida: documentos, tabelas, eventos e dados operacionais. A chave ? consist?ncia e rastreabilidade.",
+          "title": "Fontes e ingestão",
+          "body": "Ponto de partida: documentos, tabelas, eventos e dados operacionais. A chave é consistência e rastreabilidade.",
           "bullets": [
-            "Normaliza??o e deduplica??o",
-            "Controle de vers?es de dados",
+            "Normalização e deduplicação",
+            "Controle de versões de dados",
             "Trilha de auditoria (o que entrou e quando)"
           ],
           "links": [
@@ -535,10 +538,10 @@
           "label": "Chunking",
           "x": 38,
           "y": 30,
-          "title": "Chunking e indexa??o",
-          "body": "Separar conte?do em partes recuper?veis aumenta a qualidade do RAG. Estrat?gias mudam por dom?nio.",
+          "title": "Chunking e indexação",
+          "body": "Separar conteúdo em partes recuperáveis aumenta a qualidade do RAG. Estratégias mudam por domínio.",
           "bullets": [
-            "Chunking por estrutura (t?tulo/se??o/tabela)",
+            "Chunking por estrutura (título/seção/tabela)",
             "Metadados para filtros",
             "Testes de recall/precision"
           ],
@@ -553,11 +556,11 @@
           "x": 60,
           "y": 18,
           "title": "Embeddings + vector store",
-          "body": "Embeddings traduzem texto em vetores. O index precisa ser r?pido, consistente e observ?vel.",
+          "body": "Embeddings traduzem texto em vetores. O index precisa ser rápido, consistente e observável.",
           "bullets": [
             "FAISS/Chroma e filtros",
             "Cache e batching",
-            "Reranking quando necess?rio"
+            "Reranking quando necessário"
           ],
           "links": [
             "rag"
@@ -568,8 +571,8 @@
           "label": "RAG",
           "x": 72,
           "y": 42,
-          "title": "RAG (retrieval + gera??o)",
-          "body": "Resposta com base em evid?ncias recuperadas. O objetivo ? reduzir alucina??o e aumentar precis?o.",
+          "title": "RAG (retrieval + geração)",
+          "body": "Resposta com base em evidências recuperadas. O objetivo é reduzir alucinação e aumentar precisão.",
           "bullets": [
             "Contexto citado/ancorado",
             "Prompts estruturados",
@@ -586,11 +589,11 @@
           "x": 22,
           "y": 58,
           "title": "Agentes com ferramentas",
-          "body": "Agentes chamam ferramentas/APIs. O segredo ? previsibilidade: limites, valida??o e logs ?teis.",
+          "body": "Agentes chamam ferramentas/APIs. O segredo é previsibilidade: limites, validação e logs úteis.",
           "bullets": [
-            "Tool-calling com valida??o",
-            "Execu??o multi-step controlada",
-            "Erros previs?veis e rastre?veis"
+            "Tool-calling com validação",
+            "Execução multi-step controlada",
+            "Erros previsíveis e rastreáveis"
           ],
           "links": [
             "guardrails",
@@ -602,11 +605,11 @@
           "label": "Guardrails",
           "x": 52,
           "y": 60,
-          "title": "Guardrails e seguran?a",
-          "body": "Regras para evitar sa?das perigosas e reduzir comportamento inesperado em produ??o.",
+          "title": "Guardrails e segurança",
+          "body": "Regras para evitar saídas perigosas e reduzir comportamento inesperado em produção.",
           "bullets": [
-            "Valida??o de entrada/sa?da",
-            "Pol?ticas de dados e PII",
+            "Validação de entrada/saída",
+            "Políticas de dados e PII",
             "Rate limits e timeouts"
           ],
           "links": [
@@ -615,14 +618,14 @@
         },
         {
           "id": "eval",
-          "label": "Avalia??o",
+          "label": "Avaliação",
           "x": 78,
           "y": 70,
-          "title": "Avalia??o cont?nua",
-          "body": "Sem avalia??o, sistema degrada. O foco ? criar testes e m?tricas que detectem regress?o cedo.",
+          "title": "Avaliação contínua",
+          "body": "Sem avaliação, sistema degrada. O foco é criar testes e métricas que detectem regressão cedo.",
           "bullets": [
             "Suites offline (golden set)",
-            "M?tricas online (qualidade/lat?ncia)",
+            "Métricas online (qualidade/latência)",
             "Observabilidade e alertas"
           ],
           "links": [
@@ -635,7 +638,7 @@
           "x": 90,
           "y": 56,
           "title": "LLMOps (deploy e monitoramento)",
-          "body": "Entrega com controle: versionamento, canary, rollback e monitoramento por custo/lat?ncia/qualidade.",
+          "body": "Entrega com controle: versionamento, canary, rollback e monitoramento por custo/latência/qualidade.",
           "bullets": [
             "MLflow / tracking",
             "Deploy seguro (canary/rollback)",
@@ -644,6 +647,28 @@
           "links": []
         }
       ]
+    },
+    "toolbox": {
+      "clear": "Limpar",
+      "help": "Dica: Shift+clique para selecionar mais de um item.",
+      "countLabel": "projetos"
+    },
+    "cmdk": {
+      "open": "Comandos",
+      "title": "Comandos",
+      "placeholder": "Buscar seções, projetos e links...",
+      "hint": "Use ↑/↓ e Enter. Pressione Ctrl+K para abrir de qualquer lugar.",
+      "sectionHint": "Ir para seção",
+      "actionHint": "Ação rápida",
+      "toggleTheme": "Alternar tema",
+      "email": "E-mail",
+      "whatsapp": "WhatsApp",
+      "kinds": {
+        "section": "Seção",
+        "project": "Projeto",
+        "link": "Link",
+        "action": "Ação"
+      }
     }
   },
   "en": {
@@ -665,7 +690,8 @@
       "experience": "Experience",
       "education": "Education",
       "contact": "Contact",
-      "lab": "Systems"
+      "lab": "Systems",
+      "toolbox": "Toolbox"
     },
     "theme": {
       "toDark": "Dark mode",
@@ -766,7 +792,9 @@
       "contactTitle": "Contact",
       "contactSub": "Best: email. Fast: WhatsApp.",
       "labTitle": "Architectures in action",
-      "labSub": "An interactive map of the building blocks I ship in production (RAG, agents, evaluation, LLMOps)."
+      "labSub": "An interactive map of the building blocks I ship in production (RAG, agents, evaluation, LLMOps).",
+      "toolboxTitle": "Toolbox",
+      "toolboxSub": "Click a tag to highlight projects that actually use it."
     },
     "about": [
       "Artificial Intelligence Engineer focused on Generative AI, Large Language Models (LLMs), and Retrieval-Augmented Generation (RAG) architectures. Experienced in building end-to-end pipelines and integrating AI into enterprise systems (ERP, REST APIs, and Lakehouse platforms).",
@@ -1309,6 +1337,28 @@
           "links": []
         }
       ]
+    },
+    "toolbox": {
+      "clear": "Clear",
+      "help": "Tip: Shift+click to multi-select.",
+      "countLabel": "projects"
+    },
+    "cmdk": {
+      "open": "Cmd+K",
+      "title": "Command palette",
+      "placeholder": "Search sections, projects and links...",
+      "hint": "Use ↑/↓ and Enter. Press Ctrl+K (or Cmd+K) from anywhere.",
+      "sectionHint": "Jump to section",
+      "actionHint": "Quick action",
+      "toggleTheme": "Toggle theme",
+      "email": "Email",
+      "whatsapp": "WhatsApp",
+      "kinds": {
+        "section": "Section",
+        "project": "Project",
+        "link": "Link",
+        "action": "Action"
+      }
     }
   }
 }

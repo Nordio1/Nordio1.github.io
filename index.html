@@ -66,6 +66,7 @@
         <nav class="nav" aria-label="Primary">
           <a href="#about" data-i18n="nav.about">Sobre</a>
           <a href="#skills" data-i18n="nav.skills">Competências</a>
+          <a href="#toolbox" data-i18n="nav.toolbox">Toolbox</a>
           <a href="#projects" data-i18n="nav.projects">Projetos</a>
           <a href="#lab" data-i18n="nav.lab">Arquiteturas</a>
           <a href="#experience" data-i18n="nav.experience">Experiência</a>
@@ -81,6 +82,9 @@
           <button type="button" class="theme-toggle" id="theme-toggle">
             Theme
           </button>
+          <button type="button" class="cmdk-open" id="cmdk-open" data-i18n="cmdk.open">
+            Comandos
+          </button>
           <a
             class="pill"
             id="cta-email"
@@ -89,6 +93,9 @@
             >Falar por e-mail</a
           >
         </div>
+      </div>
+      <div class="scroll-progress" aria-hidden="true">
+        <div class="scroll-progress-bar" id="scroll-progress-bar"></div>
       </div>
     </header>
 
@@ -170,6 +177,30 @@
             </p>
           </div>
           <div class="grid skills" id="skills-grid"></div>
+        </div>
+      </section>
+
+      <section class="section toolbox" id="toolbox">
+        <div class="wrap" data-reveal>
+          <div class="section-head">
+            <h2 data-i18n="sections.toolboxTitle">Toolbox</h2>
+            <p class="section-sub" data-i18n="sections.toolboxSub">
+              Clique em um item para destacar os projetos que realmente usam aquela peça.
+            </p>
+          </div>
+
+          <div class="toolbox-bar">
+            <div class="toolbox-tags" id="toolbox-tags" aria-label="Toolbox tags"></div>
+            <div class="toolbox-side">
+              <div class="toolbox-stats" id="toolbox-stats"></div>
+              <button type="button" class="toolbox-clear" id="toolbox-clear" data-i18n="toolbox.clear">
+                Limpar
+              </button>
+            </div>
+          </div>
+          <p class="tiny muted toolbox-help" data-i18n="toolbox.help">
+            Dica: Shift+clique para selecionar mais de um item.
+          </p>
         </div>
       </section>
 
@@ -296,6 +327,28 @@
       <form method="dialog" class="modal-inner">
         <button class="modal-close" value="cancel" aria-label="Close">×</button>
         <div class="modal-body" id="project-modal-body"></div>
+      </form>
+    </dialog>
+
+    <dialog class="cmdk" id="cmdk" aria-label="Command palette">
+      <form method="dialog" class="cmdk-inner">
+        <div class="cmdk-top">
+          <span class="cmdk-title" data-i18n="cmdk.title">Command palette</span>
+          <button class="cmdk-close" value="cancel" aria-label="Close">Esc</button>
+        </div>
+        <input
+          class="cmdk-input"
+          id="cmdk-input"
+          type="text"
+          autocomplete="off"
+          spellcheck="false"
+          data-i18n-placeholder="cmdk.placeholder"
+          placeholder="Buscar seções, projetos e links..."
+        />
+        <div class="cmdk-hint tiny muted" data-i18n="cmdk.hint">
+          Use ↑/↓ e Enter. Pressione Ctrl+K para abrir de qualquer lugar.
+        </div>
+        <ul class="cmdk-results" id="cmdk-results" aria-label="Results"></ul>
       </form>
     </dialog>
   </body>

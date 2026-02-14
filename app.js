@@ -12,6 +12,13 @@ const state = {
   theme: null,
   fx: null,
   currentProjectId: null,
+  toolboxSelected: [],
+  cmdk: {
+    items: [],
+    filtered: [],
+    activeIndex: 0,
+    open: false,
+  },
 };
 
 function $(sel, root = document) {
@@ -66,6 +73,13 @@ function applyI18n(langData) {
     const key = el.getAttribute("data-i18n");
     const val = getByPath(langData, key);
     if (typeof val === "string") el.textContent = val;
+  });
+
+  // Placeholder i18n for inputs (keeps UX polished).
+  $all("[data-i18n-placeholder]").forEach((el) => {
+    const key = el.getAttribute("data-i18n-placeholder");
+    const val = getByPath(langData, key);
+    if (typeof val === "string") el.setAttribute("placeholder", val);
   });
 }
 
@@ -265,6 +279,447 @@ function renderSkills(langData) {
   });
 }
 
+function collectToolboxTags(langData) {
+  const freq = new Map();
+  const bump = (tag) => {
+    const t = String(tag || "").trim();
+    if (!t) return;
+    freq.set(t, (freq.get(t) || 0) + 1);
+  };
+
+  (langData.projects || []).forEach((p) => (p.stack || []).forEach(bump));
+  // Pull a few from skills to fill the board, without exploding the list.
+  (langData.skills || []).forEach((g) => (g.items || []).forEach((it) => bump(it)));
+
+  // Sort by frequency, then name (stable).
+  const tags = Array.from(freq.entries())
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+    .map(([t]) => t);
+
+  // Keep it dense but not overwhelming.
+  return tags.slice(0, 36);
+}
+
+function renderToolbox(langData) {
+  const root = $("#toolbox-tags");
+  const stats = $("#toolbox-stats");
+  const btnClear = $("#toolbox-clear");
+  if (!root || !stats || !btnClear) return;
+
+  const tags = collectToolboxTags(langData);
+  const selected = new Set(state.toolboxSelected);
+  const countLabel = String(langData?.toolbox?.countLabel || (state.lang === "pt" ? "projetos" : "projects"));
+
+  const updateStats = () => {
+    const total = Array.isArray(langData.projects) ? langData.projects.length : 0;
+    if (selected.size === 0) {
+      stats.textContent = total ? `${total} ${countLabel}` : "";
+      btnClear.disabled = true;
+      return;
+    }
+    const matchCount = $all("#projects-grid .card.is-match").length;
+    const names = Array.from(selected).slice(0, 3).join(" + ");
+    const more = selected.size > 3 ? ` +${selected.size - 3}` : "";
+    stats.textContent = `${names}${more} · ${matchCount}/${total}`;
+    btnClear.disabled = false;
+  };
+
+  const apply = () => {
+    state.toolboxSelected = Array.from(selected);
+    $all(".tbox-tag", root).forEach((b) => b.classList.toggle("is-active", selected.has(b.dataset.tag)));
+    applyToolboxFilter();
+    updateStats();
+  };
+
+  root.innerHTML = "";
+  const frag = document.createDocumentFragment();
+  tags.forEach((t) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "tbox-tag";
+    b.dataset.tag = t;
+    b.textContent = t;
+    b.addEventListener("click", (ev) => {
+      const multi = Boolean(ev.shiftKey);
+      if (!multi) {
+        if (selected.size === 1 && selected.has(t)) selected.clear();
+        else {
+          selected.clear();
+          selected.add(t);
+        }
+      } else {
+        if (selected.has(t)) selected.delete(t);
+        else selected.add(t);
+      }
+      apply();
+    });
+    frag.appendChild(b);
+  });
+  root.appendChild(frag);
+
+  btnClear.onclick = () => {
+    selected.clear();
+    apply();
+  };
+
+  // Initial apply (keeps selection across language switches).
+  apply();
+}
+
+function applyToolboxFilter() {
+  const selected = state.toolboxSelected || [];
+  const cards = $all("#projects-grid .card");
+  if (selected.length === 0) {
+    cards.forEach((c) => c.classList.remove("is-muted", "is-match"));
+    return;
+  }
+  const wanted = new Set(selected);
+  cards.forEach((c) => {
+    const stack = String(c.dataset.stack || "");
+    const tags = new Set(stack.split("|").filter(Boolean));
+    let ok = true;
+    wanted.forEach((t) => {
+      if (!tags.has(t)) ok = false;
+    });
+    c.classList.toggle("is-match", ok);
+    c.classList.toggle("is-muted", !ok);
+  });
+}
+
+function normalizeText(input) {
+  const s = String(input || "").toLowerCase();
+  try {
+    // Allow "avaliacao" to match "avaliação", etc.
+    return s
+      .normalize("NFKD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
+  } catch {
+    return s.replace(/\s+/g, " ").trim();
+  }
+}
+
+function buildCmdkItems(langData) {
+  const kinds = langData?.cmdk?.kinds || {};
+  const items = [];
+
+  const add = (it) => {
+    items.push({
+      ...it,
+      _hay: normalizeText(`${it.title || ""} ${it.subtitle || ""} ${(it.keywords || []).join(" ")}`),
+      kindLabel: it.kindLabel || kinds[it.kind] || it.kind || "",
+    });
+  };
+
+  // Sections (navigation)
+  const sections = [
+    { id: "about", key: "about" },
+    { id: "skills", key: "skills" },
+    { id: "toolbox", key: "toolbox" },
+    { id: "projects", key: "projects" },
+    { id: "lab", key: "lab" },
+    { id: "experience", key: "experience" },
+    { id: "education", key: "education" },
+    { id: "contact", key: "contact" },
+  ];
+  sections.forEach((s) => {
+    const label = langData?.nav?.[s.key];
+    if (!label) return;
+    add({
+      id: `section:${s.id}`,
+      kind: "section",
+      title: label,
+      subtitle: langData?.cmdk?.sectionHint || "",
+      action: () => {
+        const el = document.getElementById(s.id);
+        if (el) el.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth", block: "start" });
+      },
+    });
+  });
+
+  // Quick actions
+  add({
+    id: "action:toggle-theme",
+    kind: "action",
+    title: langData?.cmdk?.toggleTheme || (state.theme === "dark" ? "Light theme" : "Dark theme"),
+    subtitle: langData?.cmdk?.actionHint || "",
+    action: () => {
+      applyTheme(state.theme === "dark" ? "light" : "dark");
+      updateThemeToggle(langData);
+      // Keep label updated while palette is open.
+      state.cmdk.items = buildCmdkItems(langData);
+      filterCmdk($("#cmdk-input")?.value || "");
+    },
+  });
+
+  // Profile links
+  const prof = langData?.profile || {};
+  const links = [
+    { id: "email", title: langData?.cmdk?.email || "Email", href: prof.email ? `mailto:${prof.email}` : "" },
+    { id: "linkedin", title: "LinkedIn", href: prof.linkedin || "" },
+    { id: "github", title: "GitHub", href: prof.github || "" },
+    { id: "whatsapp", title: langData?.cmdk?.whatsapp || "WhatsApp", href: prof.whatsapp || "" },
+  ];
+  links.forEach((l) => {
+    if (!l.href) return;
+    add({
+      id: `link:${l.id}`,
+      kind: "link",
+      title: l.title,
+      subtitle: l.href.replace(/^mailto:/, ""),
+      action: () => window.open(l.href, "_blank", "noreferrer"),
+    });
+  });
+
+  // Projects (case studies)
+  (langData?.projects || []).forEach((p, idx) => {
+    add({
+      id: `project:${p.id || idx}`,
+      kind: "project",
+      title: p.title || "",
+      subtitle: p.subtitle || "",
+      keywords: Array.isArray(p.stack) ? p.stack : [],
+      action: () => openProjectModal(p, langData),
+    });
+  });
+
+  return items;
+}
+
+function renderCmdkResults() {
+  const list = $("#cmdk-results");
+  if (!list) return;
+
+  const items = state.cmdk.filtered || [];
+  const active = Math.max(0, Math.min(state.cmdk.activeIndex || 0, Math.max(0, items.length - 1)));
+  state.cmdk.activeIndex = active;
+
+  list.innerHTML = "";
+  const frag = document.createDocumentFragment();
+  items.forEach((it, idx) => {
+    const li = document.createElement("li");
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "cmdk-item";
+    btn.classList.toggle("is-active", idx === active);
+    btn.dataset.id = it.id || "";
+
+    const left = document.createElement("div");
+    left.className = "cmdk-left";
+    const strong = document.createElement("strong");
+    strong.textContent = it.title || "";
+    const sub = document.createElement("span");
+    sub.textContent = it.subtitle || "";
+    left.appendChild(strong);
+    left.appendChild(sub);
+
+    const k = document.createElement("span");
+    k.className = "cmdk-kbd";
+    k.textContent = it.kindLabel || "";
+
+    btn.appendChild(left);
+    btn.appendChild(k);
+
+    btn.addEventListener("click", () => executeCmdkItem(it));
+    li.appendChild(btn);
+    frag.appendChild(li);
+  });
+  list.appendChild(frag);
+}
+
+function filterCmdk(query) {
+  const q = normalizeText(query);
+  const all = state.cmdk.items || [];
+  const out = q
+    ? all.filter((it) => it._hay && it._hay.includes(q))
+    : all.slice(0);
+
+  // Keep it snappy.
+  state.cmdk.filtered = out.slice(0, 16);
+  state.cmdk.activeIndex = 0;
+  renderCmdkResults();
+}
+
+function closeCmdk() {
+  const dlg = $("#cmdk");
+  if (!dlg) return;
+  state.cmdk.open = false;
+  try {
+    if (typeof dlg.close === "function") dlg.close();
+    else dlg.removeAttribute("open");
+  } catch {
+    dlg.removeAttribute("open");
+  }
+  const back = state.cmdk._returnFocus;
+  state.cmdk._returnFocus = null;
+  if (back && typeof back.focus === "function") back.focus();
+}
+
+function openCmdk() {
+  const dlg = $("#cmdk");
+  const input = $("#cmdk-input");
+  if (!dlg || !input) return;
+
+  state.cmdk.open = true;
+  state.cmdk._returnFocus = document.activeElement;
+
+  try {
+    if (typeof dlg.showModal === "function") dlg.showModal();
+    else dlg.setAttribute("open", "open");
+  } catch {
+    dlg.setAttribute("open", "open");
+  }
+
+  // Fresh query per open.
+  input.value = "";
+  filterCmdk("");
+  setTimeout(() => {
+    try {
+      input.focus();
+      input.select();
+    } catch {
+      // ignore
+    }
+  }, 0);
+}
+
+function executeCmdkItem(it) {
+  if (!it) return;
+  closeCmdk();
+  // Let dialog close animation happen first.
+  setTimeout(() => {
+    try {
+      if (typeof it.action === "function") it.action();
+    } catch {
+      // ignore
+    }
+  }, 30);
+}
+
+function setupCmdk() {
+  const dlg = $("#cmdk");
+  const input = $("#cmdk-input");
+  const openBtn = $("#cmdk-open");
+  if (!dlg || !input) return;
+
+  if (!dlg.dataset.bound) {
+    dlg.dataset.bound = "1";
+
+    if (openBtn) openBtn.addEventListener("click", openCmdk);
+
+    dlg.addEventListener("close", () => {
+      state.cmdk.open = false;
+      const back = state.cmdk._returnFocus;
+      state.cmdk._returnFocus = null;
+      if (back && typeof back.focus === "function") back.focus();
+    });
+
+    input.addEventListener("input", () => filterCmdk(input.value));
+
+    input.addEventListener("keydown", (ev) => {
+      if (ev.key === "Escape") {
+        ev.preventDefault();
+        closeCmdk();
+        return;
+      }
+      if (ev.key === "ArrowDown") {
+        ev.preventDefault();
+        state.cmdk.activeIndex = Math.min(
+          (state.cmdk.activeIndex || 0) + 1,
+          Math.max(0, (state.cmdk.filtered || []).length - 1),
+        );
+        renderCmdkResults();
+        return;
+      }
+      if (ev.key === "ArrowUp") {
+        ev.preventDefault();
+        state.cmdk.activeIndex = Math.max((state.cmdk.activeIndex || 0) - 1, 0);
+        renderCmdkResults();
+        return;
+      }
+      if (ev.key === "Enter") {
+        ev.preventDefault();
+        const cur = (state.cmdk.filtered || [])[state.cmdk.activeIndex || 0];
+        if (cur) executeCmdkItem(cur);
+      }
+    });
+
+    // Global shortcut
+    window.addEventListener("keydown", (ev) => {
+      const k = String(ev.key || "").toLowerCase();
+      if ((ev.ctrlKey || ev.metaKey) && k === "k") {
+        ev.preventDefault();
+        if (state.cmdk.open) closeCmdk();
+        else openCmdk();
+      }
+      if (state.cmdk.open && k === "escape") {
+        ev.preventDefault();
+        closeCmdk();
+      }
+    });
+  }
+
+  // Always rebuild items for the current language (cheap).
+  const langData = state.content ? state.content[state.lang] : null;
+  if (langData) state.cmdk.items = buildCmdkItems(langData);
+  filterCmdk(input.value || "");
+}
+
+function setupScrollProgress() {
+  const bar = $("#scroll-progress-bar");
+  if (!bar) return;
+  if (bar.dataset.bound) return;
+  bar.dataset.bound = "1";
+
+  let raf = 0;
+  const tick = () => {
+    raf = 0;
+    const doc = document.documentElement;
+    const max = Math.max(1, doc.scrollHeight - doc.clientHeight);
+    const p = Math.max(0, Math.min(1, (doc.scrollTop || 0) / max));
+    bar.style.width = `${(p * 100).toFixed(2)}%`;
+  };
+  const on = () => {
+    if (raf) return;
+    raf = window.requestAnimationFrame(tick);
+  };
+  window.addEventListener("scroll", on, { passive: true });
+  window.addEventListener("resize", on, { passive: true });
+  tick();
+}
+
+function setupCardTilt() {
+  if (prefersReducedMotion()) return;
+  if (!window.matchMedia) return;
+  const ok = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  if (!ok) return;
+
+  const cards = $all(".card, .panel-card, .titem, .edu");
+  cards.forEach((el) => {
+    if (el.dataset.tiltBound) return;
+    el.dataset.tiltBound = "1";
+
+    const maxDeg = 8;
+    const onMove = (ev) => {
+      const rect = el.getBoundingClientRect();
+      const px = (ev.clientX - rect.left) / Math.max(1, rect.width);
+      const py = (ev.clientY - rect.top) / Math.max(1, rect.height);
+      const ry = (px - 0.5) * (maxDeg * 2);
+      const rx = -(py - 0.5) * (maxDeg * 2);
+      el.style.setProperty("--rx", `${rx.toFixed(2)}deg`);
+      el.style.setProperty("--ry", `${ry.toFixed(2)}deg`);
+    };
+    const onLeave = () => {
+      el.style.setProperty("--rx", "0deg");
+      el.style.setProperty("--ry", "0deg");
+    };
+
+    el.addEventListener("pointermove", onMove);
+    el.addEventListener("pointerleave", onLeave);
+  });
+}
+
 function safeLink(url) {
   if (!url) return null;
   try {
@@ -373,6 +828,7 @@ function renderProjects(langData) {
     card.className = "card";
     card.tabIndex = 0;
     card.dataset.projectId = p.id || "";
+    card.dataset.stack = Array.isArray(p.stack) ? p.stack.join("|") : "";
 
     const top = document.createElement("div");
     top.className = "project-top";
@@ -809,10 +1265,15 @@ function setLang(next) {
   renderPipeline(langData);
   renderSkills(langData);
   renderProjects(langData);
+  renderToolbox(langData);
   renderExperience(langData);
   renderEducation(langData);
   renderLab(langData);
   renderQuickLinks(langData);
+
+  // Progressive enhancement re-binders after re-render.
+  setupCardTilt();
+  setupCmdk();
 }
 
 async function bootstrap() {
@@ -876,6 +1337,7 @@ async function bootstrap() {
   }
 
   setupReveal();
+  setupScrollProgress();
 
   try {
     const res = await fetch("content.json", { cache: "no-store" });
