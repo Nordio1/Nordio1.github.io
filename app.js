@@ -1132,9 +1132,71 @@ function renderEducation(langData) {
     const extra = document.createElement("p");
     extra.className = "muted tiny";
     extra.textContent = ed.note || "";
+    const bullets = Array.isArray(ed.bullets) ? ed.bullets : [];
     card.appendChild(h);
     card.appendChild(p);
     if (ed.note) card.appendChild(extra);
+    if (bullets.length) {
+      const ul = document.createElement("ul");
+      ul.className = "edu-bullets";
+      bullets.forEach((t) => {
+        const li = document.createElement("li");
+        li.textContent = t;
+        ul.appendChild(li);
+      });
+      card.appendChild(ul);
+    }
+    return card;
+  });
+}
+
+function renderCertifications(langData) {
+  const root = $("#certs-list");
+  if (!root) return;
+  renderList(root, langData.certifications || [], (c) => {
+    const card = document.createElement(c.href ? "a" : "div");
+    card.className = "cert";
+    if (c.href) {
+      card.href = c.href;
+      card.target = "_blank";
+      card.rel = "noreferrer";
+    }
+
+    const top = document.createElement("div");
+    top.className = "cert-top";
+
+    const icon = document.createElement("div");
+    icon.className = "cert-icon";
+    if (c.badge) {
+      const img = document.createElement("img");
+      img.src = c.badge;
+      img.alt = c.issuer ? String(c.issuer) : "Certification";
+      img.loading = "lazy";
+      icon.appendChild(img);
+    } else {
+      icon.textContent = (c.issuer || "Cert").slice(0, 2).toUpperCase();
+    }
+
+    const main = document.createElement("div");
+    main.className = "cert-main";
+
+    const h = document.createElement("h3");
+    h.textContent = c.title || "";
+
+    const meta = document.createElement("p");
+    meta.className = "muted";
+    const parts = [];
+    if (c.issuer) parts.push(String(c.issuer));
+    if (c.date) parts.push(String(c.date));
+    if (c.note) parts.push(String(c.note));
+    meta.textContent = parts.join(" · ");
+
+    main.appendChild(h);
+    if (meta.textContent) main.appendChild(meta);
+
+    top.appendChild(icon);
+    top.appendChild(main);
+    card.appendChild(top);
     return card;
   });
 }
@@ -1432,6 +1494,7 @@ function setLang(next) {
   renderToolbox(langData);
   renderExperience(langData);
   renderEducation(langData);
+  renderCertifications(langData);
   renderLab(langData);
   renderQuickLinks(langData);
 

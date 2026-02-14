@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="AWS">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#111827" />
+      <stop offset="1" stop-color="#0b0d12" />
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="56" height="56" rx="14" fill="url(#g)" stroke="#ffffff" stroke-opacity="0.14" />
+  <text
+    x="32"
+    y="37"
+    text-anchor="middle"
+    font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial"
+    font-size="18"
+    font-weight="850"
+    fill="#ff9900"
+    letter-spacing="0.06em"
+  >
+    AWS
+  </text>
+  <path d="M18 44c8 6 20 6 28 0" fill="none" stroke="#ff9900" stroke-width="3" stroke-linecap="round" />
+</svg>

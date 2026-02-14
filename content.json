@@ -125,6 +125,8 @@
       "experienceSub": "O que foi entregue, melhorado e estabilizado.",
       "educationTitle": "Formação",
       "educationSub": "IA e engenharia de software com foco em aplicação prática.",
+      "certsTitle": "Certificações",
+      "certsSub": "Credenciais e cursos relevantes (GenAI, cloud e engenharia).",
       "contactTitle": "Contato",
       "contactSub": "Melhor: e-mail. Rápido: WhatsApp.",
       "labTitle": "Arquiteturas em ação",
@@ -475,24 +477,84 @@
     "education": [
       {
         "title": "Pós-graduação em Inteligência Artificial",
-        "org": "UTFPR",
-        "year": "2025"
+        "org": "UTFPR (Universidade Tecnológica Federal do Paraná)",
+        "year": "2025",
+        "note": "Curitiba, PR. Pós com viés aplicado e foco em engenharia para colocar IA em produção.",
+        "bullets": [
+          "Fundamentos de ML/IA com ênfase em validação e qualidade",
+          "Pipelines end-to-end (dados → treino → deploy → monitoramento)",
+          "Boas práticas de engenharia para sistemas com IA (testes, logs, observabilidade)"
+        ]
       },
       {
         "title": "Pós-graduação em Engenharia de Software",
         "org": "Universidade Positivo",
-        "year": ""
+        "year": "",
+        "note": "Arquitetura, qualidade e manutenção sustentável de software.",
+        "bullets": [
+          "Arquitetura e padrões (design, modularidade, contratos)",
+          "Testes automatizados e qualidade (regressão, cobertura, revisão)",
+          "Documentação e práticas de entrega (versionamento, releases)"
+        ]
       },
       {
         "title": "Tecnólogo em Análise e Desenvolvimento de Sistemas",
         "org": "Universidade Positivo",
-        "year": ""
+        "year": "",
+        "note": "Base sólida para engenharia de software: desenvolvimento, dados e sistemas.",
+        "bullets": [
+          "Desenvolvimento (fundamentos) e integração de sistemas",
+          "Banco de dados e modelagem",
+          "Sistemas operacionais e redes (fundamentos)"
+        ]
       },
       {
         "title": "Pós-graduação em IA Generativa Aplicada",
-        "org": "UTFPR",
+        "org": "UTFPR (Universidade Tecnológica Federal do Paraná)",
         "year": "Início Abr/2026",
-        "note": "Linha de estudo aplicada em GenAI e LLM systems."
+        "note": "Especialização aplicada em LLMs, RAG e agentes com foco em engenharia e operação.",
+        "bullets": [
+          "Arquiteturas de LLM systems (RAG, agentes, tool-calling)",
+          "LLMOps: avaliação, guardrails e monitoramento",
+          "Integração em sistemas empresariais (APIs, dados, segurança)"
+        ]
+      }
+    ],
+    "certifications": [
+      {
+        "title": "Hugging Face Agents Course",
+        "issuer": "Hugging Face",
+        "date": "Jun/2025",
+        "badge": "assets/badges/huggingface.svg",
+        "note": "Agents, tool calling e workflows multi-step"
+      },
+      {
+        "title": "Microsoft Professional Program: Artificial Intelligence",
+        "issuer": "Microsoft",
+        "date": "",
+        "badge": "assets/badges/microsoft.svg",
+        "note": "Certificado de conclusão"
+      },
+      {
+        "title": "Microsoft Certified: Azure AI Engineer Associate",
+        "issuer": "Microsoft Azure",
+        "date": "",
+        "badge": "assets/badges/azure.svg",
+        "note": "Azure AI Engineer"
+      },
+      {
+        "title": "AWS Certified Machine Learning Engineer",
+        "issuer": "AWS",
+        "date": "",
+        "badge": "assets/badges/aws.svg",
+        "note": "Machine Learning"
+      },
+      {
+        "title": "AWS Certified Generative AI Developer",
+        "issuer": "AWS",
+        "date": "",
+        "badge": "assets/badges/aws.svg",
+        "note": "Generative AI"
       }
     ],
     "quickLinks": [
@@ -829,6 +891,8 @@
       "experienceSub": "What shipped, what improved, and what stabilized.",
       "educationTitle": "Education",
       "educationSub": "AI and software engineering with a hands-on bias.",
+      "certsTitle": "Certifications",
+      "certsSub": "Selected credentials and courses (GenAI, cloud, and engineering).",
       "contactTitle": "Contact",
       "contactSub": "Best: email. Fast: WhatsApp.",
       "labTitle": "Architectures in action",
@@ -1185,24 +1249,84 @@
     "education": [
       {
         "title": "Postgraduate Degree in Artificial Intelligence",
-        "org": "UTFPR",
-        "year": "2025"
+        "org": "UTFPR (Federal University of Technology – Paraná)",
+        "year": "2025",
+        "note": "Curitiba, Brazil. Applied AI program with an engineering bias toward production.",
+        "bullets": [
+          "ML/AI fundamentals with emphasis on validation and quality",
+          "End-to-end pipelines (data → training → deploy → monitoring)",
+          "Engineering practices for AI systems (tests, logs, observability)"
+        ]
       },
       {
         "title": "Postgraduate Degree in Software Engineering",
         "org": "Universidade Positivo",
-        "year": ""
+        "year": "",
+        "note": "Software architecture, quality, and sustainable maintenance.",
+        "bullets": [
+          "Architecture and patterns (modularity, contracts, maintainability)",
+          "Automated testing and quality (regression, coverage, reviews)",
+          "Delivery practices (versioning, releases, documentation)"
+        ]
       },
       {
         "title": "Technologist Degree in Systems Analysis and Development",
         "org": "Universidade Positivo",
-        "year": ""
+        "year": "",
+        "note": "Solid foundation for software engineering: development, data, and systems.",
+        "bullets": [
+          "Development fundamentals and system integration",
+          "Databases and data modeling",
+          "Operating systems and networking fundamentals"
+        ]
       },
       {
         "title": "Postgraduate Degree in Applied Generative AI",
-        "org": "UTFPR",
+        "org": "UTFPR (Federal University of Technology – Paraná)",
         "year": "Starting Apr/2026",
-        "note": "Applied track for GenAI and LLM systems."
+        "note": "Applied specialization in LLMs, RAG and agents with a focus on engineering and operations.",
+        "bullets": [
+          "LLM system architectures (RAG, agents, tool-calling)",
+          "LLMOps: evaluation, guardrails, monitoring",
+          "Enterprise integration (APIs, data, security)"
+        ]
+      }
+    ],
+    "certifications": [
+      {
+        "title": "Hugging Face Agents Course",
+        "issuer": "Hugging Face",
+        "date": "Jun 2025",
+        "badge": "assets/badges/huggingface.svg",
+        "note": "Agents, tool calling, and multi-step workflows"
+      },
+      {
+        "title": "Microsoft Professional Program: Artificial Intelligence",
+        "issuer": "Microsoft",
+        "date": "",
+        "badge": "assets/badges/microsoft.svg",
+        "note": "Completion certificate"
+      },
+      {
+        "title": "Microsoft Certified: Azure AI Engineer Associate",
+        "issuer": "Microsoft Azure",
+        "date": "",
+        "badge": "assets/badges/azure.svg",
+        "note": "Azure AI Engineer"
+      },
+      {
+        "title": "AWS Certified Machine Learning Engineer",
+        "issuer": "AWS",
+        "date": "",
+        "badge": "assets/badges/aws.svg",
+        "note": "Machine Learning"
+      },
+      {
+        "title": "AWS Certified Generative AI Developer",
+        "issuer": "AWS",
+        "date": "",
+        "badge": "assets/badges/aws.svg",
+        "note": "Generative AI"
       }
     ],
     "quickLinks": [
