@@ -449,6 +449,118 @@ function applyToolboxFilter() {
   });
 }
 
+function getDialogBackdrop() {
+  let el = document.getElementById("dlg-backdrop");
+  if (el) return el;
+  el = document.createElement("div");
+  el.id = "dlg-backdrop";
+  el.className = "dlg-backdrop";
+  el.setAttribute("aria-hidden", "true");
+  document.body.appendChild(el);
+  return el;
+}
+
+function markDialogPolyfill(dialogEl) {
+  if (!dialogEl || dialogEl.dataset.polyfill) return;
+  const ok = typeof dialogEl.showModal === "function" && typeof dialogEl.close === "function";
+  if (ok) return;
+  dialogEl.dataset.polyfill = "1";
+}
+
+function openDialog(dialogEl) {
+  if (!dialogEl) return false;
+
+  // Track the active dialog for generic escape/backdrop handling.
+  state._activeDialog = dialogEl;
+
+  // Native path first.
+  if (typeof dialogEl.showModal === "function") {
+    try {
+      dialogEl.showModal();
+      return true;
+    } catch {
+      // Fallthrough to polyfill path.
+    }
+  }
+
+  // Polyfill path (older Safari/iOS).
+  dialogEl.setAttribute("open", "open");
+  markDialogPolyfill(dialogEl);
+  const bd = getDialogBackdrop();
+  bd.classList.add("is-open");
+  document.documentElement.classList.add("is-modal-open");
+  document.body.classList.add("is-modal-open");
+  return true;
+}
+
+function closeDialog(dialogEl) {
+  const dlg = dialogEl || state._activeDialog;
+  if (!dlg) return false;
+
+  // Native close when possible.
+  if (typeof dlg.close === "function") {
+    try {
+      dlg.close();
+    } catch {
+      // ignore
+    }
+  }
+
+  // Always drop the open attribute for polyfill and safety.
+  try {
+    dlg.removeAttribute("open");
+  } catch {
+    // ignore
+  }
+
+  const bd = document.getElementById("dlg-backdrop");
+  if (bd) bd.classList.remove("is-open");
+  document.documentElement.classList.remove("is-modal-open");
+  document.body.classList.remove("is-modal-open");
+
+  if (dlg.id === "project-modal") state.currentProjectId = null;
+  if (state._activeDialog === dlg) state._activeDialog = null;
+  return true;
+}
+
+function setupDialogs() {
+  // Mark polyfill-only dialogs early (so CSS can hide them while closed).
+  $all("dialog").forEach(markDialogPolyfill);
+
+  const bd = getDialogBackdrop();
+  if (!bd.dataset.bound) {
+    bd.dataset.bound = "1";
+    bd.addEventListener("click", () => {
+      const active = state._activeDialog;
+      if (active && active.id === "cmdk") closeCmdk();
+      else closeDialog(null);
+    });
+  }
+
+  // Close buttons inside dialogs: required for browsers that don't support method="dialog".
+  $all(".modal-close, .cmdk-close").forEach((btn) => {
+    if (btn.dataset.bound) return;
+    btn.dataset.bound = "1";
+    btn.addEventListener("click", (ev) => {
+      ev.preventDefault();
+      const dlg = btn.closest ? btn.closest("dialog") : null;
+      if (dlg && dlg.id === "cmdk") closeCmdk();
+      else closeDialog(dlg);
+    });
+  });
+
+  // Tap/click outside the inner panel to close (mobile-friendly).
+  $all("dialog").forEach((dlg) => {
+    if (dlg.dataset.outsideBound) return;
+    dlg.dataset.outsideBound = "1";
+    dlg.addEventListener("click", (ev) => {
+      if (ev.target !== dlg) return;
+      if (dlg.id === "cmdk") closeCmdk();
+      else closeDialog(dlg);
+    });
+  });
+}
+
 function normalizeText(input) {
   const s = String(input || "").toLowerCase();
   try {
@@ -608,12 +720,7 @@ function closeCmdk() {
   const dlg = $("#cmdk");
   if (!dlg) return;
   state.cmdk.open = false;
-  try {
-    if (typeof dlg.close === "function") dlg.close();
-    else dlg.removeAttribute("open");
-  } catch {
-    dlg.removeAttribute("open");
-  }
+  closeDialog(dlg);
   const back = state.cmdk._returnFocus;
   state.cmdk._returnFocus = null;
   if (back && typeof back.focus === "function") back.focus();
@@ -626,13 +733,7 @@ function openCmdk() {
 
   state.cmdk.open = true;
   state.cmdk._returnFocus = document.activeElement;
-
-  try {
-    if (typeof dlg.showModal === "function") dlg.showModal();
-    else dlg.setAttribute("open", "open");
-  } catch {
-    dlg.setAttribute("open", "open");
-  }
+  openDialog(dlg);
 
   // Fresh query per open.
   input.value = "";
@@ -878,8 +979,7 @@ function openProjectModal(project, langData) {
   // Open with view transitions when supported.
   withViewTransition(() => {
     state.currentProjectId = project.id || title;
-    if (typeof modal.showModal === "function") modal.showModal();
-    else modal.setAttribute("open", "open");
+    openDialog(modal);
   });
 }
 
@@ -1400,6 +1500,7 @@ async function bootstrap() {
     });
   }
 
+  setupDialogs();
   setupReveal();
   setupScrollProgress();
 

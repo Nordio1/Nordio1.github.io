@@ -93,6 +93,11 @@ body {
   line-height: 1.55;
 }
 
+html.is-modal-open,
+body.is-modal-open {
+  overflow: hidden;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -579,6 +584,8 @@ a {
   flex-wrap: wrap;
   gap: 8px;
   align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .toolbox-side {
@@ -586,6 +593,7 @@ a {
   gap: 8px;
   justify-items: end;
   min-width: 180px;
+  flex: 0 0 auto;
 }
 
 .toolbox-stats {
@@ -1255,6 +1263,35 @@ a {
   border-radius: var(--radius);
   background: var(--surface-50);
   padding: 14px;
+}
+
+.dlg-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.38);
+  backdrop-filter: blur(10px);
+  display: none;
+  z-index: 50;
+}
+
+.dlg-backdrop.is-open {
+  display: block;
+}
+
+/* Dialog polyfill for browsers that lack <dialog> support (ex.: older Safari/iOS). */
+dialog[data-polyfill="1"] {
+  display: none;
+  position: fixed;
+  inset: auto;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  z-index: 60;
+}
+
+dialog[data-polyfill="1"][open] {
+  display: block;
 }
 
 .cmdk {
