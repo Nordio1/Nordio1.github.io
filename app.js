@@ -911,6 +911,7 @@ function openProjectModal(project, langData) {
   const metrics = Array.isArray(project.metrics) ? project.metrics : [];
   const highlights = Array.isArray(project.highlights) ? project.highlights : [];
   const tradeoffs = Array.isArray(project.tradeoffs) ? project.tradeoffs : [];
+  const artifacts = Array.isArray(project.artifacts) ? project.artifacts : [];
   const stack = Array.isArray(project.stack) ? project.stack : [];
   const disclaimer = String(project.disclaimer || "");
   const archRaw = project.architecture;
@@ -999,6 +1000,44 @@ function openProjectModal(project, langData) {
 
   if (tradeoffs.length) {
     addDetails(labels.tradeoffs || "Trade-offs", mkList(tradeoffs));
+  }
+
+  if (artifacts.length) {
+    const aWrap = document.createElement("div");
+    aWrap.className = "artifacts";
+    artifacts.forEach((a) => {
+      if (!a) return;
+      const at = String(a.title || "").trim();
+      const code = String(a.code || "").trim();
+      if (!at || !code) return;
+
+      const d = document.createElement("details");
+      d.className = "details";
+      const s = document.createElement("summary");
+      s.textContent = at;
+      d.appendChild(s);
+
+      if (a.note) {
+        const note = document.createElement("p");
+        note.className = "tiny muted artifact-note";
+        note.textContent = String(a.note);
+        d.appendChild(note);
+      }
+
+      const pre = document.createElement("pre");
+      pre.className = "codeblock";
+      pre.textContent = code;
+      d.appendChild(pre);
+      aWrap.appendChild(d);
+    });
+
+    if (aWrap.childElementCount) {
+      const h2 = document.createElement("h4");
+      h2.className = "artifact-head";
+      h2.textContent = labels.artifacts || labels.samples || "Examples";
+      body.appendChild(h2);
+      body.appendChild(aWrap);
+    }
   }
 
   if (stack.length) {

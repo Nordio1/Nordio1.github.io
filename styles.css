@@ -1459,6 +1459,21 @@ html[data-theme="dark"] .metric-chips .mchip {
   line-height: 1.45;
 }
 
+.artifact-head {
+  margin: 16px 0 8px;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+}
+
+.artifacts {
+  display: grid;
+  gap: 10px;
+}
+
+.artifact-note {
+  margin: 8px 0 0;
+}
+
 .dlg-backdrop {
   position: fixed;
   inset: 0;
