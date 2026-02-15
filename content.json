@@ -34,7 +34,7 @@
       "ctaPrimary": "Falar por e-mail",
       "ctaSecondary": "Ver projetos",
       "ctaLinkedin": "LinkedIn",
-      "note": "Parte do trabalho está anonimizada (NDA). Detalhes sob demanda.",
+      "note": "GenAI em produção: arquitetura, avaliação e governança (sem hype).\\nParte do trabalho está anonimizada (NDA). Detalhes sob demanda.",
       "panelTitle": "Foco",
       "panelTitle2": "O que eu construo",
       "focus": [
@@ -111,7 +111,7 @@
       "featuredProjectIds": [
         "erp-crm",
         "rag",
-        "agents"
+        "lakehouse"
       ]
     },
     "sections": {
@@ -203,77 +203,147 @@
     ],
     "projects": [
       {
-        "title": "ERP/CRM Varejo (NDA) | Estabilidade + Integrações",
-        "subtitle": "Resiliência, trilha de auditoria e integrações críticas em um ERP/CRM desktop (NDA).",
+        "title": "AI-Powered ERP Intelligence Layer (NDA)",
+        "subtitle": "Camada de inteligência para ERP/CRM de varejo: previsão, scoring e automações com trilha auditável.",
         "highlights": [
-          "Hardening de APIs: validação, erros tratados, observabilidade e compatibilidade retroativa",
-          "Paridade ERP<->CRM: diagnóstico por rota, contratos e roundtrip de dados consistente",
-          "UX guiada para fluxos críticos (venda/pagamento) com auditoria ponta a ponta"
+          "Forecasting + scoring + segmentação integrados ao ERP com trilha auditável",
+          "Pipelines versionados (dados/experimentos) e gates de qualidade antes do release",
+          "Operação segura: idempotência, timeouts, fallback e UX guiada em fluxos críticos"
         ],
         "stack": [
           "Python",
-          "REST APIs",
-          "Desktop app",
-          "Databases",
-          "Observability"
+          "PyTorch",
+          "Transformers",
+          "scikit-learn",
+          "XGBoost",
+          "PostgreSQL",
+          "Redis",
+          "FastAPI",
+          "Docker"
         ],
         "links": {
           "repo": "",
           "demo": "",
           "writeup": ""
         },
-        "disclaimer": "Estudo de caso anonimizado (NDA-friendly). Detalhes técnicos sob demanda.",
+        "disclaimer": "Estudo de caso anonimizado (NDA-friendly). Métricas e detalhes por cenário sob demanda.",
         "image": "assets/projects/project-erpcrm.svg",
         "id": "erp-crm",
-        "problem": "Operação de varejo não tolera instabilidade: uma desconexão em venda/estoque/fiscal vira retrabalho, inconsistência e suporte caro.",
+        "problem": "Em PMEs, dados existem, mas decisões críticas (reposição, risco e priorização) ainda são feitas no feeling, gerando ruptura, estoque parado e retrabalho.",
         "approach": [
-          "Contratos canônicos de rotas + testes automatizados para capturar regressões antes do release",
-          "Camada de rede resiliente (timeout/backoff/fallback) com retries idempotentes para evitar duplicidade de gravações",
-          "Persistência consistente: configurações e estados críticos sempre no banco (sem \"estado em memória\") + validações de unicidade",
-          "Auditoria como trilha de verdade: registrar quem fez o quê e quando, com mensagens operacionais e sem vazar segredos",
-          "Profiling + otimização de queries e carregamento lazy para reduzir \"travadas\" em abas pesadas"
+          "IA isolada como serviço: pipeline de features + treino + Inference API (provider-agnostic).",
+          "Engenharia de dados com limpeza/normalização, feature extraction e versionamento de datasets/experimentos.",
+          "Caixa de ferramentas de modelos por tarefa: forecasting (time series/tabular), scoring e segmentação; fine-tuning de Transformers para texto/observações quando aplicável.",
+          "Cache de inferência e fast-paths (ex.: Redis) + budgets/timeouts para previsibilidade em produção.",
+          "Avaliação contínua: backtests por janela, checks de regressão e gates antes de habilitar mudanças.",
+          "Integração no ERP com UX guiada e trilha de auditoria (sem vazamento de dados sensíveis)."
         ],
         "impact": [
-          "Comportamento previsível em produção: menos falhas intermitentes e reconexão segura",
-          "Integridade de dados: ERP -> API -> CRM sem perda de campos e com rastreabilidade",
-          "Operação mais simples: diagnóstico mais rápido e releases mais seguros"
+          "Decisões operacionais mais consistentes (reposição/segmentação/risco) e menos \"surpresas\" no dia a dia.",
+          "Integração de ponta a ponta (ERP -> API -> CRM) preservando snapshot fiscal e integridade de dados.",
+          "Base pronta para automações auditáveis (ex.: sugestão de compra/reposição com justificativa)."
+        ],
+        "context": "Construí um ERP/CRM desktop para PMEs (vendas, estoque, fiscal, financeiro, RH). Evolução: adicionar uma camada de inteligência para transformar dados operacionais em decisões consistentes, com baixa latência e custo controlado.",
+        "challenge": [
+          "Dados fragmentados e inconsistentes do dia a dia (cadastros, itens, descontos, estoque).",
+          "Inferência rápida dentro do fluxo do caixa (desktop), sem travar a operação.",
+          "Arquitetura modular para manter o core do ERP desacoplado da IA.",
+          "Automações seguras (idempotência) para evitar duplicidade e inconsistência.",
+          "Rastreabilidade: auditoria e explicabilidade do que foi recomendado e por quê."
+        ],
+        "metrics": [
+          "Erro de previsão (MAPE/SMAPE) por família de produto via backtests com janela deslizante.",
+          "Latência de inferência P50/P95 (ms) em CPU local (desktop/edge).",
+          "KPIs operacionais: taxa de ruptura, % de estoque parado e tempo até reposição após recomendação."
+        ],
+        "architecture": [
+          "ERP Core (Desktop)",
+          "  |",
+          "  v",
+          "PostgreSQL (dados operacionais)  ---->  Auditoria/Logs",
+          "  |",
+          "  v",
+          "Feature Pipeline  ->  Training/Registry  ->  Inference API  ->  Dashboard/UX",
+          "                           |",
+          "                           v",
+          "                        Cache (Redis)"
+        ],
+        "tradeoffs": [
+          "Edge vs cloud: custo/latência/controle vs elasticidade.",
+          "Modelos leves vs precisão: preferir previsibilidade e manutenção em produção.",
+          "Microserviço vs monólito: isolamento e contratos claros vs simplicidade de deploy."
         ]
       },
       {
-        "title": "Enterprise RAG System",
-        "subtitle": "Pipeline completo: ingestão → embeddings → armazenamento vetorial → geração.",
+        "title": "LLM + RAG em Produção (Q&A com fontes)",
+        "subtitle": "Assistente corporativo com citações, governança e baixa latência.",
         "highlights": [
-          "Ingestão versionada: dedup + metadados + chunking por estrutura",
-          "Recuperação híbrida: filtros + vetores + reranking, com cache e observabilidade",
-          "Qualidade em produção: suites de avaliação + guardrails + respostas com evidências"
+          "Citações obrigatórias + abstention quando falta contexto (menos alucinação)",
+          "ACL/RBAC no índice: respostas só com documentos permitidos",
+          "Avaliação contínua + observabilidade para operar RAG como software"
         ],
         "stack": [
-          "RAG",
-          "Embeddings",
-          "FAISS/Chroma",
-          "LLMOps",
-          "Python"
+          "Python",
+          "FastAPI",
+          "pgvector",
+          "Redis",
+          "OpenTelemetry",
+          "Prometheus/Grafana",
+          "MinIO/S3",
+          "LLM provider-agnostic"
         ],
         "links": {
           "repo": "",
           "demo": "",
           "writeup": ""
         },
-        "disclaimer": "Detalhes de dados e documentos são variáveis por domínio (ajuste rápido por caso).",
+        "disclaimer": "Ajustado por domínio (documentos, permissões e políticas). Detalhes sob demanda.",
         "image": "assets/projects/project-rag.svg",
         "id": "rag",
-        "problem": "RAG \"naive\" quebra em produção: documentos mudam, a recuperação traz ruído e ninguém mede qualidade, gerando respostas erradas com confiança.",
+        "problem": "Busca tradicional falha (sinônimos, linguagem natural) e LLM puro alucina. Em produção, documentos mudam e versões antigas geram respostas erradas.",
         "approach": [
-          "Pipeline de ingestão incremental com versionamento de fontes, deduplicação e metadados",
-          "Chunking adaptativo por tipo de documento (título/seção/tabela) + normalização",
-          "Recuperação com vetores + filtros, reranking e tuning por recall/precision",
-          "Avaliação contínua (golden set) + gates de regressão antes de mudanças de prompt/modelo",
-          "Guardrails: schemas, redaction de PII, citações obrigatórias e controles de custo/latência"
+          "Ingestão incremental com limpeza (boilerplate), normalização e enriquecimento por metadados (doc, seção, data, tags, permissões).",
+          "Chunking semântico por headings + overlap; tratamento específico para tabelas e PDFs complexos.",
+          "Retrieval híbrido (BM25 + vetorial) com filtros por ACL + reranking eficiente.",
+          "Geração com guardrails: políticas de resposta grounded, citações obrigatórias e redaction de PII.",
+          "Avaliação offline com golden set (Recall@K, nDCG@K, groundedness) e regressão por mudança de modelo/prompt/chunking.",
+          "Observabilidade: logs com prompt hash, docs usados, scores, latência P50/P95 e custos por request."
         ],
         "impact": [
-          "Respostas mais confiáveis e auditáveis (com evidências/citações)",
-          "Menos risco de alucinação e regressões silenciosas",
-          "Loop de melhoria contínua: medir -> ajustar -> revalidar"
+          "Respostas rastreáveis com fontes (melhor que \"chat com documento\" genérico).",
+          "Menos alucinações e regressões silenciosas via avaliação e gates.",
+          "Base pronta para automações: sugerir ação, abrir ticket, gerar resumo com compliance."
+        ],
+        "context": "Conhecimento espalhado em PDFs, wikis, políticas internas, tickets e planilhas. Objetivo: responder perguntas com base em documentos reais, citando fontes e respeitando permissões.",
+        "challenge": [
+          "Chunking ruim vira retrieval burro: precisa respeitar estrutura (títulos, seções, tabelas).",
+          "Documentos mudam: versionamento e invalidação incremental do índice são obrigatórios.",
+          "Confiabilidade: resposta deve vir com evidência ou abstém (\"não sei\" + sugestões).",
+          "Segurança: RBAC/ACL, redaction de PII e mitigação de prompt injection no contexto.",
+          "Latência e custo: topK, reranking e cache precisam ser calibrados."
+        ],
+        "metrics": [
+          "Retrieval: Recall@K e nDCG@K (com/sem reranking).",
+          "Confiabilidade: citations coverage e abstention rate (quando falta evidência).",
+          "Performance: latência P50/P95 e custo por request (tokens/tempo)."
+        ],
+        "architecture": [
+          "Conectores (PDF/HTML/MD/Tickets)",
+          "  -> Normalização/limpeza",
+          "  -> Chunking + Metadados/ACL",
+          "  -> Embeddings + Index (pgvector)",
+          "Pergunta",
+          "  -> Query rewrite (opcional)",
+          "  -> Retrieval híbrido + filtros",
+          "  -> Rerank",
+          "  -> Prompt com políticas",
+          "  -> LLM (provider-agnostic)",
+          "  -> Resposta + citações + logging"
+        ],
+        "tradeoffs": [
+          "Vetorial-only vs híbrido: híbrido melhora cobertura em domínios com vocabulário variável.",
+          "Rerank agressivo vs custo: balancear nDCG com latência.",
+          "Chunk maior vs menor: contexto vs recall; calibrar com métricas e regressão."
         ]
       },
       {
@@ -311,22 +381,41 @@
           "Agentes previsíveis, testáveis e fáceis de operar",
           "Menos risco operacional em integrações com sistemas externos",
           "Time-to-market mais rápido para novos workflows e ferramentas"
+        ],
+        "context": "Workflows de agentes para automações internas (integrações com APIs, tarefas multi-step e execuções rastreáveis).",
+        "challenge": [
+          "Efeitos colaterais reais: tool-calling precisa ser controlado.",
+          "Previsibilidade: estado explícito e reexecução (replay) para depurar.",
+          "Segurança: allowlists, budgets e aprovações humanas para ações sensíveis."
+        ],
+        "metrics": [
+          "Taxa de sucesso por cenário (E2E) e erros por tipo de ferramenta.",
+          "Custo/latência por step (P50/P95) e número médio de steps por tarefa.",
+          "Replayability: % de execuções reproduzíveis com os mesmos inputs."
+        ],
+        "tradeoffs": [
+          "Autonomia vs controle: reduzir risco com gates e aprovações.",
+          "Toolset amplo vs manutenção: começar com allowlist pequena e expandir por ROI.",
+          "Memória longa vs privacidade: preferir estado explícito e storage mínimo."
         ]
       },
       {
-        "title": "Lakehouse LLMOps (Databricks)",
-        "subtitle": "Integração de dados + rastreabilidade de modelos em ambiente corporativo.",
+        "title": "MLOps Estruturado (Lakehouse) | Treino -> Deploy -> Monitoramento",
+        "subtitle": "Um \"sistema operacional\" de ML: reprodutibilidade, governança, rollback e drift.",
         "highlights": [
-          "Lineage e reprodutibilidade: Delta Lake + checks de qualidade de dados",
-          "Governança de modelos: MLflow tracking/registry + deploy canary/rollback",
-          "Operação: métricas online + alertas (sem números inventados)"
+          "Pipelines reprodutíveis + tracking/registry para auditoria e rollback",
+          "CI/CD de ML com validação de dados e regressão de modelo",
+          "Monitoramento online (latência/erro/drift) com alertas operacionais"
         ],
         "stack": [
           "Databricks",
           "Delta Lake",
           "MLflow",
-          "Serving",
-          "Python"
+          "Great Expectations",
+          "GitHub Actions",
+          "Docker",
+          "FastAPI",
+          "Prometheus/Grafana"
         ],
         "links": {
           "repo": "",
@@ -336,18 +425,41 @@
         "disclaimer": "Padrões prontos para monitoramento, versionamento e entrega contínua.",
         "image": "assets/projects/project-lakehouse.svg",
         "id": "lakehouse",
-        "problem": "Sem governança, o ciclo de dados/modelos vira caixa-preta: difícil reproduzir, auditar e operar sob pressão.",
+        "problem": "Sem MLOps, tudo vira notebook: deploy manual, sem rastreio de dados, sem rollback rápido e com regressões descobertas tarde.",
         "approach": [
-          "Pipelines Lakehouse com versionamento, validações e trilha de lineage",
-          "MLflow para tracking/registro/versionamento, com artefatos reproduzíveis",
-          "Deploy com canary + rollback e monitoramento por custo/latência/qualidade",
-          "Integração com APIs/sistemas legados e controles de acesso",
-          "Operação contínua: alertas, playbooks e rotinas de validação"
+          "Versionamento e lineage no Lakehouse (Delta) + validação de dados (ex.: Great Expectations).",
+          "Pipelines reprodutíveis: ambiente containerizado, seeds fixas e tracking de experimentos.",
+          "Registry e promoção por gates: métricas mínimas, assinatura I/O e tags de risco/owner.",
+          "Serving padronizado (API) + canary deploy e rollback automatizado.",
+          "Monitoramento online: latência, erro, PSI/KS para drift e alertas operacionais.",
+          "Testes: unit de features, contract tests do endpoint e regressão de modelo."
         ],
         "impact": [
-          "Entrega controlada e auditável do ciclo inteiro",
-          "Resposta mais rápida a incidentes e regressões",
-          "Base pronta para escalar para múltiplos domínios/equipes"
+          "Entrega confiável: deploy e rollback previsíveis, com rastreabilidade ponta a ponta.",
+          "Menos incidentes: regressões capturadas por gates antes de atingir usuários.",
+          "Base escalável para múltiplos modelos e squads sem virar \"caixa-preta\"."
+        ],
+        "context": "Quando múltiplos modelos (tabular, forecasting, NLP) entram em produção, o desafio vira processo: rastrear dados, reproduzir treino, implantar com segurança e monitorar degradação.",
+        "challenge": [
+          "Reprodutibilidade: garantir que todo modelo tenha dataset hash + assinatura + artifacts.",
+          "Qualidade de dados: schema/ranges e validações antes do treino.",
+          "CI/CD de ML: gates de performance/latência e deploy automatizado.",
+          "Monitoramento: drift de dados e queda de performance ao longo do tempo.",
+          "Operação: rollback rápido quando métricas pioram."
+        ],
+        "metrics": [
+          "Lead time de deploy (commit -> produção) e tempo de rollback.",
+          "Taxa de regressão evitada: % de releases bloqueados por gates (dados/modelo/perf).",
+          "Drift: tempo para detecção (TTD) + taxa de alertas acionáveis."
+        ],
+        "architecture": [
+          "Data (Delta/Lakehouse) -> Data validation -> Train pipeline -> Registry",
+          "Registry -> CI/CD gates -> Serving -> Monitoring/Drift -> Retrain"
+        ],
+        "tradeoffs": [
+          "Gates rígidos vs velocidade: calibrar thresholds para não bloquear evolução.",
+          "Monitoramento profundo vs custo: começar pelo essencial (latência/erro/drift).",
+          "Registry central vs times autônomos: padronizar contratos para escalar."
         ]
       },
       {
@@ -385,7 +497,18 @@
           "writeup": ""
         },
         "disclaimer": "Detalhes de datasets/modelos dependem do caso de uso.",
-        "image": "assets/projects/project-generic.svg"
+        "image": "assets/projects/project-generic.svg",
+        "context": "Fine-tuning de LLMs para domínio (tom, vocabulário e tarefas específicas) com foco em custo e governança.",
+        "challenge": [
+          "Overfitting e regressões silenciosas sem avaliação.",
+          "Curadoria de dataset (instruções/saídas) e qualidade do rótulo.",
+          "Trade-off custo x qualidade em LoRA/PEFT."
+        ],
+        "metrics": [
+          "Qualidade em benchmark de domínio (task score) vs baseline.",
+          "Custo de treino (tempo/GPU) e tamanho do adaptador (LoRA).",
+          "Latência/throughput no serving após fine-tuning."
+        ]
       },
       {
         "id": "eval",
@@ -421,8 +544,19 @@
           "demo": "",
           "writeup": ""
         },
-        "disclaimer": "Sem números inventados: métricas específicas variam por cliente e contexto.",
-        "image": "assets/projects/project-lakehouse.svg"
+        "disclaimer": "Métricas variam por contexto; foco em governança, testes e observabilidade em produção.",
+        "image": "assets/projects/project-lakehouse.svg",
+        "context": "Avaliação e observabilidade para operar LLMs/RAG como produto: medir qualidade, detectar regressões e manter governança.",
+        "challenge": [
+          "Sem métricas, regressão só aparece via reclamação do usuário.",
+          "Múltiplas versões (prompt/modelo/índice) exigem testes de contrato.",
+          "Qualidade subjetiva precisa virar checks objetivos (groundedness/faithfulness)."
+        ],
+        "metrics": [
+          "Groundedness/faithfulness (checks + avaliadores) e taxa de alucinação por suite.",
+          "Latência P50/P95 e taxa de erro por versão.",
+          "Tempo para detecção de regressão (TTD) e tempo de rollback."
+        ]
       }
     ],
     "labels": {
@@ -430,10 +564,15 @@
       "demo": "Demo",
       "writeup": "Writeup",
       "caseStudy": "Estudo de caso",
+      "context": "Contexto",
       "problem": "Problema",
+      "challenge": "Desafio",
       "approach": "Abordagem",
-      "impact": "Impacto",
+      "impact": "Resultados",
+      "metrics": "Métricas",
       "highlights": "Destaques",
+      "architecture": "Arquitetura",
+      "tradeoffs": "Trade-offs",
       "stack": "Stack"
     },
     "experience": [
@@ -800,7 +939,7 @@
       "ctaPrimary": "Email me",
       "ctaSecondary": "View projects",
       "ctaLinkedin": "LinkedIn",
-      "note": "Some work is anonymized (NDA-friendly). Details available on request.",
+      "note": "Production-grade GenAI: architecture, evaluation, and governance (no hype).\\nSome work is anonymized (NDA-friendly). Details available on request.",
       "panelTitle": "Focus",
       "panelTitle2": "What I build",
       "focus": [
@@ -877,7 +1016,7 @@
       "featuredProjectIds": [
         "erp-crm",
         "rag",
-        "agents"
+        "lakehouse"
       ]
     },
     "sections": {
@@ -969,77 +1108,147 @@
     ],
     "projects": [
       {
-        "title": "Retail ERP/CRM (NDA) | Stability + Integrations",
-        "subtitle": "Resilience, audit trail, and critical integrations in a desktop ERP/CRM (NDA).",
+        "title": "AI-Powered ERP Intelligence Layer (NDA)",
+        "subtitle": "Decision intelligence for a retail ERP/CRM: forecasting, scoring, and automation with an auditable trail.",
         "highlights": [
-          "API hardening: validation, explicit errors, observability, and backwards-compatible contracts",
-          "ERP<->CRM parity: route-level diagnostics, contracts, and consistent data roundtrip",
-          "Guided critical flows (sales/payments) with end-to-end auditing"
+          "Forecasting + scoring + segmentation integrated with an auditable trail",
+          "Versioned pipelines (data/experiments) with quality gates before releases",
+          "Operational hardening: idempotency, timeouts, fallbacks, and guided UX"
         ],
         "stack": [
           "Python",
-          "REST APIs",
-          "Desktop app",
-          "Databases",
-          "Observability"
+          "PyTorch",
+          "Transformers",
+          "scikit-learn",
+          "XGBoost",
+          "PostgreSQL",
+          "Redis",
+          "FastAPI",
+          "Docker"
         ],
         "links": {
           "repo": "",
           "demo": "",
           "writeup": ""
         },
-        "disclaimer": "Anonymized case study (NDA-friendly). Deeper technical details on request.",
+        "disclaimer": "Anonymized case study (NDA-friendly). Metrics and deeper technical details available on request.",
         "image": "assets/projects/project-erpcrm.svg",
         "id": "erp-crm",
-        "problem": "Retail operations cannot tolerate instability: a disconnect during sales/stock/fiscal flows turns into rework, inconsistency, and expensive support.",
+        "problem": "In SMBs, data exists, but critical decisions (replenishment, risk, prioritization) are still made by gut, causing stockouts, dead stock, and rework.",
         "approach": [
-          "Canonical API contracts + automated route checks to catch regressions before release",
-          "Resilient networking (timeouts/backoff/fallback) with idempotent retries to avoid duplicate writes",
-          "Consistent persistence: critical configs/state always in the database (no \"in-memory state\") + uniqueness validation",
-          "Audit trail as source of truth: who did what/when, with operational messages and no secret leakage",
-          "Profiling + query and lazy-load optimization to reduce first-click freezes on heavy screens"
+          "ML isolated as a service: feature pipeline + training + inference API (provider-agnostic).",
+          "Data engineering: cleaning/normalization, feature extraction, dataset/experiment versioning.",
+          "Right model per task: forecasting, scoring, and segmentation; transformer fine-tuning for text/notes when applicable.",
+          "Inference caching + fast-paths (e.g., Redis) with budgets/timeouts for predictable ops.",
+          "Continuous evaluation: rolling-window backtests, regression checks, and quality gates.",
+          "ERP integration with guided UX and audit trail (without leaking sensitive data)."
         ],
         "impact": [
-          "More predictable production behavior: fewer intermittent failures and safer reconnection",
-          "Data integrity: ERP -> API -> CRM roundtrip without losing fields, with traceability",
-          "Simpler operations: faster diagnosis and safer releases"
+          "More consistent day-to-day operations (replenishment/segmentation/risk) with fewer surprises.",
+          "End-to-end integration (ERP -> API -> CRM) preserving fiscal snapshot and data integrity.",
+          "Foundation for auditable automations (e.g., restock recommendations with rationale)."
+        ],
+        "context": "I built a desktop ERP/CRM for SMBs (sales, stock, fiscal, finance, HR). Next step: an intelligence layer that turns operational data into consistent decisions, with low-latency inference and controlled cost.",
+        "challenge": [
+          "Fragmented and messy real-world operational data (catalog, items, discounts, stock).",
+          "Low-latency inference inside a POS-like desktop workflow.",
+          "Modular architecture to keep the ERP core decoupled from ML.",
+          "Safe automations (idempotency) to prevent double-writes and inconsistency.",
+          "Traceability: auditability and explainability of recommendations and actions."
+        ],
+        "metrics": [
+          "Forecasting error (MAPE/SMAPE) per SKU family via rolling backtests.",
+          "Inference latency P50/P95 (ms) on local CPU (desktop/edge).",
+          "Ops KPIs: stockout rate, dead stock %, and time-to-replenish after recommendations."
+        ],
+        "architecture": [
+          "ERP Core (Desktop)",
+          "  |",
+          "  v",
+          "PostgreSQL (operational data)  ---->  Audit/Logs",
+          "  |",
+          "  v",
+          "Feature Pipeline  ->  Training/Registry  ->  Inference API  ->  Dashboard/UX",
+          "                           |",
+          "                           v",
+          "                        Cache (Redis)"
+        ],
+        "tradeoffs": [
+          "Edge vs cloud inference: cost/latency/control vs elasticity.",
+          "Lightweight models vs accuracy: prioritize predictability and maintainability.",
+          "Microservice isolation vs deployment simplicity."
         ]
       },
       {
-        "title": "Enterprise RAG System",
-        "subtitle": "Full pipeline: ingestion → embeddings → vector store → generation.",
+        "title": "LLM + RAG in Production (Grounded Q&A)",
+        "subtitle": "An internal assistant with citations, governance, and low latency.",
         "highlights": [
-          "Versioned ingestion: dedup + metadata + structure-aware chunking",
-          "Hybrid retrieval: filters + vectors + reranking, with cache + observability",
-          "Production quality: evaluation suites + guardrails + evidence-backed answers"
+          "Mandatory citations + abstention when evidence is missing",
+          "ACL/RBAC enforced at retrieval time",
+          "Continuous evaluation + observability to run RAG like software"
         ],
         "stack": [
-          "RAG",
-          "Embeddings",
-          "FAISS/Chroma",
-          "LLMOps",
-          "Python"
+          "Python",
+          "FastAPI",
+          "pgvector",
+          "Redis",
+          "OpenTelemetry",
+          "Prometheus/Grafana",
+          "MinIO/S3",
+          "LLM provider-agnostic"
         ],
         "links": {
           "repo": "",
           "demo": "",
           "writeup": ""
         },
-        "disclaimer": "Data sources and documents vary by domain (fast adaptation per use case).",
+        "disclaimer": "Adapted per domain (docs, permissions, and policies). Details available on request.",
         "image": "assets/projects/project-rag.svg",
         "id": "rag",
-        "problem": "Naive RAG breaks in production: documents change, retrieval brings noise, and nobody measures quality, leading to confident-but-wrong answers.",
+        "problem": "Traditional search misses intent and pure LLMs hallucinate. In production, documents change and stale versions lead to confident-but-wrong answers.",
         "approach": [
-          "Incremental ingestion pipeline with source versioning, deduplication, and metadata",
-          "Adaptive chunking per doc type (headings/sections/tables) + normalization",
-          "Retrieval with vectors + filters, reranking, and tuning by recall/precision",
-          "Continuous evaluation (golden set) + regression gates before prompt/model changes",
-          "Guardrails: schemas, PII redaction, required citations, and cost/latency controls"
+          "Incremental ingestion with cleaning (boilerplate), normalization, and metadata enrichment (doc, section, date, tags, permissions).",
+          "Semantic chunking by headings + overlap; special handling for tables and complex PDFs.",
+          "Hybrid retrieval (BM25 + vectors) with ACL filters and efficient reranking.",
+          "Guardrails: grounded answering policies, mandatory citations, and PII redaction.",
+          "Offline evaluation with a golden set (Recall@K, nDCG@K, groundedness) + regression gates for model/prompt/chunk changes.",
+          "Observability: prompt hash, docs used, scores, P50/P95 latency, and cost per request."
         ],
         "impact": [
-          "More trustworthy, auditable answers (evidence-backed)",
-          "Lower hallucination risk and fewer silent regressions",
-          "A measurable improvement loop: measure -> adjust -> re-validate"
+          "Traceable answers with sources (better than generic \"chat over docs\").",
+          "Fewer hallucinations and silent regressions via evaluation + gates.",
+          "A foundation for workflow automation: suggested actions, tickets, summaries with compliance."
+        ],
+        "context": "Knowledge spread across PDFs, wikis, internal policies, tickets, and spreadsheets. Goal: answer questions from real documents, cite sources, and respect permissions.",
+        "challenge": [
+          "Bad chunking makes retrieval dumb: structure matters (headings, sections, tables).",
+          "Documents change: index versioning and incremental invalidation are mandatory.",
+          "Reliability: answer with evidence or abstain (\"I don't know\" + next steps).",
+          "Security: RBAC/ACL, PII redaction, and prompt-injection mitigation.",
+          "Latency and cost: topK, reranking, and caching need tight tuning."
+        ],
+        "metrics": [
+          "Retrieval: Recall@K and nDCG@K (with/without reranking).",
+          "Reliability: citation coverage and abstention rate (when evidence is missing).",
+          "Runtime: P50/P95 latency and cost per request (tokens/time)."
+        ],
+        "architecture": [
+          "Connectors (PDF/HTML/MD/Tickets)",
+          "  -> Normalization/Cleaning",
+          "  -> Chunking + Metadata/ACL",
+          "  -> Embeddings + Index (pgvector)",
+          "Question",
+          "  -> Query rewrite (optional)",
+          "  -> Hybrid retrieval + filters",
+          "  -> Rerank",
+          "  -> Policy-aware prompt",
+          "  -> LLM (provider-agnostic)",
+          "  -> Answer + citations + logging"
+        ],
+        "tradeoffs": [
+          "Vector-only vs hybrid: hybrid boosts coverage in vocabulary-heavy domains.",
+          "Aggressive reranking vs cost: balance nDCG and latency.",
+          "Bigger vs smaller chunks: context vs recall; tune with metrics and regression."
         ]
       },
       {
@@ -1077,22 +1286,41 @@
           "Agents that behave like software: predictable, testable, operable",
           "Lower operational risk when integrating external systems",
           "Faster time-to-market for new workflows and tools"
+        ],
+        "context": "Agent workflows for internal automation (API integrations, multi-step tasks, and traceable execution).",
+        "challenge": [
+          "Real side effects: tool-calling must be controlled.",
+          "Predictability: explicit state + replay for debugging.",
+          "Security: allowlists, budgets, and human approvals for sensitive actions."
+        ],
+        "metrics": [
+          "Scenario-based success rate (E2E) and errors by tool type.",
+          "Cost/latency per step (P50/P95) and average steps per task.",
+          "Replayability: % of runs reproducible with the same inputs."
+        ],
+        "tradeoffs": [
+          "Autonomy vs control: reduce risk with gates and approvals.",
+          "Large toolset vs maintenance: start with a small allowlist and expand by ROI.",
+          "Long memory vs privacy: prefer explicit state and minimal retention."
         ]
       },
       {
-        "title": "Lakehouse LLMOps (Databricks)",
-        "subtitle": "Data integration + model traceability in enterprise environments.",
+        "title": "Structured MLOps (Lakehouse) | Train -> Deploy -> Monitor",
+        "subtitle": "A production ML operating system: reproducibility, governance, rollback, and drift.",
         "highlights": [
-          "Lineage + reproducibility: Delta Lake + data quality checks",
-          "Model governance: MLflow tracking/registry + canary/rollback",
-          "Operational metrics + alerts (no invented numbers)"
+          "Reproducible pipelines + tracking/registry for audit and rollback",
+          "ML CI/CD with data validation and model regression",
+          "Online monitoring (latency/error/drift) with operational alerts"
         ],
         "stack": [
           "Databricks",
           "Delta Lake",
           "MLflow",
-          "Serving",
-          "Python"
+          "Great Expectations",
+          "GitHub Actions",
+          "Docker",
+          "FastAPI",
+          "Prometheus/Grafana"
         ],
         "links": {
           "repo": "",
@@ -1102,18 +1330,41 @@
         "disclaimer": "Patterns ready for monitoring, versioning, and continuous delivery.",
         "image": "assets/projects/project-lakehouse.svg",
         "id": "lakehouse",
-        "problem": "Without governance, the data/model lifecycle becomes a black box: hard to reproduce, audit, and operate under pressure.",
+        "problem": "Without MLOps, everything becomes notebook-driven: manual deploys, no data traceability, slow rollbacks, and regressions discovered too late.",
         "approach": [
-          "Lakehouse pipelines with versioning, validation, and lineage",
-          "MLflow tracking/registry/versioning with reproducible artifacts",
-          "Canary + rollback deployment and monitoring by cost/latency/quality",
-          "Integration with legacy systems/APIs and access controls",
-          "Continuous ops: alerts, playbooks, and validation routines"
+          "Lakehouse versioning/lineage (Delta) + data validation (e.g., Great Expectations).",
+          "Reproducible pipelines: containerized envs, fixed seeds, and experiment tracking.",
+          "Registry and promotion by gates: minimum metrics, I/O signature, and risk/owner tags.",
+          "Standardized serving (API) with canary deploys and automated rollback.",
+          "Online monitoring: latency, error rate, PSI/KS drift, and operational alerts.",
+          "Testing: feature unit tests, endpoint contract tests, and model regression tests."
         ],
         "impact": [
-          "End-to-end delivery that is controlled and auditable",
-          "Faster response to incidents and regressions",
-          "A foundation that scales across domains/teams"
+          "Reliable delivery: predictable deploy/rollback with end-to-end traceability.",
+          "Fewer incidents: regressions caught by gates before users are impacted.",
+          "A scalable foundation for multiple models and teams without becoming a black box."
+        ],
+        "context": "When multiple models (tabular, forecasting, NLP) reach production, the hard part becomes process: data traceability, reproducible training, safe deployment, and monitoring degradation over time.",
+        "challenge": [
+          "Reproducibility: dataset hash + signature + artifacts for every model.",
+          "Data quality: schema/range checks and validation before training.",
+          "ML CI/CD: performance/latency gates and automated deployment.",
+          "Monitoring: data drift and gradual quality drop.",
+          "Operations: fast rollback when metrics degrade."
+        ],
+        "metrics": [
+          "Deployment lead time (commit -> production) and rollback time.",
+          "% of releases blocked by quality gates (data/model/perf).",
+          "Drift: time-to-detect (TTD) and actionable alert rate."
+        ],
+        "architecture": [
+          "Data (Delta/Lakehouse) -> Data validation -> Train pipeline -> Registry",
+          "Registry -> CI/CD gates -> Serving -> Monitoring/Drift -> Retrain"
+        ],
+        "tradeoffs": [
+          "Strict gates vs speed: tune thresholds to avoid blocking evolution.",
+          "Deep monitoring vs cost: start with essentials (latency/error/drift).",
+          "Central registry vs team autonomy: scale via contracts and standards."
         ]
       },
       {
@@ -1151,7 +1402,18 @@
           "writeup": ""
         },
         "disclaimer": "Model/dataset details vary by use case.",
-        "image": "assets/projects/project-generic.svg"
+        "image": "assets/projects/project-generic.svg",
+        "context": "LLM fine-tuning for domain alignment (tone, vocabulary, and task behavior) with cost-aware governance.",
+        "challenge": [
+          "Overfitting and silent regressions without proper evaluation.",
+          "Dataset curation (instruction/response quality) and labeling reliability.",
+          "Cost vs quality trade-offs in LoRA/PEFT."
+        ],
+        "metrics": [
+          "Domain benchmark quality vs baseline.",
+          "Training cost (time/GPU) and adapter size (LoRA).",
+          "Serving latency/throughput after fine-tuning."
+        ]
       },
       {
         "id": "eval",
@@ -1188,7 +1450,18 @@
           "writeup": ""
         },
         "disclaimer": "No fabricated numbers: metrics are context-dependent.",
-        "image": "assets/projects/project-lakehouse.svg"
+        "image": "assets/projects/project-lakehouse.svg",
+        "context": "Evaluation and observability to run LLMs/RAG as a product: measure quality, detect regressions, and maintain governance.",
+        "challenge": [
+          "Without metrics, regressions surface only via user complaints.",
+          "Multiple versions (prompt/model/index) require contract testing.",
+          "Subjective quality must become objective checks (groundedness/faithfulness)."
+        ],
+        "metrics": [
+          "Groundedness/faithfulness and hallucination rate per evaluation suite.",
+          "P50/P95 latency and error rate per version.",
+          "Regression detection time (TTD) and rollback time."
+        ]
       }
     ],
     "labels": {
@@ -1196,10 +1469,15 @@
       "demo": "Demo",
       "writeup": "Writeup",
       "caseStudy": "Case study",
+      "context": "Context",
       "problem": "Problem",
+      "challenge": "Challenge",
       "approach": "Approach",
-      "impact": "Impact",
+      "impact": "Results",
+      "metrics": "Metrics",
       "highlights": "Highlights",
+      "architecture": "Architecture",
+      "tradeoffs": "Trade-offs",
       "stack": "Stack"
     },
     "experience": [

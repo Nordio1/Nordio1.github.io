@@ -903,12 +903,22 @@ function openProjectModal(project, langData) {
   const labels = langData?.labels || {};
   const title = String(project.title || "");
   const subtitle = String(project.subtitle || "");
+  const context = String(project.context || "");
   const problem = String(project.problem || "");
+  const challenge = Array.isArray(project.challenge) ? project.challenge : [];
   const approach = Array.isArray(project.approach) ? project.approach : [];
   const impact = Array.isArray(project.impact) ? project.impact : [];
+  const metrics = Array.isArray(project.metrics) ? project.metrics : [];
   const highlights = Array.isArray(project.highlights) ? project.highlights : [];
+  const tradeoffs = Array.isArray(project.tradeoffs) ? project.tradeoffs : [];
   const stack = Array.isArray(project.stack) ? project.stack : [];
   const disclaimer = String(project.disclaimer || "");
+  const archRaw = project.architecture;
+  const architecture = Array.isArray(archRaw)
+    ? archRaw.filter((x) => typeof x === "string" && x.trim())
+    : typeof archRaw === "string" && archRaw.trim()
+      ? [archRaw.trim()]
+      : [];
 
   body.innerHTML = "";
 
@@ -946,16 +956,50 @@ function openProjectModal(project, langData) {
     return ul;
   };
 
-  if (problem) {
+  if (context) {
     const p = document.createElement("p");
     p.className = "muted";
-    p.textContent = problem;
-    grid2.appendChild(mkBox(labels.problem || "Problem", p));
+    p.textContent = context;
+    grid2.appendChild(mkBox(labels.context || "Context", p));
+  }
+
+  if (problem || challenge.length) {
+    const wrap = document.createElement("div");
+    if (problem) {
+      const p = document.createElement("p");
+      p.className = "muted";
+      p.textContent = problem;
+      wrap.appendChild(p);
+    }
+    if (challenge.length) wrap.appendChild(mkList(challenge));
+    grid2.appendChild(mkBox(labels.challenge || labels.problem || "Challenge", wrap));
   }
   if (approach.length) grid2.appendChild(mkBox(labels.approach || "Approach", mkList(approach)));
-  if (impact.length) grid2.appendChild(mkBox(labels.impact || "Impact", mkList(impact)));
+  if (impact.length) grid2.appendChild(mkBox(labels.impact || "Results", mkList(impact)));
+  if (metrics.length) grid2.appendChild(mkBox(labels.metrics || "Metrics", mkList(metrics)));
   if (highlights.length) grid2.appendChild(mkBox(labels.highlights || "Highlights", mkList(highlights)));
   body.appendChild(grid2);
+
+  const addDetails = (heading, child) => {
+    const d = document.createElement("details");
+    d.className = "details";
+    const s = document.createElement("summary");
+    s.textContent = heading;
+    d.appendChild(s);
+    d.appendChild(child);
+    body.appendChild(d);
+  };
+
+  if (architecture.length) {
+    const pre = document.createElement("pre");
+    pre.className = "codeblock";
+    pre.textContent = architecture.join("\n");
+    addDetails(labels.architecture || "Architecture", pre);
+  }
+
+  if (tradeoffs.length) {
+    addDetails(labels.tradeoffs || "Trade-offs", mkList(tradeoffs));
+  }
 
   if (stack.length) {
     const row = document.createElement("div");
