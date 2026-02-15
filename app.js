@@ -1068,6 +1068,54 @@ function renderProjects(langData) {
     });
     card.appendChild(ul);
 
+    const truncate = (s, max) => {
+      const text = String(s || "").trim();
+      if (!text) return "";
+      if (text.length <= max) return text;
+      return text.slice(0, Math.max(0, max - 1)).trimEnd() + "…";
+    };
+
+    const firstOr = (arr, fallback) =>
+      Array.isArray(arr) && arr.length ? String(arr[0] || "") : String(fallback || "");
+
+    const mini = document.createElement("div");
+    mini.className = "case-mini";
+
+    const mkKV = (label, value) => {
+      const box = document.createElement("div");
+      box.className = "kv";
+      const k = document.createElement("div");
+      k.className = "k";
+      k.textContent = label;
+      const v = document.createElement("div");
+      v.className = "v";
+      v.textContent = value;
+      box.appendChild(k);
+      box.appendChild(v);
+      return box;
+    };
+
+    const c0 = truncate(firstOr(p.challenge, p.problem), 150);
+    const a0 = truncate(firstOr(p.approach, ""), 150);
+    const r0 = truncate(firstOr(p.impact, ""), 150);
+    if (c0) mini.appendChild(mkKV(langData.labels?.challenge || "Challenge", c0));
+    if (a0) mini.appendChild(mkKV(langData.labels?.approach || "Approach", a0));
+    if (r0) mini.appendChild(mkKV(langData.labels?.impact || "Results", r0));
+    if (mini.childElementCount) card.appendChild(mini);
+
+    const metrics = Array.isArray(p.metrics) ? p.metrics.filter(Boolean).slice(0, 3) : [];
+    if (metrics.length) {
+      const row = document.createElement("div");
+      row.className = "metric-chips";
+      metrics.forEach((t) => {
+        const chip = document.createElement("span");
+        chip.className = "mchip";
+        chip.textContent = t;
+        row.appendChild(chip);
+      });
+      card.appendChild(row);
+    }
+
     const stack = document.createElement("div");
     stack.className = "stack";
     (p.stack || []).forEach((t) => {
