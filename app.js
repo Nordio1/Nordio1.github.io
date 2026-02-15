@@ -1149,7 +1149,8 @@ function renderProjects(langData) {
       metrics.forEach((t) => {
         const chip = document.createElement("span");
         chip.className = "mchip";
-        chip.textContent = t;
+        chip.textContent = truncate(t, 56);
+        chip.title = String(t || "");
         row.appendChild(chip);
       });
       card.appendChild(row);
