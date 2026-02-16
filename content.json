@@ -252,9 +252,9 @@
           "Rastreabilidade: auditoria e explicabilidade do que foi recomendado e por quê."
         ],
         "metrics": [
-          "Lat?ncia de infer?ncia (CPU local): alvo P50 < 120ms e P95 < 400ms (com cache e budgets).",
-          "Forecasting (backtests): alvo SMAPE < 20% para SKUs de maior giro (por janela deslizante).",
-          "Integridade/auditoria: 100% das recomenda??es com trilha (hash de features + motivo + timestamp)."
+          "Erro de previsão (MAPE/SMAPE) por família de produto via backtests com janela deslizante.",
+          "Latência de inferência P50/P95 (ms) em CPU local (desktop/edge).",
+          "KPIs operacionais: taxa de ruptura, % de estoque parado e tempo até reposição após recomendação."
         ],
         "architecture": [
           "ERP Core (Desktop)",
@@ -269,27 +269,9 @@
           "                        Cache (Redis)"
         ],
         "tradeoffs": [
-          "Edge vs cloud: custo/lat?ncia/controle vs elasticidade (fallback quando dispon?vel).",
-          "Modelos leves vs precis?o: priorizar previsibilidade, manuten??o e robustez operacional.",
-          "Microservi?o vs mon?lito: contratos claros e rollback f?cil vs simplicidade de deploy.",
-          "Cache vs frescor: TTL curto + invalida??o por venda/estoque para n?o recomendar com dados velhos."
-        ],
-        "artifacts": [
-          {
-            "title": "Sample: contrato de infer?ncia (payload minimalista)",
-            "note": "Exemplo simplificado (sem dados reais). ?til para testes de contrato e idempot?ncia.",
-            "code": "{\n  \"request_id\": \"uuid\",\n  \"store_id\": \"STORE-001\",\n  \"task\": \"restock_recommendation\",\n  \"horizon_days\": 30,\n  \"inputs\": {\n    \"sku\": \"0073\",\n    \"sales_history\": [{\"d\":\"2026-01-01\",\"q\":2}],\n    \"stock\": {\"on_hand\": 4, \"min\": 2, \"max\": 18}\n  }\n}"
-          },
-          {
-            "title": "Sample: resposta explic?vel (decis?o + justificativa)",
-            "note": "Formato orientado a opera??o: o usu?rio v? o que fazer e o porqu? (audit?vel).",
-            "code": "{\n  \"decision\": {\"action\": \"buy\", \"qty\": 12},\n  \"why\": [\n    \"tend?ncia de venda ? nas ?ltimas 4 semanas\",\n    \"estoque projetado < m?nimo em 9 dias\",\n    \"lead time do fornecedor: 5?7 dias\"\n  ],\n  \"confidence\": 0.78,\n  \"feature_snapshot_hash\": \"sha256:?\"\n}"
-          },
-          {
-            "title": "Sample: log de auditoria (sem dados sens?veis)",
-            "note": "O objetivo ? rastreabilidade: o que foi recomendado, quando, por quem e com qual contexto.",
-            "code": "{\n  \"event\": \"ai_recommendation_generated\",\n  \"actor\": \"maintenance\",\n  \"task\": \"restock_recommendation\",\n  \"entity\": {\"type\": \"product\", \"ref\": \"0073\"},\n  \"result\": {\"action\": \"buy\", \"qty\": 12},\n  \"created_at\": \"2026-02-16T09:12:05Z\"\n}"
-          }
+          "Edge vs cloud: custo/latência/controle vs elasticidade.",
+          "Modelos leves vs precisão: preferir previsibilidade e manutenção em produção.",
+          "Microserviço vs monólito: isolamento e contratos claros vs simplicidade de deploy."
         ]
       },
       {
@@ -334,16 +316,16 @@
         ],
         "context": "Conhecimento espalhado em PDFs, wikis, políticas internas, tickets e planilhas. Objetivo: responder perguntas com base em documentos reais, citando fontes e respeitando permissões.",
         "challenge": [
-          "Busca tradicional falha (sin?nimos, linguagem natural) e LLM puro alucina: precisava de respostas confi?veis com rastreabilidade.",
+          "Chunking ruim vira retrieval burro: precisa respeitar estrutura (títulos, seções, tabelas).",
           "Documentos mudam: versionamento e invalidação incremental do índice são obrigatórios.",
           "Confiabilidade: resposta deve vir com evidência ou abstém (\"não sei\" + sugestões).",
           "Segurança: RBAC/ACL, redaction de PII e mitigação de prompt injection no contexto.",
           "Latência e custo: topK, reranking e cache precisam ser calibrados."
         ],
         "metrics": [
-          "Recall@5: alvo +20% vs baseline (BM25-only), medido em golden set com fontes.",
-          "Lat?ncia (CPU local): alvo P50 < 150ms e P95 < 450ms (retrieval + rerank + gera??o).",
-          "Cobertura de ground truth: ? 90% do conjunto avaliado + cita??es obrigat?rias por resposta."
+          "Ganho de Recall@K vs baseline (com/sem reranking).",
+          "Latência média + P95 por pergunta (ms).",
+          "% de respostas avaliadas com ground truth + groundedness."
         ],
         "architecture": [
           "Conectores (PDF/HTML/MD/Tickets)",
@@ -488,9 +470,9 @@
           "Operação: rollback rápido quando métricas pioram."
         ],
         "metrics": [
-          "Lead time de deploy: alvo < 30 min (merge ? serving) com gates de qualidade.",
-          "Rollback: alvo < 5 min (canary + promote/rollback automatizado).",
-          "Drift: PSI > 0,20 dispara alerta (TTD < 24h) + trilha de causas e a??o recomendada."
+          "Lead time de deploy (commit -> produção) e tempo de rollback.",
+          "Taxa de regressão evitada: % de releases bloqueados por gates (dados/modelo/perf).",
+          "Drift: tempo para detecção (TTD) + taxa de alertas acionáveis."
         ],
         "architecture": [
           "Data (Delta/Lakehouse) -> Data validation -> Train pipeline -> Registry",
@@ -500,23 +482,6 @@
           "Gates rígidos vs velocidade: calibrar thresholds para não bloquear evolução.",
           "Monitoramento profundo vs custo: começar pelo essencial (latência/erro/drift).",
           "Registry central vs times autônomos: padronizar contratos para escalar."
-        ],
-        "artifacts": [
-          {
-            "title": "Sample: registro de modelo (assinatura + dataset hash)",
-            "note": "Modelo registrado com rastreabilidade para reproduzir treino e fazer rollback.",
-            "code": "{\n  \"name\": \"demand_forecast\",\n  \"version\": \"3.4.1\",\n  \"dataset_hash\": \"sha256:?\",\n  \"signature\": {\"inputs\": [\"sku\",\"date\"], \"outputs\": [\"qty_pred\"]},\n  \"metrics\": {\"smape\": 0.18, \"p95_ms\": 340},\n  \"tags\": {\"owner\": \"ai\", \"risk\": \"medium\"}\n}"
-          },
-          {
-            "title": "Sample: gate de promo??o (CI)",
-            "note": "S? promove se bater baseline e respeitar lat?ncia.",
-            "code": "rules:\n  - name: quality\n    require:\n      smape: \"<=0.20\"\n      p95_ms: \"<=450\"\n      contract_tests: pass\n  - name: data\n    require:\n      schema_validation: pass\n      drift_psI: \"<=0.20\""
-          },
-          {
-            "title": "Sample: alarme de drift (PSI)",
-            "note": "Exemplo de regra simples que gera alerta acion?vel.",
-            "code": "if PSI(feature=\"avg_ticket\", window=\"7d\") > 0.20:\n  alert(\"drift\", severity=\"high\", action=\"retrain_or_roll_back\")"
-          }
         ]
       },
       {
@@ -1215,9 +1180,9 @@
           "Traceability: auditability and explainability of recommendations and actions."
         ],
         "metrics": [
-          "Inference latency (local CPU): target P50 < 120ms and P95 < 400ms (cache + budgets).",
-          "Forecasting (backtests): target SMAPE < 20% for top-moving SKUs (rolling windows).",
-          "Integrity/audit: 100% of recommendations with trace (feature hash + reason + timestamp)."
+          "Forecasting error (MAPE/SMAPE) per SKU family via rolling backtests.",
+          "Inference latency P50/P95 (ms) on local CPU (desktop/edge).",
+          "Ops KPIs: stockout rate, dead stock %, and time-to-replenish after recommendations."
         ],
         "architecture": [
           "ERP Core (Desktop)",
@@ -1232,27 +1197,9 @@
           "                        Cache (Redis)"
         ],
         "tradeoffs": [
-          "Edge vs cloud: cost/latency/control vs elasticity (with fallback when available).",
-          "Lightweight models vs accuracy: prioritize predictability, maintainability, operational robustness.",
-          "Microservice vs monolith: clear contracts + easy rollback vs simpler deploy.",
-          "Cache vs freshness: short TTL + invalidation on sales/stock changes to avoid stale advice."
-        ],
-        "artifacts": [
-          {
-            "title": "Sample: inference contract (minimal payload)",
-            "note": "Simplified example (no real data). Useful for contract tests and idempotency.",
-            "code": "{\n  \"request_id\": \"uuid\",\n  \"store_id\": \"STORE-001\",\n  \"task\": \"restock_recommendation\",\n  \"horizon_days\": 30,\n  \"inputs\": {\n    \"sku\": \"0073\",\n    \"sales_history\": [{\"d\":\"2026-01-01\",\"q\":2}],\n    \"stock\": {\"on_hand\": 4, \"min\": 2, \"max\": 18}\n  }\n}"
-          },
-          {
-            "title": "Sample: explainable output (decision + rationale)",
-            "note": "Ops-first format: what to do + why (auditable).",
-            "code": "{\n  \"decision\": {\"action\": \"buy\", \"qty\": 12},\n  \"why\": [\n    \"sales trend ? over the last 4 weeks\",\n    \"projected stock < minimum in 9 days\",\n    \"supplier lead time: 5?7 days\"\n  ],\n  \"confidence\": 0.78,\n  \"feature_snapshot_hash\": \"sha256:?\"\n}"
-          },
-          {
-            "title": "Sample: audit log (no sensitive data)",
-            "note": "Goal: traceability (what, when, who, and which context).",
-            "code": "{\n  \"event\": \"ai_recommendation_generated\",\n  \"actor\": \"maintenance\",\n  \"task\": \"restock_recommendation\",\n  \"entity\": {\"type\": \"product\", \"ref\": \"0073\"},\n  \"result\": {\"action\": \"buy\", \"qty\": 12},\n  \"created_at\": \"2026-02-16T09:12:05Z\"\n}"
-          }
+          "Edge vs cloud inference: cost/latency/control vs elasticity.",
+          "Lightweight models vs accuracy: prioritize predictability and maintainability.",
+          "Microservice isolation vs deployment simplicity."
         ]
       },
       {
@@ -1297,16 +1244,16 @@
         ],
         "context": "Knowledge spread across PDFs, wikis, internal policies, tickets, and spreadsheets. Goal: answer questions from real documents, cite sources, and respect permissions.",
         "challenge": [
-          "Traditional search fails (synonyms, natural language) and pure LLMs hallucinate: needed reliable, traceable answers.",
+          "Bad chunking makes retrieval dumb: structure matters (headings, sections, tables).",
           "Documents change: index versioning and incremental invalidation are mandatory.",
           "Reliability: answer with evidence or abstain (\"I don't know\" + next steps).",
           "Security: RBAC/ACL, PII redaction, and prompt-injection mitigation.",
           "Latency and cost: topK, reranking, and caching need tight tuning."
         ],
         "metrics": [
-          "Recall@5: target +20% vs baseline (BM25-only), measured on a golden set with sources.",
-          "Latency (local CPU): target P50 < 150ms and P95 < 450ms (retrieval + rerank + generation).",
-          "Ground-truth coverage: ? 90% of the evaluated set + mandatory citations per answer."
+          "Recall@K uplift vs baseline (with/without reranking).",
+          "Mean latency + P95 per query (ms).",
+          "% of answers evaluated vs ground truth + groundedness."
         ],
         "architecture": [
           "Connectors (PDF/HTML/MD/Tickets)",
@@ -1451,9 +1398,9 @@
           "Operations: fast rollback when metrics degrade."
         ],
         "metrics": [
-          "Deploy lead time: target < 30 min (merge ? serving) with quality gates.",
-          "Rollback: target < 5 min (canary + automated promote/rollback).",
-          "Drift: PSI > 0.20 triggers alert (TTD < 24h) with traceable causes and recommended actions."
+          "Deployment lead time (commit -> production) and rollback time.",
+          "% of releases blocked by quality gates (data/model/perf).",
+          "Drift: time-to-detect (TTD) and actionable alert rate."
         ],
         "architecture": [
           "Data (Delta/Lakehouse) -> Data validation -> Train pipeline -> Registry",
@@ -1463,23 +1410,6 @@
           "Strict gates vs speed: tune thresholds to avoid blocking evolution.",
           "Deep monitoring vs cost: start with essentials (latency/error/drift).",
           "Central registry vs team autonomy: scale via contracts and standards."
-        ],
-        "artifacts": [
-          {
-            "title": "Sample: model registry entry (signature + dataset hash)",
-            "note": "Traceability to reproduce training and rollback safely.",
-            "code": "{\n  \"name\": \"demand_forecast\",\n  \"version\": \"3.4.1\",\n  \"dataset_hash\": \"sha256:?\",\n  \"signature\": {\"inputs\": [\"sku\",\"date\"], \"outputs\": [\"qty_pred\"]},\n  \"metrics\": {\"smape\": 0.18, \"p95_ms\": 340},\n  \"tags\": {\"owner\": \"ai\", \"risk\": \"medium\"}\n}"
-          },
-          {
-            "title": "Sample: promotion gate (CI)",
-            "note": "Only promote if it beats baseline and stays within latency budgets.",
-            "code": "rules:\n  - name: quality\n    require:\n      smape: \"<=0.20\"\n      p95_ms: \"<=450\"\n      contract_tests: pass\n  - name: data\n    require:\n      schema_validation: pass\n      drift_psi: \"<=0.20\""
-          },
-          {
-            "title": "Sample: drift alert rule (PSI)",
-            "note": "Simple rule that triggers an actionable alert.",
-            "code": "if PSI(feature=\"avg_ticket\", window=\"7d\") > 0.20:\n  alert(\"drift\", severity=\"high\", action=\"retrain_or_roll_back\")"
-          }
         ]
       },
       {
