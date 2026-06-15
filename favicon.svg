@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="JN favicon">
+  <defs>
+    <linearGradient id="a" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#1e6f5c"/>
+      <stop offset="100%" stop-color="#b08968"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="28" fill="url(#a)"/>
+  <path d="M22 46 C34 30, 48 22, 68 22 C88 22, 102 32, 108 48" fill="none" stroke="rgba(255,255,255,.28)" stroke-width="6" stroke-linecap="round"/>
+  <text x="64" y="82" text-anchor="middle" font-family="Georgia, serif" font-size="58" font-weight="700" fill="rgba(255,255,255,.92)">JN</text>
+</svg>
+

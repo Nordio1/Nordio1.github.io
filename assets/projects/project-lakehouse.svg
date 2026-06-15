@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="240" viewBox="0 0 420 240" role="img" aria-label="Lakehouse illustration">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#f6f3ee"/>
+      <stop offset="100%" stop-color="#efe7de"/>
+    </linearGradient>
+  </defs>
+  <rect width="420" height="240" rx="22" fill="url(#bg)"/>
+  <path d="M80 154 C112 130, 144 124, 176 140 C208 156, 242 190, 302 126 C332 94, 356 90, 380 100" fill="none" stroke="rgba(30,111,92,.36)" stroke-width="8" stroke-linecap="round"/>
+  <rect x="56" y="64" width="126" height="44" rx="16" fill="rgba(30,111,92,.10)" stroke="rgba(30,111,92,.24)" stroke-width="2"/>
+  <rect x="206" y="64" width="158" height="44" rx="16" fill="rgba(176,137,104,.10)" stroke="rgba(176,137,104,.24)" stroke-width="2"/>
+  <path d="M76 86 H160" stroke="rgba(11,13,18,.16)" stroke-width="10" stroke-linecap="round"/>
+  <path d="M226 86 H344" stroke="rgba(11,13,18,.16)" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="120" cy="172" r="10" fill="rgba(176,137,104,.78)"/>
+  <circle cx="230" cy="154" r="10" fill="rgba(30,111,92,.78)"/>
+  <circle cx="324" cy="136" r="10" fill="rgba(176,137,104,.78)"/>
+</svg>
+
